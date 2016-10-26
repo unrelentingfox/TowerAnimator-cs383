@@ -1,10 +1,14 @@
-# Project Name
+# Tower Animator
+![alt text](https://i.ytimg.com/vi/hESMhgDnk4E/maxresdefault.jpg "Logo Title Text 1")
 
-TODO: Write a project description
+This is our project for cs383. We have been assigned to create animation software for the popular University of Idaho Tower Light Show. Our Goal for this project is to improve upon the current Tower Animator that is in use.
 
-## Installation
+Here is an example of the Tower Light Show:
+https://www.youtube.com/watch?v=hESMhgDnk4E
 
-TODO: Describe the installation process
+## Installation ##
+__For Development__
+Make sure that you set the kit to "Desktop Qt 5.7.0 GCC 64bit" when you open the project in the Qt creator.
 
 ## Usage
 
