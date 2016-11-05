@@ -6,9 +6,8 @@ This is our project for cs383. We have been assigned to create animation softwar
 Here is an example of the Tower Light Show:
 https://www.youtube.com/watch?v=hESMhgDnk4E
 
-## Installation ##
-__For Development__
-Make sure that you set the kit to "Desktop Qt 5.7.0 GCC 64bit" when you open the project in the Qt creator.
+## Developer Info ##
+This project is built using QT 5.7
 
 ## Usage
 
