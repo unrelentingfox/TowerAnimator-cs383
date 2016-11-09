@@ -2,6 +2,14 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>543</width>
+    <height>652</height>
+   </rect>
+  </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
@@ -14,7 +22,7 @@
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="AnimationGraphicsView" name="AnimationView">
+     <widget class="AnimationView" name="AnimationWidget">
       <property name="minimumSize">
        <size>
         <width>525</width>
@@ -58,7 +66,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>543</width>
      <height>21</height>
     </rect>
    </property>
@@ -76,9 +84,9 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>AnimationGraphicsView</class>
+   <class>AnimationView</class>
    <extends>QGraphicsView</extends>
-   <header>animationgraphicsview.h</header>
+   <header>animationview.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
