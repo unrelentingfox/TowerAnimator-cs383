@@ -25,6 +25,7 @@ public slots:
     void setTool(int);
 
 private slots:
+    void drawBackground(QPainter *painter, const QRectF &rect);
     void mousePressEvent(QMouseEvent * e);
     void mouseReleaseEvent();
     void mouseDoubleClickEvent(QMouseEvent * e);
