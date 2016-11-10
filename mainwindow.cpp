@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    //connect draw and erase buttons to the mouseInteracion variable in AnimationView
+    //connect draw and erase buttons to the tool variable in AnimationView
     connect(ui->drawButton, SIGNAL (released()), this, SLOT (drawButtonPress()));
     connect(ui->eraseButton, SIGNAL (released()), this, SLOT (eraseButtonPress()));
 
@@ -20,10 +20,15 @@ MainWindow::~MainWindow()
 
 void MainWindow::drawButtonPress()
 {
-    ui->AnimationWidget->setMouseInteraction(AnimationView::DRAW);
+    ui->AnimationWidget->setTool(AnimationView::DRAW);
 }
 
 void MainWindow::eraseButtonPress()
 {
-    ui->AnimationWidget->setMouseInteraction(AnimationView::ERASE);
+    ui->AnimationWidget->setTool(AnimationView::ERASE);
+}
+
+void MainWindow::moveButtonPress()
+{
+    ui->AnimationWidget->setTool(AnimationView::MOVE);
 }

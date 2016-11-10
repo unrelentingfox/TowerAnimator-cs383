@@ -5,24 +5,56 @@
 AnimationView::AnimationView(QWidget *parent) :
     QGraphicsView(parent)
 {
-    mouseInteraction = this->DRAW;
+    tool = this->DRAW;
     scene = new QGraphicsScene();
     this->setScene(scene);
 }
 
-void AnimationView::setMouseInteraction(int x)
+void AnimationView::setTool(int x)
 {
-    mouseInteraction = x;
+    tool = x;
 }
 
 void AnimationView::mousePressEvent(QMouseEvent * e)
 {
-    switch (mouseInteraction){
+    mouseClicked = true;
+
+    switch (tool){
     case AnimationView::ERASE:
         erasePixel(e);
         break;
     case AnimationView::DRAW:
         drawPixel(e);
+        break;
+    case AnimationView::MOVE:
+        move(e);
+        break;
+    default:
+        break;
+    }
+}
+
+void AnimationView::mouseReleaseEvent()
+{
+    mouseClicked = false;
+}
+
+void AnimationView::mouseDoubleClickEvent(QMouseEvent *e)
+{
+
+}
+
+void AnimationView::mouseMoveEvent(QMouseEvent *e)
+{
+    switch (tool){
+    case AnimationView::ERASE:
+        erasePixel(e);
+        break;
+    case AnimationView::DRAW:
+        drawPixel(e);
+        break;
+    case AnimationView::MOVE:
+        move(e);
         break;
     default:
         break;
@@ -51,25 +83,36 @@ qreal AnimationView::roundToGrid(qreal x)
 
 int AnimationView::drawPixel(QMouseEvent * e)
 {
-    qreal x;
-    qreal y;
-    //Get x and y position of mouse click.
-    QPointF pt = mapToScene(e->pos());
-    x = roundToGrid(pt.x());
-    y = roundToGrid(pt.y());
-    //Check if there is already an object there, if not, make one.
-    if(!scene->itemAt(x,y, QTransform::QTransform()))
-    {
-        QGraphicsRectItem * rect = new QGraphicsRectItem();
-        rect->setRect(x,y, PIXEL_SIZE,PIXEL_SIZE);
-        scene->addItem(rect);
-        qDebug() << x << ", " << y;
-        return 1;
-    }
-    else
-    {
-        return 0;
-    }
+    do{
+        //Get x and y position of mouse click.
+        QPointF pt;
+//        if(mouseClicked)
+//        {
+//            pt = this->mapFromGlobal(QCursor::pos());
+//            pt.setX(roundToGrid(pt.x()));
+//            pt.setY(roundToGrid(pt.y()));
+//        }
+//        else
+//        {
+            pt = mapToScene(e->pos());
+            pt.setX(roundToGrid(pt.x()));
+            pt.setY(roundToGrid(pt.y()));
+//        }
+
+        //Check if there is already an object there, if not, make one.
+        if(!scene->itemAt(pt.x(),pt.y(), QTransform::QTransform()))
+        {
+            QGraphicsRectItem * rect = new QGraphicsRectItem();
+            rect->setRect(pt.x(),pt.y(), PIXEL_SIZE,PIXEL_SIZE);
+            scene->addItem(rect);
+            qDebug() << pt.x() << ", " << pt.y();
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+    }while(mouseClicked);
 }
 
 int AnimationView::erasePixel(QMouseEvent * e)
@@ -90,4 +133,9 @@ int AnimationView::erasePixel(QMouseEvent * e)
     {
         return 0;
     }
+}
+
+int AnimationView::move(QMouseEvent * e)
+{
+    return 1;
 }
