@@ -14,6 +14,7 @@ class AnimationView : public QGraphicsView
 {
     Q_OBJECT
 public:
+    static const int MOVE = 3;
     static const int DRAW = 1;
     static const int ERASE = 0;
     explicit AnimationView(QWidget *parent = 0);
@@ -21,17 +22,22 @@ public:
 signals:
 
 public slots:
-    void setMouseInteraction(int);
-    void mousePressEvent(QMouseEvent * e);
-    // void mouseReleaseEvent(QMouseEvent * e);
-    // void mouseDoubleClickEvent(QMouseEvent * e);
-    // void mouseMoveEvent(QMouseEvent * e);
+    void setTool(int);
+
 private slots:
+    void drawBackground(QPainter *painter, const QRectF &rect);
+    void mousePressEvent(QMouseEvent * e);
+    void mouseReleaseEvent();
+    void mouseDoubleClickEvent(QMouseEvent * e);
+    void mouseMoveEvent(QMouseEvent * e);
     qreal roundToGrid(qreal x);
     int drawPixel(QMouseEvent * e);
     int erasePixel(QMouseEvent * e);
+    int move(QMouseEvent * e);
+
 private:
-    int mouseInteraction;
+    int tool;
+    bool mouseClicked;
     QGraphicsScene * scene;
 };
 

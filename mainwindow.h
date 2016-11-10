@@ -18,6 +18,7 @@ public:
 private slots:
     void drawButtonPress();
     void eraseButtonPress();
+    void moveButtonPress();
 
 private:
     Ui::MainWindow *ui;

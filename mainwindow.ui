@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>543</width>
-    <height>652</height>
+    <width>610</width>
+    <height>602</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,40 @@
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QFrame" name="frame">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QToolButton" name="drawButton">
+         <property name="text">
+          <string>Draw</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="moveButton">
+         <property name="text">
+          <string>Move</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="eraseButton">
+         <property name="text">
+          <string>Erase</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
     <item>
      <widget class="AnimationView" name="AnimationWidget">
       <property name="minimumSize">
@@ -45,20 +78,6 @@
       </property>
      </widget>
     </item>
-    <item>
-     <widget class="QPushButton" name="eraseButton">
-      <property name="text">
-       <string>Erase</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="drawButton">
-      <property name="text">
-       <string>Draw</string>
-      </property>
-     </widget>
-    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -66,8 +85,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>543</width>
-     <height>21</height>
+     <width>610</width>
+     <height>20</height>
     </rect>
    </property>
   </widget>
