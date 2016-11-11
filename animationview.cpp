@@ -136,8 +136,6 @@ int AnimationView::drawPixel(QMouseEvent * e)
     }
     else
     {
-        erasePixel(e);
-        drawPixel(e);
          return 0;
     }
 }
