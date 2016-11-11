@@ -1,12 +1,16 @@
 #ifndef ANIMATIONVIEW_H
 #define ANIMATIONVIEW_H
+
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QGraphicsEllipseItem>
 #include <QMouseEvent>
 #include <QPointF>
 #include <QDebug>
+
 #include "global.h"
+#include "pixel.h"
+#include "frame.h"
 
 //http://stackoverflow.com/questions/7830054/how-to-draw-a-point-on-mouseclick-on-a-qgraphicsscene
 
@@ -19,11 +23,14 @@ public:
     static const int ERASE = 0;
     explicit AnimationView(QWidget *parent = 0);
 
+
 signals:
 
 public slots:
     void setTool(int);
-
+    void setRed(int);
+    void setGreen(int);
+    void setBlue(int);
 private slots:
     void drawBackground(QPainter *painter, const QRectF &rect);
     void mousePressEvent(QMouseEvent * e);
@@ -36,7 +43,11 @@ private slots:
     int move(QMouseEvent * e);
 
 private:
+    int red=0;
+    int green=0;
+    int blue=0;
     int tool;
+    Frame current_frame;
     bool mouseClicked;
     QGraphicsScene * scene;
 };

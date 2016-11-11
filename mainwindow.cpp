@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //connect draw and erase buttons to the tool variable in AnimationView
     connect(ui->drawButton, SIGNAL (released()), this, SLOT (drawButtonPress()));
     connect(ui->eraseButton, SIGNAL (released()), this, SLOT (eraseButtonPress()));
+    connect(ui->moveButton, SIGNAL (released()), this, SLOT (moveButtonPress()));
 
 }
 
@@ -31,4 +32,20 @@ void MainWindow::eraseButtonPress()
 void MainWindow::moveButtonPress()
 {
     ui->AnimationWidget->setTool(AnimationView::MOVE);
+}
+
+void MainWindow::on_redEdit_textEdited(const QString &arg1)
+{
+    ui->AnimationWidget->setRed(arg1.toInt());
+}
+
+void MainWindow::on_greenEdit_textEdited(const QString &arg1)
+{
+    ui->AnimationWidget->setGreen(arg1.toInt());
+
+}
+
+void MainWindow::on_blueEdit_textEdited(const QString &arg1)
+{
+    ui->AnimationWidget->setBlue(arg1.toInt());
 }
