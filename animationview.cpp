@@ -14,7 +14,20 @@ void AnimationView::setTool(int x)
 {
     tool = x;
 }
+void AnimationView::setRed(int r)
+{
+    red=r;
+}
 
+void AnimationView::setGreen(int g)
+{
+    green=g;
+}
+
+void AnimationView::setBlue(int b)
+{
+    blue=b;
+}
 void AnimationView::drawBackground(QPainter *painter, const QRectF &rect)
 {
     QPen pen;
@@ -100,7 +113,7 @@ qreal AnimationView::roundToGrid(qreal x)
 
 int AnimationView::drawPixel(QMouseEvent * e)
 {
-
+    QBrush selected_color(QColor(red,green,blue));
     //Get x and y position of mouse click.
     QPointF pt = mapToScene(e->pos());
     pt.setX(roundToGrid(pt.x()));
@@ -111,15 +124,20 @@ int AnimationView::drawPixel(QMouseEvent * e)
     {
         QGraphicsRectItem * rect = new QGraphicsRectItem();
         rect->setRect(pt.x(),pt.y(), PIXEL_SIZE, PIXEL_SIZE);
+        rect->setBrush(* new QBrush(selected_color));
         scene->addItem(rect);
-
+        Pixel* p=new Pixel;
+        p->createPixel(pt.x(),pt.y(),red,green,blue);
+        current_frame.addPixel(*p);
         //output coords of new rect for debugging
-        qDebug() << pt.x() << ", " << pt.y();
-
+        //qDebug() << pt.x() << ", " << pt.y();
+        qDebug() << current_frame.pixel_list.size();
         return 1;
     }
     else
     {
+        erasePixel(e);
+        drawPixel(e);
          return 0;
     }
 }
