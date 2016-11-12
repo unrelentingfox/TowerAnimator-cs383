@@ -1,0 +1,192 @@
+%------------------------------------------
+% LaTeX memo for CS 383 with Bruce Bolden
+%------------------------------------------
+\documentclass[letterpaper,11pt]{article}
+\usepackage{enumitem}
+\usepackage{fullpage}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\begin{document}
+\noindent
+\section*{Agile Sprint 1}
+\noindent
+\begin{tabular}{l l}
+\textbf{To:}&Bruce Bolden\\
+\textbf{From:}&Group \#1\\
+\textbf{Names:}&Andrew Avery, Brandon Brewster, Lydia Engerbretson,\\
+ &Dustin Fox, Colton Hotchkiss, Hannah Pearson, Alex Wezensky\\
+\textbf{Date:}&\today\\
+\end{tabular}\\
+
+\noindent
+\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}\\
+
+%Start actual content of memo.
+\tableofcontents
+
+\section{AnimationView Class Prototype}
+We have a working prototype of the Animation window that is a custom QGraphicsView. It has functionality for drawing and erasing in new pixels (which are a custom QGraphicsRectItem). All of these pixels will be stored in an AnimationObject which will be a custom QGraphicsItemGroup that we will be able to select and move around with the mouse which is functionality that is already built into QGraphicsItemGroup so implementation should be there by sprint two.\\
+
+\noindent Attributes: 
+\begin{itemize}
+\item This is the view window that all of the animation and pixel creation/manipulation happens. It is a custom version of the QGraphicsView widget.
+\end{itemize}
+\noindent Operations:
+\begin{itemize}
+\item void drawBackground(QPainter *painter, const QRectF \&rect)
+\begin{itemize}
+\item Draws the grid in the background layer.
+\end{itemize}
+\item void mousePressEvent(QMouseEvent * e);
+\begin{itemize}
+\item Handles the mouse click event
+\item contains a switch statement to decide what to do about the click based upon which of the tool buttons has been pressed. draw, erase, move etc.
+\end{itemize}
+\item qreal roundToGrid(qreal x);
+\begin{itemize}
+\item Takes a coordinate and rounds the number up or down to a multiple of GRIDSIZE in order to lock objects to the "grid".
+\end{itemize}
+\item int loadFrame(Frame * frame);
+\begin{itemize}
+\item Loads in location data for all of the objects in a scene as well as all of the pixels within those objects.
+\item This happens when a user clicks any of the key framed frames in the time line view.
+\end{itemize}
+\item Frame saveFrame();
+\begin{itemize}
+\item Saves location data for all of the objects in the scene as well as all of the pixels within those objects. This happens when a user is done with the frame and clicks the "KeyFrame button"
+\end{itemize}
+\item int drawPixel(QMouseEvent * e);
+\begin{itemize}
+\item Gets the coordinates of the mouse event and passes them through roundToGrid();
+\item Draws a pixel object at those coordinates.
+\end{itemize}
+\item int erasePixel(QMouseEvent * e);
+\begin{itemize}
+\item Gets the coordinates of the mouse event and passes them through roundToGrid();
+\item Deletes a pixel object at those coordinates.
+\end{itemize}
+\end{itemize}
+
+\noindent The basic functionality is already in this prototype as you can see below, All that is left is to implement objects, loading, and saving.\\
+
+
+\begin{tabular}{c c}
+\includegraphics[width=8cm]{prototype1.PNG} & \includegraphics[width=8cm]{prototype2.PNG}
+\end{tabular}
+\newpage 
+\noindent And here is a screen shot of the AnimationView.h\\
+
+\includegraphics[width=14cm]{code.PNG}
+
+\section{Pixel Class Attributes}
+\noindent Attributes: 
+\begin{itemize}
+\item X and Y coordinates
+\item RGB Color
+\item Associated frame number
+\end{itemize}
+
+\section{Object Class Attributes and Operations}
+\noindent Attributes: 
+\begin{itemize}
+\item Custom QLinkedList of pixels
+\item string name; - A unique name that is increments with each object
+\end{itemize}
+Operations: 
+\begin{itemize}
+\item objectConstructor(QList * pixels, int duration)
+\begin{itemize}
+\item Parse QList of pixels and add their x and y coordinates to a linked list
+\item Populates object with pixels from the List of pixels
+\end{itemize}
+\item objectDestructor()
+\begin{itemize}
+\item Deletes all of the pixels in the object and the object itself
+\end{itemize}
+\item addPixel(Pixel * arg)
+\begin{itemize}
+\item Add an pixel to the object
+\item pixel is added to the List of pixels
+\end{itemize}
+\item deletePixel(Pixel * arg)
+\begin{itemize}
+\item Delete a pixel from the Object
+\item pixel is deleted from the List of Objects
+\end{itemize}
+\end{itemize}
+
+\section{Frame Class Attributes and Operations}
+\noindent Attributes: 
+\begin{itemize}
+\item QLinkedList of Objects
+\item Duration of the Frame
+\end{itemize}
+Operations: 
+\begin{itemize}
+\item frameConstructor(arg=QList of Objects, arg=duration)
+\begin{itemize}
+\item Parse QList of Objects and add to linked list
+\item Populates frame with Objects from the List of Objects
+\end{itemize}
+\item frameDestructor()
+\begin{itemize}
+\item Deletes an instance of the Frame object (destructor)
+\item Delete List of Objects for that Frame
+\end{itemize}
+\item addObject(arg=*Object)
+\begin{itemize}
+\item Add an Object to the Frame (calls Object constructor)
+\item Object is added to the List of Objects
+\end{itemize}
+\item deleteObject(arg=*Object)
+\begin{itemize}
+\item Delete an Object from the Frame (calls Object destructor)
+\item Object is deleted from the List of Objects
+\end{itemize}
+\end{itemize}
+
+\section{Timeline Class Attributes and Operations}
+\noindent Attributes
+\begin{itemize}
+\item Ptr to currentFrame
+\item QLinkedList of Frames
+\end{itemize}
+Operations: 
+\begin{itemize}
+\item addFrame()
+\begin{itemize}
+\item Call the Frame's constructor
+\item Adds the Frame to the QLinkedList of Frames after the *currentFrame
+\end{itemize}
+\item moveFrame(arg=currentFrame, arg=destinationFrame)
+\begin{itemize}
+\item Move currentFrame to desired location in Timeline and connect currentFrame's link to the Frame in front of it (destinationFrame)
+\end{itemize}
+\item moveFrames(arg=firstFrame, arg=lastFrame, arg=*destinationFrame)
+\begin{itemize}
+\item firstFrame and lastFrame (with other Frames in between) are selected and moved to desired location in Timeline and connect firstFrame's link to the Frame in front of it (destinationFrame)
+\end{itemize}
+\item deleteFrame(arg=*currentFrame)
+\begin{itemize}
+\item Link Frame before currentFrame to Frame after currentFrame and vice versa (Doubly QLinkedList)
+\item Delete currentFrame from doubly linked list
+\end{itemize}
+\item deleteFrames(arg=firstFrame, arg=lastFrame)
+\begin{itemize}
+\item Link Frame before firstFrame to Frame after lastFrame and vice versa (Doubly QLinkedList)
+\item Loop from firstFrame to lastFrame and delete Frames
+\end{itemize}
+\end{itemize}
+
+
+\section{File I/O}
+\noindent The TAN file is read by our parser and stored in a linked list.
+Later implementations will use use the same process to save tan files created by the users.
+\noindent The parser also distinguishes the lines that contain the time stamps, separates them into minutes, seconds, and milliseconds, then computes the total time in milliseconds that the frame occurs since the start of playback. We did this because version 0.4 (.tan2) files are in this format.\\
+
+\begin{center}
+\includegraphics[width=13cm]{Output.PNG}
+\end{center}
+
+\end{document}
+\grid
