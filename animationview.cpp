@@ -14,7 +14,26 @@ void AnimationView::setTool(int x)
 {
     tool = x;
 }
+void AnimationView::setRed(int r)
+{
+    red=r;
+}
 
+void AnimationView::setGreen(int g)
+{
+    green=g;
+}
+
+void AnimationView::setBlue(int b)
+{
+    blue=b;
+}
+/**
+ * @brief AnimationView::drawBackground
+ * @param painter
+ * @param rect
+ * Draws the background of the AnimationView frame.
+ */
 void AnimationView::drawBackground(QPainter *painter, const QRectF &rect)
 {
     QPen pen;
@@ -30,7 +49,11 @@ void AnimationView::drawBackground(QPainter *painter, const QRectF &rect)
     }
     painter->drawPoints(points.data(), points.size());
 }
-
+/**
+ * @brief AnimationView::mousePressEvent
+ * @param e
+ * Handles left clicks based on current selected mode.
+ */
 void AnimationView::mousePressEvent(QMouseEvent * e)
 {
     mouseClicked = true;
@@ -59,7 +82,11 @@ void AnimationView::mouseDoubleClickEvent(QMouseEvent *e)
 {
 
 }
-
+/**
+ * @brief AnimationView::mouseMoveEvent
+ * @param e
+ * Handles the left mouse button being held down, based on current selected mode.
+ */
 void AnimationView::mouseMoveEvent(QMouseEvent *e)
 {
     switch (tool){
@@ -76,7 +103,12 @@ void AnimationView::mouseMoveEvent(QMouseEvent *e)
         break;
     }
 }
-
+/**
+ * @brief AnimationView::roundToGrid
+ * @param x
+ * @return
+ * Fixes coordinates so that all pixels are aligned to a grid.
+ */
 qreal AnimationView::roundToGrid(qreal x)
 {
     int coordinate = x;
@@ -97,33 +129,43 @@ qreal AnimationView::roundToGrid(qreal x)
 
     return coordinate;
 }
-
+/**
+  Creates a pixel at the cursor location.
+ */
 int AnimationView::drawPixel(QMouseEvent * e)
 {
-
     //Get x and y position of mouse click.
     QPointF pt = mapToScene(e->pos());
     pt.setX(roundToGrid(pt.x()));
     pt.setY(roundToGrid(pt.y()));
 
     //Check if there is already an object there, if not, make one.
+
+    QBrush selected_color(QColor(red,green,blue));
+    Pixel* p=new Pixel;
+    p->createPixel(pt.x(),pt.y(),red,green,blue);
     if(!scene->itemAt(pt, QTransform()))
     {
-        QGraphicsRectItem * rect = new QGraphicsRectItem();
-        rect->setRect(pt.x(),pt.y(), PIXEL_SIZE, PIXEL_SIZE);
-        scene->addItem(rect);
+
+        p->createRect(pt,selected_color);
+        scene->addItem(p->rect);
+        current_frame.addPixel(*p);
+
 
         //output coords of new rect for debugging
         qDebug() << pt.x() << ", " << pt.y();
-
+        qDebug() << "Current number of Pixels in pixel_list: " << current_frame.pixel_list.size();
         return 1;
     }
     else
     {
+        current_frame.addPixel(*p);
          return 0;
     }
 }
-
+/**
+ * Erases a pixel from the screen,calls a deleteSearch to remove its associated pixel.
+ */
 int AnimationView::erasePixel(QMouseEvent * e)
 {
     //Get x and y position of mouse click.
@@ -134,7 +176,16 @@ int AnimationView::erasePixel(QMouseEvent * e)
     //Check for an object to delete.
     if(QGraphicsItem * item = scene->itemAt(pt, QTransform()))
     {
+        /**
+         * Creates a new pixel to search the pixel_list with,deletes it after it is found.
+         */
+        QBrush selected_color(QColor(red,green,blue));
+        Pixel* p=new Pixel;
+        p->createPixel(pt.x(),pt.y(),red,green,blue);
+        current_frame.deleteSearch(*p);
         scene->removeItem(item);
+        delete p;
+
         return 1;
     }
     else

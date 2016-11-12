@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>610</width>
+    <width>827</width>
     <height>602</height>
    </rect>
   </property>
@@ -20,72 +20,137 @@
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <item>
-     <widget class="QFrame" name="frame">
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <item>
-        <widget class="QToolButton" name="drawButton">
-         <property name="text">
-          <string>Draw</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QToolButton" name="moveButton">
-         <property name="text">
-          <string>Move</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QToolButton" name="eraseButton">
-         <property name="text">
-          <string>Erase</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item>
-     <widget class="AnimationView" name="AnimationWidget">
-      <property name="minimumSize">
-       <size>
-        <width>525</width>
-        <height>525</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>525</width>
-        <height>525</height>
-       </size>
-      </property>
-      <property name="sceneRect">
-       <rectf>
-        <x>0.000000000000000</x>
-        <y>0.000000000000000</y>
-        <width>500.000000000000000</width>
-        <height>500.000000000000000</height>
-       </rectf>
-      </property>
-     </widget>
-    </item>
-   </layout>
+   <widget class="QFrame" name="frame">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>9</y>
+      <width>278</width>
+      <height>531</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QToolButton" name="drawButton">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>51</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Draw</string>
+     </property>
+    </widget>
+    <widget class="QToolButton" name="moveButton">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>20</y>
+       <width>51</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Move</string>
+     </property>
+    </widget>
+    <widget class="QToolButton" name="eraseButton">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>40</y>
+       <width>51</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Erase</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="greenEdit">
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>20</y>
+       <width>125</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="placeholderText">
+      <string>Green</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="redEdit">
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>0</y>
+       <width>125</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="placeholderText">
+      <string>Red</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="blueEdit">
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>40</y>
+       <width>125</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="placeholderText">
+      <string>Blue</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="AnimationView" name="AnimationWidget">
+    <property name="geometry">
+     <rect>
+      <x>293</x>
+      <y>9</y>
+      <width>525</width>
+      <height>525</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>525</width>
+      <height>525</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>525</width>
+      <height>525</height>
+     </size>
+    </property>
+    <property name="sceneRect">
+     <rectf>
+      <x>0.000000000000000</x>
+      <y>0.000000000000000</y>
+      <width>500.000000000000000</width>
+      <height>500.000000000000000</height>
+     </rectf>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>610</width>
+     <width>827</width>
      <height>20</height>
     </rect>
    </property>
