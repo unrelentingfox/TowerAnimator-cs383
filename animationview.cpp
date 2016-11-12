@@ -98,6 +98,9 @@ qreal AnimationView::roundToGrid(qreal x)
     return coordinate;
 }
 
+/**
+  Creates a pixel at the cursor location.
+ */
 int AnimationView::drawPixel(QMouseEvent * e)
 {
 
@@ -110,9 +113,8 @@ int AnimationView::drawPixel(QMouseEvent * e)
     //Check if there is already an object there, if not, make one.
     if(!scene->itemAt(pt, QTransform()))
     {
-        QGraphicsRectItem * rect = new QGraphicsRectItem();
-        rect->setRect(pt.x(),pt.y(), PIXEL_SIZE, PIXEL_SIZE);
-        scene->addItem(rect);
+        Pixel * pixel = new Pixel(pt.x(),pt.y(),PIXEL_SIZE, red, green, blue);
+        scene->addItem(pixel);
 
         //output coords of new rect for debugging
         qDebug() << pt.x() << ", " << pt.y();

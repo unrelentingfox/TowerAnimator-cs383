@@ -37,6 +37,7 @@ private slots:
 
 private:
     int tool;
+    QColor drawColor;
     bool mouseClicked;
     QGraphicsScene * scene;
 };
