@@ -2,6 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTableWidget>
+#include <QGraphicsScene>
+#include <QHboxLayout>
+
 #include "global.h"
 
 namespace Ui {
@@ -22,6 +26,10 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    QTableWidget* m_pTableWidget;
+    QStringList m_TableHeader;
+    void addFramePixel(QGraphicsScene* scene, int y, int x);
+    void addTimelineFrame(QHBoxLayout* layout );
 };
 
 #endif // MAINWINDOW_H

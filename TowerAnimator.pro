@@ -13,11 +13,13 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    animationview.cpp
+    animationview.cpp \
+    timelinegraphics.cpp
 
 HEADERS  += mainwindow.h \
     global.h \
-    animationview.h
+    animationview.h \
+    timelinegraphics.h
 
 FORMS    += mainwindow.ui
 
