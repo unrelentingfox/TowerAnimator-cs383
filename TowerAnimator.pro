@@ -13,11 +13,19 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    animationview.cpp
+    animationview.cpp \
+    frame.cpp \
+    pixel.cpp \
+    object.cpp \
+    timeline.cpp
 
 HEADERS  += mainwindow.h \
     global.h \
-    animationview.h
+    animationview.h \
+    frame.h \
+    pixel.h \
+    object.h \
+    timeline.h
 
 FORMS    += mainwindow.ui
 

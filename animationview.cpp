@@ -105,6 +105,7 @@ int AnimationView::drawPixel(QMouseEvent * e)
     QPointF pt = mapToScene(e->pos());
     pt.setX(roundToGrid(pt.x()));
     pt.setY(roundToGrid(pt.y()));
+    // need to store these pixels in pixel class
 
     //Check if there is already an object there, if not, make one.
     if(!scene->itemAt(pt, QTransform()))
