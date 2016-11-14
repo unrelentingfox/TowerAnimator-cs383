@@ -23,6 +23,12 @@ signals:
 
 public slots:
     void setTool(int);
+    void setRed(int);
+    void setGreen(int);
+    void setBlue(int);
+    void getTower();
+    void saveFrame();
+    void loadFrame();
 
 private slots:
     void drawBackground(QPainter *painter, const QRectF &rect);

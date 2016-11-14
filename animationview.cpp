@@ -15,6 +15,41 @@ void AnimationView::setTool(int x)
     tool = x;
 }
 
+void AnimationView::setBlue(int b)
+{
+    blue=b;
+}
+
+/**
+ * @brief AnimationView::getTower, Returns a QList of all of the pixels that are within the tower rectangle.
+ */
+void AnimationView::getTower()
+{
+    //@todo create this function
+}
+
+/**
+ * @brief AnimationView::saveFrame, Returns a QList of all of the pixels and objects that are in the current scene.
+ */
+void AnimationView::saveFrame()
+{
+    //@todo create this function
+}
+
+/**
+ * @brief AnimationView::loadFrame, Loads in a FrameStorage object and creates the scene from that info.
+ */
+void AnimationView::loadFrame()
+{
+
+}
+
+/**
+ * @brief AnimationView::drawBackground, Draws the background of the AnimationView frame.
+ * @param painter
+ * @param rect
+ * @author Dustin Fox
+ */
 void AnimationView::drawBackground(QPainter *painter, const QRectF &rect)
 {
     QPen pen;
@@ -31,6 +66,11 @@ void AnimationView::drawBackground(QPainter *painter, const QRectF &rect)
     painter->drawPoints(points.data(), points.size());
 }
 
+/**
+ * @brief AnimationView::mousePressEvent, Handles left clicks based on current selected mode.
+ * @param e
+ * @author Dustin Fox
+ */
 void AnimationView::mousePressEvent(QMouseEvent * e)
 {
     mouseClicked = true;
@@ -60,6 +100,13 @@ void AnimationView::mouseDoubleClickEvent(QMouseEvent *e)
 
 }
 
+<<<<<<< HEAD
+=======
+/**
+ * @brief AnimationView::mouseMoveEvent, Handles the left mouse button being held down, based on current selected mode.
+ * @param e
+ */
+>>>>>>> Fixed some comments and added in place holders for saveFrame, loadFrame, and getTower functions.
 void AnimationView::mouseMoveEvent(QMouseEvent *e)
 {
     switch (tool){
@@ -77,6 +124,14 @@ void AnimationView::mouseMoveEvent(QMouseEvent *e)
     }
 }
 
+<<<<<<< HEAD
+=======
+/**
+ * @brief AnimationView::roundToGrid, Fixes coordinates so that all pixels are aligned to a grid.
+ * @param x
+ * @return
+ */
+>>>>>>> Fixed some comments and added in place holders for saveFrame, loadFrame, and getTower functions.
 qreal AnimationView::roundToGrid(qreal x)
 {
     int coordinate = x;
@@ -99,7 +154,7 @@ qreal AnimationView::roundToGrid(qreal x)
 }
 
 /**
-  Creates a pixel at the cursor location.
+ * @brief AnimationView::drawPixel, Creates a pixel at the cursor location.
  */
 int AnimationView::drawPixel(QMouseEvent * e)
 {
@@ -122,6 +177,14 @@ int AnimationView::drawPixel(QMouseEvent * e)
     return 1;
 }
 
+<<<<<<< HEAD
+=======
+/**
+ * @brief AnimationView::erasePixel, erases a pixel that is at the mouse position.
+ * @param e
+ * @return
+ */
+>>>>>>> Fixed some comments and added in place holders for saveFrame, loadFrame, and getTower functions.
 int AnimationView::erasePixel(QMouseEvent * e)
 {
     //Get x and y position of mouse click.
