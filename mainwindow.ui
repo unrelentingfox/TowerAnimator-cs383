@@ -26,7 +26,7 @@
       <x>9</x>
       <y>9</y>
       <width>278</width>
-      <height>531</height>
+      <height>381</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -143,6 +143,29 @@
       <height>500.000000000000000</height>
      </rectf>
     </property>
+   </widget>
+   <widget class="QScrollArea" name="scrollArea">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>389</y>
+      <width>281</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <property name="widgetResizable">
+     <bool>true</bool>
+    </property>
+    <widget class="QWidget" name="scrollAreaWidgetContents">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>279</width>
+       <height>139</height>
+      </rect>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">

@@ -15,13 +15,15 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     animationview.cpp \
     frame.cpp \
-    pixel.cpp
+    pixel.cpp \
+    timelinegraphics.cpp
 
 HEADERS  += mainwindow.h \
     global.h \
     animationview.h \
     frame.h \
-    pixel.h
+    pixel.h \
+    timelinegraphics.h
 
 FORMS    += mainwindow.ui
 

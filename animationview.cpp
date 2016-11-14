@@ -1,3 +1,4 @@
+//(220,190) (265,325)
 #include "animationview.h"
 #define DEBUG
 //http://stackoverflow.com/questions/7830054/how-to-draw-a-point-on-mouseclick-on-a-qgraphicsscene
