@@ -110,21 +110,16 @@ int AnimationView::drawPixel(QMouseEvent * e)
     pt.setY(roundToGrid(pt.y()));
     // need to store these pixels in pixel class
 
-    //Check if there is already an object there, if not, make one.
-    if(!scene->itemAt(pt, QTransform()))
-    {
-        Pixel * pixel = new Pixel(pt.x(),pt.y(),PIXEL_SIZE, red, green, blue);
-        scene->addItem(pixel);
+    //Overwrite any pixel that is already there.
+    erasePixel(e);
+    //Draw new pixel
+    Pixel * pixel = new Pixel(pt.x(),pt.y(),PIXEL_SIZE, red, green, blue);
+    scene->addItem(pixel);
 
-        //output coords of new rect for debugging
-        qDebug() << pt.x() << ", " << pt.y();
+    //output coords of new pixel for debugging
+    qDebug() << pt.x() << ", " << pt.y();
 
-        return 1;
-    }
-    else
-    {
-         return 0;
-    }
+    return 1;
 }
 
 int AnimationView::erasePixel(QMouseEvent * e)
