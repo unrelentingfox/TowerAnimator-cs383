@@ -1,22 +1,22 @@
-#include "frame.h"
+#include "storageframe.h"
 
-Frame::Frame(double duration, int currFrame)
+storageFrame::storageFrame(double duration, int currFrame)
 {
     duration = duration;
     frameNum = currFrame++;
 }
 
-Frame::~Frame()
+storageFrame::~storageFrame()
 {
     //delete Frame;
 }
 
-void Frame::addObject(QString objectName)
+void storageFrame::addObject(QString objectName)
 {
     objects.append(storageObject(objectName));
 }
 
-void Frame::removeObject(QString objectName)
+void storageFrame::removeObject(QString objectName)
 {
     // iterate through list until object with objectName is found
     QLinkedList<storageObject>::iterator i = objects.begin();

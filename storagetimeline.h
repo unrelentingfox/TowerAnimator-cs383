@@ -1,12 +1,12 @@
-#include "frame.h"
+#include "storageframe.h"
 
-class Timeline
+class storageTimeline
 {
 public:
     int currFrame; // ??
-    QLinkedList<Frame> frames;
-    Timeline();
-    ~Timeline();
+    QLinkedList<storageFrame> frames;
+    storageTimeline();
+    ~storageTimeline();
     // add frame to timeline
     void addFrame(double duration);
     // remove frame from timeline

@@ -1,25 +1,25 @@
-#include "timeline.h"
+#include "storagetimeline.h"
 
-Timeline::Timeline()
+storageTimeline::storageTimeline()
 {
    // constructor
 }
 
-Timeline::~Timeline()
+storageTimeline::~storageTimeline()
 {
    // use with caution
 }
 
-void Timeline::addFrame(double duration)
+void storageTimeline::addFrame(double duration)
 {
     //add new frame to the timeline
-    frames.append(Frame(duration, currFrame));
+    frames.append(storageFrame(duration, currFrame));
 }
 
-void Timeline::removeFrame(int frameNum)
+void storageTimeline::removeFrame(int frameNum)
 {
     // iterate through list until correct frame number is found
-    QLinkedList<Frame>::iterator i = frames.begin();
+    QLinkedList<storageFrame>::iterator i = frames.begin();
 
     while(i != frames.end())
     {

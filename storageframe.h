@@ -1,13 +1,13 @@
-#include "object.h"
+#include "storageobject.h"
 
-class Frame
+class storageFrame
 {
 public:
     double duration;
     int frameNum;
     QLinkedList<storageObject> objects;
-    Frame(double duration, int currFrame);
-    ~Frame();
+    storageFrame(double duration, int currFrame);
+    ~storageFrame();
     void addObject(QString objectName);
     void removeObject(QString objectName);
 

@@ -1,4 +1,4 @@
-class Pixel
+class storagePixel
 {
 public:
     int x_Coordinate; // x location
@@ -7,6 +7,6 @@ public:
     int green; // green value
     int blue; // blue value
 
-    Pixel(int x, int y, int R, int G, int B); // Constructor
-    ~Pixel(); // Destructor
+    storagePixel(int x, int y, int R, int G, int B); // Constructor
+    ~storagePixel(); // Destructor
 };

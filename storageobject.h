@@ -1,12 +1,12 @@
 #include <QLinkedList>
 #include <QString>
-#include "pixel.h"
+#include "storagepixel.h"
 
 class storageObject
 {
 public:
     QString objectName;
-    QLinkedList<Pixel> pixels;
+    QLinkedList<storagePixel> pixels;
     storageObject(QString newObjectName);
     ~storageObject();
     // call Pixel constructor, add to linked list of pixels

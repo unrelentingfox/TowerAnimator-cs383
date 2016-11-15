@@ -1,5 +1,5 @@
 
-#include "object.h"
+#include "storageobject.h"
 
 storageObject::storageObject(QString newObjectName)
 {
@@ -13,7 +13,7 @@ storageObject::~storageObject()
 
 void storageObject::addPixel(int x, int y, int R, int G, int B)
 {
-    pixels.append(Pixel(x, y, R, G, B));
+    pixels.append(storagePixel(x, y, R, G, B));
 }
 
 
@@ -21,7 +21,7 @@ void storageObject::removePixel(int x, int y)
 // remove pixel with specified x,y coordinates
 {
     // iterate through list until pixel with (x,y) is found
-    QLinkedList<Pixel>::iterator i = pixels.begin();
+    QLinkedList<storagePixel>::iterator i = pixels.begin();
 
     while(i != pixels.end())
     {
