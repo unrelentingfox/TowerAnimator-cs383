@@ -7,7 +7,7 @@
 #include <QLinkedList>
 #include <QString>
 
-class Frame : public QLinkedList
+class Frame
 {
     // Q_OBJECT
 public:

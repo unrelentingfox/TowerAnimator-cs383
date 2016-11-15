@@ -7,7 +7,7 @@
 
 #endif // OBJECT_H
 
-class Object : public QLinkedList
+class Object
 {
     // Q_OBJECT
 public:

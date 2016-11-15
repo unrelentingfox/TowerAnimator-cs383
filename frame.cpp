@@ -2,18 +2,18 @@
 
 Frame::Frame(double duration, int currFrame)
 {
-    Frame->duration = duration;
-    Frame->frameNum = currFrame++;
+    duration = duration;
+    frameNum = currFrame++;
 }
 
 Frame::~Frame()
 {
-    delete Frame;
+    //delete Frame;
 }
 
 void Frame::addObject(QString objectName)
 {
-    newObject = new Object(objectName);
+    Object newObject = new Object(objectName);
     objects.append(newObject);
 }
 
