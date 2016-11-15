@@ -1,23 +1,19 @@
-
 #include "timeline.h"
-#include "frame.h"
-#include "object.h"
 
 Timeline::Timeline()
 {
-
+   // constructor
 }
 
 Timeline::~Timeline()
 {
-    //use with caution
-    delete Timeline;
-)
+   // use with caution
+}
 
 void Timeline::addFrame(double duration)
 {
-    newFrame = new Frame(duration, Timeline->currFrame);
-    frames.append(newFrame);
+    //add new frame to the timeline
+    frames.append(Frame(duration, currFrame));
 }
 
 void Timeline::removeFrame(int frameNum)

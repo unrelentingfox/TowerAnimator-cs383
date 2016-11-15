@@ -1,12 +1,7 @@
-#include <QLinkedList>
-#include <QString>
 #include "frame.h"
-#include "object.h"
 
-class Timeline : public QLinkedList
+class Timeline
 {
-   // Q_OBJECT
-
 public:
     int currFrame; // ??
     QLinkedList<Frame> frames;

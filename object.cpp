@@ -1,32 +1,23 @@
 
 #include "object.h"
 
-Object(QString objectName);
-~Object();
-// call Pixel constructor, add to linked list of pixels
-void addPixel(int x, int y, int R, int G, int B);
-// call Pixel destructor, remove from linked list of pixels
-void removePixel(Pixel pixel);
-
-Object::Object(Qstring objectName)
+storageObject::storageObject(QString newObjectName)
 {
-    Object->objectName = objectName;
-    // need to add more!
+    objectName = newObjectName;
 }
 
-Object::~Object()
+storageObject::~storageObject()
 {
-    delete Object;
+    // delete storageObject
 }
 
-void Object::addPixel(int x, int y, int R, int G, int B)
+void storageObject::addPixel(int x, int y, int R, int G, int B)
 {
-    newPixel = new Pixel(x, y, R, G, B);
-    newPixel.append(pixels);
+    pixels.append(Pixel(x, y, R, G, B));
 }
 
 
-void Object::removePixel(int x, int y)
+void storageObject::removePixel(int x, int y)
 // remove pixel with specified x,y coordinates
 {
     // iterate through list until pixel with (x,y) is found
@@ -34,7 +25,7 @@ void Object::removePixel(int x, int y)
 
     while(i != pixels.end())
     {
-        if((i->x == x) && (i->y == y)){
+        if((i->x_Coordinate == x) && (i->y_Coordinate == y)){
             pixels.erase(i);
             break;
         }
