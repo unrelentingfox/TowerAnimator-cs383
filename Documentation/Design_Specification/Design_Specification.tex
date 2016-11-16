@@ -1,0 +1,546 @@
+%Based on the code of Yiannis Lazarides and Jean-Philippe Eisenbarth
+%http://tex.stackexchange.com/questions/42602/software-requirements-specification-with-latex
+%http://tex.stackexchange.com/users/963/yiannis-lazarides
+%Also based on the template of Karl E. Wiegers
+%http://www.se.rit.edu/~emad/teaching/slides/srs_template_sep14.pdf
+%http://karlwiegers.com
+\documentclass{scrreprt}
+\usepackage{scrhack}
+\usepackage{listings}
+\usepackage{underscore}
+\usepackage[bookmarks=true]{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\def\myversion{1.0 }
+\date{}
+\usepackage{hyperref}
+\usepackage{array}
+\begin{document}
+
+\begin{flushright}
+    \rule{16cm}{5pt}\vskip1cm
+    \begin{bfseries}
+        \Huge{SOFTWARE DESIGN\\ SPECIFICATION}\\
+        \vspace{1.55cm}
+        for\\
+        \vspace{1.55cm}
+        Tower Animator\\
+        \vspace{1.55cm}
+        \LARGE{Version \myversion}\\
+        \vspace{1.55cm}
+        Prepared by:\\
+        Dustin Fox, Lydia Engerbretson,\\
+        Hannah Pearson, Brandon Brewster, Colton Hotchkiss, Andrew Avery, Alex Wezensky \\
+        \vspace{1.55cm}
+        University of Idaho - CS 383\\
+        \vspace{1.55cm}
+        \today\\
+    \end{bfseries}
+\end{flushright}
+
+\tableofcontents
+
+
+\chapter*{Development Time Line}
+
+\begin{center}
+    \begin{tabular}{|l|l|m{10cm}|}
+        \hline
+	    Week & Date & Goal \\
+        \hline
+	    1 & Tuesday, 11/1 & Complete Design Specification \\
+        \hline
+        1 & Thursday, 11/3 & Design Class Diagrams and Functions that will be needed. Create Scrum Board and choose some tasks to work on.\\
+        \hline
+        2 & Tuesday, 11/8 & Initial scrum tasks completed. Discuss progress. Assign/choose more tasks from the scrum board to complete prototype 1. \\
+        \hline
+        3 & Wednesday, 11/16 & Prototype 1 complete. Basic working animator; top priority functionality complete. Test, and see how to improve. More scrum board tasks to work on over break.\\
+        \hline
+        4 & Wednesday, 11/30 & Prototype 2 complete. Final prototype everything should be functional. Figure out what needs to be done to polish final product. Bug fixes, etc. \\
+        \hline
+        5 & Wednesday, 12/7 & Final Product complete. \\
+        \hline
+    \end{tabular} 
+\end{center}
+
+\chapter{Introduction}
+
+\section{Purpose}
+This Product Design Specification describes the design, requirements, use cases, and development time line for a CS 383 final project: The Tower Animator.
+
+%\section{Document Conventions}
+%$<$Describe any standards or typographical conventions that were followed when 
+%writing this SRS, such as fonts or highlighting that have special significance.  
+%For example, state whether priorities  for higher-level requirements are assumed 
+%to be inherited by detailed requirements, or whether every requirement statement 
+%is to have its own priority.$>$
+
+\section{Intended Audience and Reading Suggestions}
+%$<$Describe the different types of reader that the document is intended for, 
+%such as developers, project managers, marketing staff, users, testers, and 
+%documentation writers. Describe what the rest of this SRS contains and how it is 
+%organized. Suggest a sequence for reading the document, beginning with the 
+%overview sections and proceeding through the sections that are most pertinent to 
+%each reader type.$>$
+This is intended for the reference of our development team, as well as our professor to understand our plan for this project.
+
+\section{Project Scope}
+%$<$Provide a short description of the software being specified and its purpose, 
+%including relevant benefits, objectives, and goals. Relate the software to 
+%corporate goals or business strategies. If a separate vision and scope document 
+%is available, refer to it rather than duplicating its contents here.$>$
+This project is to create an intuitive animation program that is easily accessible to any student who would like to create an animation for the University of Idaho Tower Lights Show. The main goal for this program is to improve on the previous versions of the animation software and make it easier to use which would in turn result in more animations for the show.
+
+%\section{References}
+%$<$List any other documents or Web addresses to which this SRS refers. These may 
+%include user interface style guides, contracts, standards, system requirements 
+%specifications, use case documents, or a vision and scope document. Provide 
+%enough information so that the reader could access a copy of each reference, 
+%including title, author, version number, date, and source or location.$>$
+
+
+\chapter{Overall Description}
+
+\section{Product Perspective}
+%$<$Describe the context and origin of the product being specified in this SRS.  
+%For example, state whether this product is a follow-on member of a product 
+%family, a replacement for certain existing systems, or a new, self-contained 
+%product. If the SRS defines a component of a larger system, relate the 
+%requirements of the larger system to the functionality of this software and 
+%identify interfaces between the two. A simple diagram that shows the major 
+%	components of the overall system, subsystem interconnections, and external 
+%interfaces can be helpful.$>$
+This program is supposed to replace the current Tower Animation software and make it more user friendly. It will create animation videos that are compatible with the current Tower Player software.
+
+\section{Product Functions}
+%$<$Summarize the major functions the product must perform or must let the user 
+%perform. Details will be provided in Section 3, so only a high level summary 
+%(such as a bullet list) is needed here. Organize the functions to make them 
+%understandable to any reader of the SRS. A picture of the major groups of 
+%related requirements and how they relate, such as a top level data flow diagram 
+%or object class diagram, is often effective.$>$
+The following is a list of all of the things that the Tower Animator should be able to accomplish, organized from highest to lowest priority. These functions are elaborated in more detail in section 4.
+
+\begin{itemize}
+\item Save an animation video in .tan format that is currently in use.
+\item Create/draw objects that can be moved and animated with key frames
+\item Create and manage individual key frames
+\item Have a list of all objects in use with detailed information about their location and color that can be changed manually.
+\item Have an intuitive color selector for the colors of the animation objects
+\item Save work in progress video in a .animator format
+\end{itemize}
+
+\section{User Classes and Characteristics}
+%$<$Identify the various user classes that you anticipate will use this product.  
+%User classes may be differentiated based on frequency of use, subset of product 
+%functions used, technical expertise, security or privilege levels, educational 
+%level, or experience. Describe the pertinent characteristics of each user class.  
+%Certain requirements may pertain only to certain user classes. Distinguish the 
+%most important user classes for this product from those who are less important 
+%to satisfy.$>$
+There are three user classes that we anticipate will use this product and we need to cater to them accordingly.
+
+\subsection{Novice Animator - Priority 1 }
+Students, staff or majority of people who would like to create animations for the Tower Light Show. The main goal of this project is to make this program as accessible to as many people as possible, so we need to cater to users that do not have to have any extensive technical knowledge besides the basics of using a computer.
+
+\subsection{Expert Animator - Priority 2}
+In addition to making the program easy to use for someone who is new to animation software, our program should follow common animation techniques to cater to people who have experience animating using other software packages.
+
+\subsection{Programmer - Priority 3}
+Dr. Rinker mentioned that he wants this program to be written in C++ so that he can easily make additions to it if he needs or wants to. So with that being said, the project should not only be written in C++ but it should also be well documented so that it is easy for him to quickly understand the code base if he needs to make changes.
+
+\section{Operating Environment}
+%$<$Describe the environment in which the software will operate, including the 
+%hardware platform, operating system and versions, and any other software 
+%components or applications with which it must peacefully coexist.$>$
+The target operating environment is Windows Desktop. Our Program should support Windows 10, 8, 7 and possibly previous editions of windows. The possibility of supporting Mac or Linux would be a possibility with Qt but not within the scope of this project.
+
+\section{Design and Implementation Constraints}
+%$<$Describe any items or issues that will limit the options available to the 
+%developers. These might include: corporate or regulatory policies; hardware 
+%limitations (timing requirements, memory requirements); interfaces to other 
+%applications; specific technologies, tools, and databases to be used; parallel 
+%operations; language requirements; communications protocols; security 
+%considerations; design conventions or programming standards (for example, if the 
+%customer’s organization will be responsible for maintaining the delivered 
+%software).$>$
+The main limitation of this project is time. We have a total of 5 weeks to complete this project from start to finish. Besides that the project must be written in C++ using the QT development platform and must output a .tan file that correctly plays in the Tower player program.
+
+\section{User Documentation}
+%$<$List the user documentation components (such as user manuals, on-line help, 
+%and tutorials) that will be delivered along with the software. Identify any 
+%known user documentation delivery formats or standards.$>$
+For this project we will include a User manual that outlines how to make a simple animation with screen shots to help someone get started with the animation process, as well as an installation guide that will help the user install the program and it's dependencies successfully.
+
+%\section{Assumptions and Dependencies}
+%$<$List any assumed factors (as opposed to known facts) that could affect the 
+%requirements stated in the SRS. These could include third-party or commercial 
+%components that you plan to use, issues around the development or operating 
+%environment, or constraints. The project could be affected if these assumptions 
+%are incorrect, are not shared, or change. Also identify any dependencies the 
+%project has on external factors, such as software components that you intend to 
+%reuse from another project, unless they are already documented elsewhere (for 
+%example, in the vision and scope document or the project plan).$>$
+%We are building this project with the QT application development platform, using Version 5.7
+
+
+\chapter{External Interface Requirements}
+
+\section{User Interface Design}
+%$<$Describe the logical characteristics of each interface between the software 
+%product and the users. This may include sample screen images, any GUI standards 
+%or product family style guides that are to be followed, screen layout 
+%constraints, standard buttons and functions (e.g., help) that will appear on 
+%every screen, keyboard shortcuts, error message display standards, and so on.  
+%Define the software components for which a user interface is needed. Details of 
+%the user interface design should be documented in a separate user interface 
+%specification.$>$
+The user interface will be designed to be as intuitive as possible. to include all of the features listed in section 2.2. Here is a prototype of the design labeled and described in the sections that follow.\\
+
+\includegraphics[width=\textwidth]{Design.jpg}
+\newpage
+\subsection{Menu Bar}
+The tool bar across the top will be similar to other windows programs containing buttons such as File, Edit, Tools, and Help. Each of these buttons will have their own drop down list of options. 
+
+\subsection{Graphics window}
+The main graphics window will be a giant grid with a box in the center that shows the tower itself. The graphics window will also contain all of the animation objects in use during the animation. They will be able to be moved around throughout the graphics window for animation.
+
+\subsection{Object List}
+The object list will contain a complete list of all of the objects currently in use on the screen from top to bottom in order of priority. Similar to how layers work in Photoshop.
+
+\subsection{Object Details}
+Once you select an object, all of that object's information will populate the Object Details panel so that you can change things like color or location.
+
+\subsection{Frames Panel}
+The frames panel along the bottom will contain all of the current frames as well as a scroll bar along the bottom that lets you scrub through your animation. The current active frame will populate the center box which will have a key frame button above it.
+
+%\section{Hardware Interfaces}
+%$<$Describe the logical and physical characteristics of each interface between 
+%the software product and the hardware components of the system. This may include 
+%the supported device types, the nature of the data and control interactions 
+%between the software and the hardware, and communication protocols to be 
+%used.$>$
+
+%\section{Software Interfaces}
+%$<$Describe the connections between this product and other specific software 
+%components (name and version), including databases, operating systems, tools, 
+%libraries, and integrated commercial components. Identify the data items or 
+%messages coming into the system and going out and describe the purpose of each.  
+%Describe the services needed and the nature of communications. Refer to 
+%documents that describe detailed application programming interface protocols.  
+%Identify data that will be shared across software components. If the data 
+%sharing mechanism must be implemented in a specific way (for example, use of a 
+%global data area in a multitasking operating system), specify this as an 
+%implementation constraint.$>$
+
+%\section{Communications Interfaces}
+%$<$Describe the requirements associated with any communications functions 
+%required by this product, including e-mail, web browser, network server 
+%communications protocols, electronic forms, and so on. Define any pertinent 
+%message formatting. Identify any communication standards that will be used, such 
+%as FTP or HTTP. Specify any communication security or encryption issues, data 
+%transfer rates, and synchronization mechanisms.$>$
+
+
+\chapter{System Features}
+%$<$This template illustrates organizing the functional requirements for the 
+%product by system features, the major services provided by the product. You may 
+%prefer to organize this section by use case, mode of operation, user class, 
+%object class, functional hierarchy, or combinations of these, whatever makes the 
+%most logical sense for your product.$>$
+
+\section{Tower Animator File Output}
+This feature is a .tan2 file output from the Tower Animator.
+
+\subsection{Description and Priority}
+When the user interacts with the Tower Animator's File dropdown, there are several options: New, Open, Open Audio File, Save, Save As, Export, Close, and Exit. This is a high priority feature since there needs to be a .tan2 file for the Tower of Lights Player to read.
+
+\subsection{Stimulus/Response Sequences}
+\begin {itemize}
+\item When change is made and File to “New” is selected: a popup appears with “Do you want to save your current project” with options “Yes”, “No”, and “Cancel”
+\begin{itemize}
+\item When “Cancel” is selected: Current, edited frames remain as they are
+\item When “No” is selected: New, clear frames appear on application
+\item When “Yes” is selected: Output needs to be in .tan2 format and interface for saving file to certain location
+\end {itemize}
+\item When change is not made (frames are blank) and you select File to “New”: nothing happens, blank frames remain on application.
+\item When change is made and File to “Open” or “Open Audio File” is selected: a popup appears with “Do you want to save your current project” with options “Yes”, “No”, and “Cancel”
+\begin {itemize}
+\item When “Cancel” is selected: Popup goes away and edit(s) remain on frame(s)
+\item When “No” is selected: Edits are cleared, interface for opening a .tan2 file
+\item When “Yes” is selected: Output needs to be in .tan2 format, interface for opening a .tan2 file
+\end {itemize}
+\item When change is not made and File to “Open” or “Open Audio File” is selected: interface for opening a file in .tan2 format appears
+\item When change is made and you go to File to “Save” or File to “Save as” in the application: output needs to be in .tan2 format and interface for saving file to certain location
+\item When change is not made and you go to File to "Save" or File to "Save as" in the application: Re-save current file if file is already saved as .tan2 file or if the frames are blank, output needs to be in .tan2 format and interface for opening a .tan2 file.
+\item When change is made and you close out the application, go to File to “Close” or go to File to “Exit”, a popup will appear with “Save”, “Discard”, and “Cancel” options. 
+\begin {itemize}
+\item When “Save” is selected: Output needs to be in .tan2 format and interface for saving file to certain location
+\item When “Discard” is selected: application closes out
+\item When “Cancel” is selected: application remains open
+\end {itemize}
+\item When you select File to “Export”: Output needs to be in .tan2 format and interface for exporting file to certain location
+\item .animator file for saving project: This is saving your work in progress, saving configurations and settings of a project, saving your objects that you created, so you can go back and edit the file again. 
+\item When file has been open for 10 minutes, a popup appears: “You’ve been at it for a while, would you like to save?” 
+\begin {itemize}
+\item When “Yes” is selected: output needs to be in .tan2 format and interface for saving file to certain location
+\item When "No" is selected: Application remains the same
+\end {itemize}
+\end {itemize}
+
+\subsection{Functional Requirements}
+The file output functional requirements for the Tower of Lights animator: 
+\begin {itemize}
+\item Create a new file
+\item Open a file and audio file from a location (interface for browsing for a location)
+\item Name and save file to a location (interface for browsing for a location)
+\item Name and export a file to a location (interface for browsing for a location)
+\item Name and save .animator file (work and configurations in progress)
+\item Close and exit a file
+\end {itemize}
+\subsection{Use Case Diagram}
+\includegraphics[width=7cm]{fileoutput.jpg}
+
+\newpage
+\section{Color Selector}
+\subsection{Description and Priority}
+The color selection feature allows the user to select colors from the RGB spectrum, by RGB value, Hex value, color history, or the saved color palette. The color selection feature is of high priority while the savable palette is a low priority.
+\subsection{Stimulus/Response Sequences}
+\begin{itemize}		
+\item The user is able to select a current color from:
+\begin{itemize}
+	\item The RGB color wheel/grid.
+	\item Using the RGB slider/inputing RGB values.
+	\item Inputing the Hex color value.
+	\item The history of colors area.
+\end{itemize}
+\item Features of a savable color palette:
+\begin{itemize}
+	\item Users will be able to add colors to palette from the color currently selected or from the history of colors.
+	\item Users will be able to save their palettes for later use.
+	\item Users will be able to load palettes previously created.
+	\item Users will be able to clear their current palette.
+\end{itemize}
+\end{itemize}
+\subsection{Functional Requirements}
+The Functional Requirements for color selector:
+\begin{itemize}
+	\item Select a color from an RGB wheel/grid.
+	\item Select a color by inputing RGB values.
+	\item Select a color by its Hex value.
+	\item Show a selectable history of colors used.
+	\item Implement a savable color palette(if time permits).
+\end{itemize}
+\subsection{Use Case Diagram}
+\includegraphics[width=\textwidth]{ColorSelector.JPG}
+
+% =================================== %
+\section{Object Interaction} 
+% ===== Hannah Pearson ============== %
+\par{Objects are a foundational building block in this animation program. This section details specifications for functionality that are concisely summarized in the diagram below. Additionally, these actions are ranked according to priority: high, moderate, and low. High priority items are essential to program functionality. Moderate priority items are requested by the customer and will improve user experience, but are not absolutely necessary for a functional program. Low priority items will be implemented after the others, if there is time.}
+\begin{figure}[H] %H option from float, for placement
+\centering
+\includegraphics[width=10cm]{UMLobjectInteraction.png}
+\caption*{UML Use Case Diagram for Object Interaction}
+\end{figure}
+
+% =================================== %
+\subsection{Create New Object}
+
+\subsubsection{Description and Priority}
+\par{This action creates a new object. An object can be defined as a set of points that are grouped together in a set and share attributes. The action of creating a new object is very high priority because objects are the building blocks for frames, and frames are the building blocks of the animation that is produced.}
+
+\subsubsection{Stimulus/Response Sequences}
+\par{An object is created when the user selects "Create New Object" from the Objects menu or right clicks the main grid and selects "Create New Object" from the menu by the mouse. This action could also potentially be mapped to a shortcut key.}
+\par{The user then names the object, with the default name being "Object N" where N represents the number of objects existing when the new object is created. The user also must choose a color, or colors, for the object and set the object's shape and starting coordinates by left-clicking squares on the main grid in the desired pattern or holding the left mouse and using it as a "paintbrush" to color squares. Squares do not have to be contiguous, so the user can create a pattern of disconnected dots that only comprise one object. Similarly, the user can set the object to be part of one or more groups, which can be used to move or modify all member objects simultaneously. If the user does not select any groups, the object is only part of the group "All objects". Additionally, the user can set the object to be semi-transparent by modifying the "Opacity" attribute. If the user does not modify this attribute, it is set at 100 (completely opaque) as a default.}
+
+\subsubsection{Functional Requirements}
+\par{The functional requirements of this action are}
+\begin{itemize}
+	\item To create a new object from a toolbar menu option
+    \item To create a new object from a drop down (right click) menu option
+   	\item To name, place, color, and identify the new object
+\end{itemize}
+% =================================== %
+
+
+% =================================== %
+\subsection{Import Object From Library}
+
+\subsubsection{Description and Priority}
+\par{This action is similar to creating a new object, only instead of manually setting the color and shape, the user can select from a library of existing objects. This action is low priority because the program will be entirely functional without it, but it is still a target action because it will make designing animations much easier.}
+ 
+\subsubsection{Stimulus/Response Sequences}
+\par{This action is triggered when a user right-clicks over any empty space in the main grid area. A window pops up, with a list of objects on the left and a preview pane on the right. The user can then drag-and-drop and object from the preview pane to the grid or select OK and the object will be placed on the grid (in the middle? where the user right clicked?) and can then be moved.}
+
+\subsubsection{Functional Requirements}
+\par{The functional requirement of this action is}
+\begin{itemize}
+	\item To insert a new object with predefined properties into the program
+\end{itemize}
+% =================================== %
+
+
+% =================================== %
+\subsection{Add Object To Library}
+\par{Allows user to create custom object libraries that can persist through various projects and project iterations. This is a very, very low priority action and is unlikely to be completed this semester.}
+% =================================== %
+
+
+% =================================== %
+\subsection{Duplicate Object}
+
+\subsubsection{Description and Priority}
+\par{This action duplicates an existing object. It is a medium priority action because although its functionailty can be duplicated manually, it will save the user time and effort.}
+
+\subsubsection{Stimulus/Response Sequences}
+\par{This action can be triggered by right clicking on an existing object and selecting the option "Clone" from the menu that appears by the mouse pointer. The newly cloned object is placed next to the original and can then be moved. This action can also be triggered if the user right-click selects an object from the object list, with the same response.}
+
+\subsubsection{Functional Requirements}
+\par{The functional requirements of this action are}
+\begin{itemize}
+	\item To create an exact copy of an existing object
+    \item To allow the user to move and edit the new object
+\end{itemize}
+% =================================== %
+
+
+% =================================== %
+\subsection{Display Object Attributes}
+
+\subsubsection{Description and Priority}
+\par{This action displays pertinent object attributes. It is a high priority action, because a user must be able to display attributes in order to edit them.}
+
+\par{This action displays attributes in object pane on the right side of the screen. Object attributes include the following:
+\begin{itemize}
+	\item{Name}
+	\item{Location coordinates}
+	\item{Color(s)}
+	\item{Layer}
+	\item{Opacity}
+	\item{Group(s)}	
+\end{itemize}
+This is a high priority feature because manipulating objects is a foundational part of this animation program.}
+
+\subsubsection{Stimulus/Response Sequences}
+\par{This action is executed when user left-clicks object or left-click selects object from list of objects.}
+
+\subsubsection{Functional Requirements}
+\par{The functional requirements of this action are}
+\begin{itemize}
+	\item To list the properties of a selected object
+\end{itemize}
+% =================================== %
+
+
+% =================================== %
+\subsection{Edit Object Attribute}
+
+\subsubsection{Description and Priority}
+\par{This action is exactly what it sounds like: editing object attributes. Since it deals with fundamental object manipulation, it is essential and thus a high priority task.}
+
+\subsubsection{Stimulus/Response Sequences}
+\par{A prerequisite action is displaying the object attributes. Once the attributes display pane is open, the individual values can be edited. As the values are edited, they are automatically saved (alternatively, the values can be saved when the user left-clicks "Save", which is probably easier to implement).}
+
+\subsubsection{Functional Requirements}
+\par{The functional requirements are to display object attributes, and to be able to edit them.}
+% =================================== %
+
+
+% =================================== %
+\subsection{Move Object With Mouse}
+
+\subsubsection{Description and Priority}
+\par{This action changes the coordinates of an object or objects (if a group of objects is being moved). It is a very high priority action.}
+
+\subsubsection{Stimulus/Response Sequences}
+\par{The user moves an object by left-clicking it with the mouse and then dragging it to the new location. An unnamed group of objects can be selected by shift-left-click-dragging the mouse to select an area or ctrl-left-click over each object that is to be moved.}
+
+\subsubsection{Functional Requirements}
+\par{To move the object, we need to implement the functionality of the shift and control keys. The objects location values will be changed when the object is moved.}
+% =================================== %
+
+
+% =================================== %
+\subsection{Move Object With Arrow Keys}
+ 
+\subsubsection{Description and Priority}
+\par{This action allows the user to move objects by pressing the arrow keys. It is a moderate priority task because the user can also move objects using the mouse, so the program will be functional without it.}
+
+\subsubsection{Stimulus/Response Sequences}
+\par{Prerequisite to this action is that an object or group of objects must be selected, either from the objects list or from the main grid area. Once an object is selected and its attributes are being displayed in the right-hand attribute display pane, the user can move the object by pressing the arrow keys or, alternatively, the WASD keys. Optionally, these keys could be mapped by the user to any keys that are not already being used. For each time the key is pressed, the object will move one step in the corresponding direction. If the user holds the key, the object will move at a set (possibly increasing) rate in that direction. A lower priority part of this task would be to add the feature of having two arrow keys pressed at once, which moves the object in a combination of those directions.}
+ 
+\subsubsection{Functional Requirements}
+\par{The functional requirements of this action are}
+\begin{itemize}
+	\item To add the functionality of the arrow keys
+    \item To update the location values of the object as it moves
+\end{itemize}
+% =================================== %
+
+
+% =================================== %
+\subsection{Tweening}
+\par{NOTE, This is more of a key-framing task than an object manipulation task!!!!}
+
+\subsubsection{Description and Priority}
+\par{Automatically generate intermediate frames between a specified start frame and a specified end frame to represent the movement of object. This is a moderate priority task that is not vital to program functionality but has been specifically requested by our customer Dr. Rinker.}
+
+\subsubsection{Stimulus/Response Sequences}
+
+\subsubsection{Functional Requirements}
+\par{To be enumerated later.}
+% =================================== %
+\newpage
+\section{Timeline and Frame Management}
+
+\subsection{Description and Priority}
+The timeline is a linear representation of all frames in the animation, with the ability to select and manipulate frames in a number of different ways. This is a required functionality and visual representation for any basic animation and has a high priority.
+
+\subsection{Stimulus/Response Sequences}
+Selecting a frame will highlight it in the timeline. Deleting a frame will prompt the users with a confirmation dialogue to prevent accidentally deleting frames. 
+
+\subsection{Functional Requirements}
+REQ-1: The timeline allows users to select a frame to edit. Once selected, the frame will appear in the editor and all related information for the frame will be displayed such as timing info, object info, and color presets.\\ \\
+REQ-2: Users can duplicate a frame, placing the duplicated frame immediately next in line and adjusting its timing to match, and shifting all later frames to accommodate. All other frame info will also be duplicated.\\ \\
+REQ-3: Not all frames will be displayed on the timeline, but a scroll wheel will allow users to access all frames.\\ \\
+REQ-4: Clicking and dragging a frame will allow users to rearrange them. This will keep the duration of the frame, but will change its start and stop time to place it in the desired location. All other frames will also be shifted to accommodate the change.\\ \\
+REQ-5: Deleteing a frame will permanently remove a frame from the timeline and will shift all later frames to fill the gap.\\ \\ 
+REQ-6: There will be a play button on the timeline that will allow users to playback all frames with the selected music. 
+
+\includegraphics[width=10cm]{timelineusecases.jpg}
+
+\newpage
+\section{Program Configuration} 
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{config.png}
+\caption*{UML Use Case Diagram for Configuring the Program}
+\end{figure}
+% ===== Andrew Avery ============== %
+\subsection{Description and Priority}
+The ability to customize various features provided by the application is common in other animation software as a means of increasing productivity. This is a proposed feature with a low priority.
+\subsection{Stimulus/Response Sequences}
+Pressing a settings button will open up a sub menu with the choices to modify the configuration file, save the current settings as a separate file, or load and use another configuration file.
+\subsection{Functional Requirements}
+The requirements of this action are to be able to read and write user defined settings from a file. The exact data to be stored in this file is currently unspecified.
+% =================================== %
+\newpage
+
+%\section{Use Case of Selecting an Object}
+%\textbf{Name: }Select an Object\\
+%\textbf{Actors: }The user\\ 
+%\textbf{Goals: }To select an object, such as a shape or a single box, with the goal of viewing the object's properties. \\
+%\textbf{Preconditions:} An object exists.\\
+%\textbf{Summary:} The user drags their cursor around an object or clicks on a box. The object's information appears on screen.\\
+%\textbf{Related Use Cases:} Move an object, change the color of an object, tween an object. \\
+%\textbf{Steps:} Select the object. View the information on the object.\\
+%\textbf{Alternatives:} The user may select the object by clicking on boxes, or by dragging and enclosing the object with their cursor.\\
+%\textbf{Postconditions:} This action leaves the object's properties on screen.\\
+
+
+%\chapter{Appendix}
+
+\end{document}
