@@ -17,7 +17,8 @@ SOURCES += main.cpp\
     storageframe.cpp \
     storageobject.cpp \
     storagepixel.cpp \
-    storagetimeline.cpp
+    storagetimeline.cpp \
+    timelinegraphics.cpp
 
 HEADERS  += mainwindow.h \
     global.h \
@@ -25,7 +26,8 @@ HEADERS  += mainwindow.h \
     storageframe.h \
     storageobject.h \
     storagepixel.h \
-    storagetimeline.h
+    storagetimeline.h \
+    timelinegraphics.h
 
 FORMS    += mainwindow.ui
 
