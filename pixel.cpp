@@ -1,64 +1,19 @@
 #include "pixel.h"
 
-Pixel::Pixel()
+Pixel::Pixel(int x, int y, int size, int r, int g, int b)
 {
 
-}
-void Pixel::createPixel(qreal x, qreal y, int r, int g, int b)
-{
-    this->x=x;
-    this->y=y;
-    this->r=r;
-    this->g=g;
-    this->b=b;
-}
-qreal Pixel::returnX()
-{
-   return this->x;
+    x_Coordinate = x;
+    y_Coordinate = y;
+    red = r;
+    green = g;
+    blue = b;
+    this->setRect(x,y,size,size);
+    this->setBrush(QBrush(QColor(r,g,b,255)));
 }
 
-qreal Pixel::returnY()
+Pixel::~Pixel()
 {
-    return this->y;
-}
+delete this;
 
-int Pixel::returnR()
-{
-    return this->r;
-}
-int Pixel::returnG()
-{
-    return this->g;
-}
-int Pixel::returnB()
-{
-    return this->b;
-}
-
-int Pixel::setR(int newR)
-{
-    r=newR;
-}
-
-int Pixel::setG(int newG)
-{
-    g=newG;
-}
-
-int Pixel::setB(int newB)
-{
-    b=newB;
-}
-
-void Pixel::createRect(QPointF pt,QBrush selected_color)
-{
-    rect = new QGraphicsRectItem();
-    rect->setRect(pt.x(),pt.y(), PIXEL_SIZE, PIXEL_SIZE);
-    paintPixel(selected_color);
-}
-
-void Pixel::paintPixel(QBrush selected_color)
-{
-    rect->setBrush(QBrush(selected_color));
-    qDebug() << "wtwadfasdf";
 }

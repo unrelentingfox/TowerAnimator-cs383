@@ -7,13 +7,16 @@
 #include <QMouseEvent>
 #include <QPointF>
 #include <QDebug>
-
+#include <storagetimeline.h>
 #include "global.h"
 #include "pixel.h"
-#include "frame.h"
+
 
 //http://stackoverflow.com/questions/7830054/how-to-draw-a-point-on-mouseclick-on-a-qgraphicsscene
-
+/**
+ * @brief The AnimationView class
+ * Each instance is a frame in the timeline.
+ */
 class AnimationView : public QGraphicsView
 {
     Q_OBJECT
@@ -31,6 +34,10 @@ public slots:
     void setRed(int);
     void setGreen(int);
     void setBlue(int);
+    void getTower();
+    void saveFrame();
+    void loadFrame();
+
 private slots:
     void drawBackground(QPainter *painter, const QRectF &rect);
     void mousePressEvent(QMouseEvent * e);
@@ -43,11 +50,12 @@ private slots:
     int move(QMouseEvent * e);
 
 private:
+    storageTimeline Timeline;
     int red=0;
     int green=0;
     int blue=0;
     int tool;
-    Frame current_frame;
+    QColor drawColor;
     bool mouseClicked;
     QGraphicsScene * scene;
 };

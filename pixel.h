@@ -6,31 +6,23 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QPointF>
-#include <QGraphicsEllipseItem>
+#include <QGraphicsRectItem>
 #include "global.h"
-class Pixel
+/**
+ * @brief The Pixel class
+ */
+class Pixel : public QGraphicsRectItem
 {
 public:
-    Pixel();
-    void createPixel(qreal,qreal,int,int,int);
-    qreal returnX();
-    qreal returnY();
-    int returnR();
-    int returnG();
-    int returnB();
-    int setR(int);
-    int setG(int);
-    int setB(int);
-    QGraphicsRectItem * rect;
-    void createRect(QPointF,QBrush);
-    void paintPixel(QBrush selected_color);
+    Pixel(int x, int y, int size, int r, int g, int b);
 
 private:
-    int x;
-    int y;
-    int r;
-    int g;
-    int b;
+    int x_Coordinate; // x location
+    int y_Coordinate; // y location
+    int red; // red value
+    int green; // green value
+    int blue; // blue value
+    int size;
 };
 
 #endif // PIXEL_H
