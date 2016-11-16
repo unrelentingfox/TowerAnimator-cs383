@@ -1,6 +1,5 @@
 #include "animationview.h"
 #define DEBUG
-//http://stackoverflow.com/questions/7830054/how-to-draw-a-point-on-mouseclick-on-a-qgraphicsscene
 
 AnimationView::AnimationView(QWidget *parent) :
     QGraphicsView(parent)
@@ -13,6 +12,15 @@ AnimationView::AnimationView(QWidget *parent) :
 void AnimationView::setTool(int x)
 {
     tool = x;
+}
+void AnimationView::setRed(int r)
+{
+    red=r;
+}
+
+void AnimationView::setGreen(int g)
+{
+    green=g;
 }
 
 void AnimationView::setBlue(int b)
@@ -100,13 +108,10 @@ void AnimationView::mouseDoubleClickEvent(QMouseEvent *e)
 
 }
 
-<<<<<<< HEAD
-=======
 /**
  * @brief AnimationView::mouseMoveEvent, Handles the left mouse button being held down, based on current selected mode.
  * @param e
  */
->>>>>>> Fixed some comments and added in place holders for saveFrame, loadFrame, and getTower functions.
 void AnimationView::mouseMoveEvent(QMouseEvent *e)
 {
     switch (tool){
@@ -124,14 +129,11 @@ void AnimationView::mouseMoveEvent(QMouseEvent *e)
     }
 }
 
-<<<<<<< HEAD
-=======
 /**
  * @brief AnimationView::roundToGrid, Fixes coordinates so that all pixels are aligned to a grid.
  * @param x
  * @return
  */
->>>>>>> Fixed some comments and added in place holders for saveFrame, loadFrame, and getTower functions.
 qreal AnimationView::roundToGrid(qreal x)
 {
     int coordinate = x;
@@ -158,7 +160,6 @@ qreal AnimationView::roundToGrid(qreal x)
  */
 int AnimationView::drawPixel(QMouseEvent * e)
 {
-
     //Get x and y position of mouse click.
     QPointF pt = mapToScene(e->pos());
     pt.setX(roundToGrid(pt.x()));
@@ -177,14 +178,11 @@ int AnimationView::drawPixel(QMouseEvent * e)
     return 1;
 }
 
-<<<<<<< HEAD
-=======
 /**
  * @brief AnimationView::erasePixel, erases a pixel that is at the mouse position.
  * @param e
  * @return
  */
->>>>>>> Fixed some comments and added in place holders for saveFrame, loadFrame, and getTower functions.
 int AnimationView::erasePixel(QMouseEvent * e)
 {
     //Get x and y position of mouse click.
