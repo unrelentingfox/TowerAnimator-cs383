@@ -30,7 +30,6 @@ HEADERS  += mainwindow.h \
     storagepixel.h \
     storagetimeline.h \
     timelinegraphics.h \
-    frame.h \
     pixel.h \
     object.h
 

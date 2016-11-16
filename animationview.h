@@ -10,7 +10,7 @@
 
 #include "global.h"
 #include "pixel.h"
-#include "frame.h"
+
 
 //http://stackoverflow.com/questions/7830054/how-to-draw-a-point-on-mouseclick-on-a-qgraphicsscene
 /**
