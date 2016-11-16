@@ -14,11 +14,19 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     animationview.cpp \
+    storageframe.cpp \
+    storageobject.cpp \
+    storagepixel.cpp \
+    storagetimeline.cpp \
     timelinegraphics.cpp
 
 HEADERS  += mainwindow.h \
     global.h \
     animationview.h \
+    storageframe.h \
+    storageobject.h \
+    storagepixel.h \
+    storagetimeline.h \
     timelinegraphics.h
 
 FORMS    += mainwindow.ui
