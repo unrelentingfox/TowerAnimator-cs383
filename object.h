@@ -5,8 +5,6 @@
 class Object : public QGraphicsItemGroup
 {
 public:
-    Object();
-private:
     Object(int x, int y, int size, int r, int g, int b);
 };
 
