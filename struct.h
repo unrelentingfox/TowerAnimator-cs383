@@ -107,7 +107,7 @@ int* PrintPixels(Pixel_List_N *head){
    return r;
    }
 
-int getR(Pixel_List_N *head){
+/*int getR(Pixel_List_N *head){
    int rCode=0;
    Pixel_List_N *cur = head;
    int nodeCnt=0;
@@ -131,5 +131,5 @@ int getR(Pixel_List_N *head){
    // printf("%d nodes printed.\n", nodeCnt);
     //return(*r);
    return(rCode);
-   }
+   }*/
 /*end of adapted from */
