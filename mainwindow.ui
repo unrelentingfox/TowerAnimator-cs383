@@ -10,6 +10,12 @@
     <height>759</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>1200</width>
+    <height>675</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Tower Animator</string>
   </property>
@@ -235,13 +241,52 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
-         <widget class="AnimationView" name="AnimationWidget"/>
-        </item>
-        <item>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
           <property name="spacing">
            <number>0</number>
           </property>
+          <item>
+           <widget class="AnimationView" name="AnimationWidget">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>800</width>
+              <height>600</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>800</width>
+              <height>600</height>
+             </size>
+            </property>
+            <property name="sizeIncrement">
+             <size>
+              <width>15</width>
+              <height>15</height>
+             </size>
+            </property>
+            <property name="verticalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOff</enum>
+            </property>
+            <property name="horizontalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOff</enum>
+            </property>
+            <property name="sceneRect">
+             <rectf>
+              <x>0.000000000000000</x>
+              <y>0.000000000000000</y>
+              <width>800.000000000000000</width>
+              <height>400.000000000000000</height>
+             </rectf>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
        </layout>
@@ -271,7 +316,7 @@
            <x>0</x>
            <y>0</y>
            <width>1198</width>
-           <height>165</height>
+           <height>68</height>
           </rect>
          </property>
         </widget>
