@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     TimelineGraphics timeline;
-    ui->scrollArea->setWidget(timeline.timelineWidget());
+//    ui->scrollArea->setWidget(timeline.timelineWidget());
 
 
     //connect draw and erase buttons to the tool variable in AnimationView
