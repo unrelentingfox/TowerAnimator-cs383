@@ -7,6 +7,9 @@ AnimationView::AnimationView(QWidget *parent) :
     tool = this->DRAW;
     scene = new QGraphicsScene();
     this->setScene(scene);
+    baseObject = new Object();
+    scene->addItem(baseObject);
+    mouseClicked = false;
 }
 
 void AnimationView::setTool(int x)
@@ -91,21 +94,19 @@ void AnimationView::mousePressEvent(QMouseEvent * e)
         drawPixel(e);
         break;
     case AnimationView::MOVE:
-        move(e);
+        update();
+        QGraphicsView::mousePressEvent(e);
         break;
     default:
         break;
     }
 }
 
-void AnimationView::mouseReleaseEvent()
+void AnimationView::mouseReleaseEvent(QMouseEvent *e)
 {
     mouseClicked = false;
-}
-
-void AnimationView::mouseDoubleClickEvent(QMouseEvent *e)
-{
-
+    update();
+    QGraphicsView::mousePressEvent(e);
 }
 
 /**
@@ -114,45 +115,22 @@ void AnimationView::mouseDoubleClickEvent(QMouseEvent *e)
  */
 void AnimationView::mouseMoveEvent(QMouseEvent *e)
 {
-    switch (tool){
-    case AnimationView::ERASE:
-        erasePixel(e);
-        break;
-    case AnimationView::DRAW:
-        drawPixel(e);
-        break;
-    case AnimationView::MOVE:
-        move(e);
-        break;
-    default:
-        break;
+    if(mouseClicked){
+        switch (tool){
+        case AnimationView::ERASE:
+            erasePixel(e);
+            break;
+        case AnimationView::DRAW:
+            drawPixel(e);
+            break;
+        case AnimationView::MOVE:
+            break;
+        default:
+            break;
+        }
     }
-}
-
-/**
- * @brief AnimationView::roundToGrid, Fixes coordinates so that all pixels are aligned to a grid.
- * @param x
- * @return
- */
-qreal AnimationView::roundToGrid(qreal x)
-{
-    int coordinate = x;
-    int remainder;
-
-
-    //Round the coordinate to a multiple of GRID_SIZE.
-    remainder = coordinate % GRID_SIZE;
-    if(remainder == 0)
-        coordinate = coordinate;
-    else if(remainder >= GRID_SIZE/2)
-        coordinate = coordinate-remainder+GRID_SIZE;
-    else
-        coordinate = coordinate-remainder;
-
-    //move the coordinate so it is centered at the mouse click.
-    coordinate = coordinate-PIXEL_SIZE/2;
-
-    return coordinate;
+    update();
+    QGraphicsView::mouseMoveEvent(e);
 }
 
 /**
@@ -162,15 +140,16 @@ int AnimationView::drawPixel(QMouseEvent * e)
 {
     //Get x and y position of mouse click.
     QPointF pt = mapToScene(e->pos());
-    pt.setX(roundToGrid(pt.x()));
-    pt.setY(roundToGrid(pt.y()));
-    // need to store these pixels in pixel class
 
     //Overwrite any pixel that is already there.
-    erasePixel(e);
+    //erasePixel(e);
+
     //Draw new pixel
     Pixel * pixel = new Pixel(pt.x(),pt.y(),PIXEL_SIZE, red, green, blue);
     scene->addItem(pixel);
+    //Add it to the object
+    baseObject->addToGroup(pixel);
+
 
     //output coords of new pixel for debugging
     qDebug() << pt.x() << ", " << pt.y();
@@ -187,8 +166,6 @@ int AnimationView::erasePixel(QMouseEvent * e)
 {
     //Get x and y position of mouse click.
     QPointF pt = mapToScene(e->pos());
-    pt.setX(roundToGrid(pt.x()));
-    pt.setY(roundToGrid(pt.y()));
 
     //Check for an object to delete.
     if(QGraphicsItem * item = scene->itemAt(pt, QTransform()))
@@ -200,9 +177,4 @@ int AnimationView::erasePixel(QMouseEvent * e)
     {
         return 0;
     }
-}
-
-int AnimationView::move(QMouseEvent * e)
-{
-    return 1;
 }

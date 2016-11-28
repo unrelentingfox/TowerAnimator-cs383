@@ -10,6 +10,7 @@
 
 #include "global.h"
 #include "pixel.h"
+#include "object.h"
 
 
 //http://stackoverflow.com/questions/7830054/how-to-draw-a-point-on-mouseclick-on-a-qgraphicsscene
@@ -41,13 +42,10 @@ public slots:
 private slots:
     void drawBackground(QPainter *painter, const QRectF &rect);
     void mousePressEvent(QMouseEvent * e);
-    void mouseReleaseEvent();
-    void mouseDoubleClickEvent(QMouseEvent * e);
+    void mouseReleaseEvent(QMouseEvent * e);
     void mouseMoveEvent(QMouseEvent * e);
-    qreal roundToGrid(qreal x);
     int drawPixel(QMouseEvent * e);
     int erasePixel(QMouseEvent * e);
-    int move(QMouseEvent * e);
 
 private:
     int red=0;
@@ -57,6 +55,7 @@ private:
     QColor drawColor;
     bool mouseClicked;
     QGraphicsScene * scene;
+    Object * baseObject;
 };
 
 #endif // ANIMATIONVIEW_H

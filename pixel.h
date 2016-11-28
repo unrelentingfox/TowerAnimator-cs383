@@ -8,6 +8,7 @@
 #include <QPointF>
 #include <QGraphicsRectItem>
 #include "global.h"
+#include "algorithms.h"
 /**
  * @brief The Pixel class
  */
