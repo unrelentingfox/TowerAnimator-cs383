@@ -33,19 +33,24 @@ void Frame::setBlue(int b)
     blue = b;
 }
 
-int Frame::getTowerContents()
+QList<storagePixel> Frame::getTowerContents()
 {
-    qDebug() << "hello";
-    Pixel * temp;
+    Pixel * tempPixel;
+    storagePixel * tempStorage;
+    QList<storagePixel> pixelList;
+
+    //get a list of the items that are within the tower
     QList<QGraphicsItem *> list = items(Globals::TOWER_POSITION_X, Globals::TOWER_POSITION_Y, Globals::TOWER_WIDTH, Globals::TOWER_HEIGHT, Qt::IntersectsItemBoundingRect , Qt::DescendingOrder);
+
 
     QList<QGraphicsItem *>::iterator i;
     for (i = list.begin(); i != list.end(); ++i){
-        temp = qgraphicsitem_cast<Pixel*>(i.operator *());
+        tempPixel = qgraphicsitem_cast<Pixel*>(i.operator *());
         //this is just a place holder to show proof of functionality.
-        qDebug() << temp->mapFromItem(tower, QPointF(Globals::TOWER_POSITION_X,Globals::TOWER_POSITION_Y)) << temp->red << temp->green << temp->blue;
+        //need to convert this information into a list of storagepixel or something so it is easily accessable without having to cast.
+        qDebug() << tempPixel->mapFromItem(tower, QPointF(Globals::TOWER_POSITION_X,Globals::TOWER_POSITION_Y)) << tempPixel->red << tempPixel->green << tempPixel->blue;
     }
-    return 0;
+    return pixelList;
 }
 
 void Frame::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)

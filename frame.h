@@ -6,7 +6,7 @@
 #include "global.h"
 #include "pixel.h"
 #include <QDebug>
-
+#include <storagepixel.h>
 class Frame : public QGraphicsScene
 {
 public:
@@ -16,7 +16,7 @@ public:
     void setGreen(int g);
     void setBlue(int b);
 
-    int getTowerContents();
+    QList<storagePixel> getTowerContents();
 private:
     QGraphicsRectItem * tower;
     void mouseMoveEvent(QGraphicsSceneMouseEvent * mouseEvent);
