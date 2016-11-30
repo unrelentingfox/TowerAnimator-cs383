@@ -51,7 +51,6 @@ void write(Pixel_List_N *head)
     }
     //qDebug() << "Writing finished";
 }
-
 void read()
 {
   QFile file(F_Name);
