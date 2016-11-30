@@ -28,7 +28,7 @@ void write(Pixel_List_N *head)
         }
     }*/
     int height = 798, width = 12;
-    int headarr[height][width];
+    int headarr[789][12];
     for(int y = 0; y < height; y++){
         for(int z = 0; z < width; z++){
             headarr[y][z] = y + z;
