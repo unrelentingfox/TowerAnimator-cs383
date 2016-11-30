@@ -21,7 +21,9 @@ SOURCES += main.cpp\
     timelinegraphics.cpp \
     pixel.cpp \
     object.cpp \
-    algorithms.cpp
+    algorithms.cpp \
+    frame.cpp \
+    tool.cpp
 
 HEADERS  += mainwindow.h \
     global.h \
@@ -33,7 +35,9 @@ HEADERS  += mainwindow.h \
     timelinegraphics.h \
     pixel.h \
     object.h \
-    algorithms.h
+    algorithms.h \
+    frame.h \
+    tool.h
 
 FORMS    += mainwindow.ui
 
