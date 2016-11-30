@@ -28,17 +28,17 @@ MainWindow::~MainWindow()
 
 void MainWindow::drawButtonPress()
 {
-    ui->AnimationWidget->setTool(AnimationView::DRAW);
+    ui->AnimationWidget->setTool(Globals::DRAW_TOOL);
 }
 
 void MainWindow::eraseButtonPress()
 {
-    ui->AnimationWidget->setTool(AnimationView::ERASE);
+    ui->AnimationWidget->setTool(Globals::ERASE_TOOL);
 }
 
 void MainWindow::moveButtonPress()
 {
-    ui->AnimationWidget->setTool(AnimationView::MOVE);
+    ui->AnimationWidget->setTool(Globals::MOVE_TOOL);
 }
 
 void MainWindow::on_redLineEdit_textEdited(const QString &arg1)

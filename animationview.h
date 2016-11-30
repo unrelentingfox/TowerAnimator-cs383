@@ -42,17 +42,17 @@ public slots:
 
 private slots:
     void drawBackground(QPainter *painter, const QRectF &rect);
-    void mousePressEvent(QMouseEvent * e);
-    void mouseReleaseEvent(QMouseEvent * e);
-    void mouseMoveEvent(QMouseEvent * e);
-    int drawPixel(QMouseEvent * e);
-    int erasePixel(QMouseEvent * e);
+//    void mousePressEvent(QMouseEvent * e);
+//    void mouseReleaseEvent(QMouseEvent * e);
+//    void mouseMoveEvent(QMouseEvent * e);
+//    int drawPixel(QMouseEvent * e);
+//    int erasePixel(QMouseEvent * e);
 
 private:
-    int red=0;
-    int green=0;
-    int blue=0;
-    int tool;
+//    int red=0;
+//    int green=0;
+//    int blue=0;
+//    int tool;
     QColor drawColor;
     bool mouseClicked;
     Frame * frame;
