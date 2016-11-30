@@ -22,8 +22,7 @@ SOURCES += main.cpp\
     pixel.cpp \
     object.cpp \
     algorithms.cpp \
-    frame.cpp \
-    tool.cpp
+    frame.cpp
 
 HEADERS  += mainwindow.h \
     global.h \
@@ -36,8 +35,7 @@ HEADERS  += mainwindow.h \
     pixel.h \
     object.h \
     algorithms.h \
-    frame.h \
-    tool.h
+    frame.h
 
 FORMS    += mainwindow.ui
 
