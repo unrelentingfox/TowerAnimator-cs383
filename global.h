@@ -12,6 +12,8 @@ public:
     const static int TOWER_SIZE_Y = 10;//How many windows? (must be a multiple of 2)
     const static int GRID_SIZE = 20;//How many pixels should the grid be? (must be a miltiple of 4)
 
+    const static int MOUSE_OFFSET = 5; //mouse clicks happen
+
     // DO NOT CHANGE THE VARIABLES BELOW! They are set automatically based upon the variables above.
     const static int PIXEL_SIZE = GRID_SIZE/2; //Pixel size is always half of the grid size.
     const static int PIXEL_OFFSET = GRID_SIZE/4; //The offset is the distance from the edge of the grid that the pixel sits, since the pixel is half of the grid size, that distance is 1/4 of the grid size.
