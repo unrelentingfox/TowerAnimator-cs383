@@ -5,17 +5,17 @@ Tool::Tool()
     current = Globals::DRAW_TOOL;
 }
 
-Tool::setToolDraw()
+void Tool::setToolDraw()
 {
     current = Globals::DRAW_TOOL;
 }
 
-Tool::setToolErase()
+void Tool::setToolErase()
 {
     current = Globals::ERASE_TOOL;
 }
 
-Tool::setToolMove()
+void Tool::setToolMove()
 {
     current = Globals::MOVE_TOOL;
 }

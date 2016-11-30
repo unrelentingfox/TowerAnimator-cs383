@@ -6,9 +6,9 @@ class Tool
 {
 public:
     Tool();
-    setToolDraw();
-    setToolErase();
-    setToolMove();
+    void setToolDraw();
+    void setToolErase();
+    void setToolMove();
 private:
     int current;
 };

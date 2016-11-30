@@ -11,6 +11,7 @@
 #include "global.h"
 #include "pixel.h"
 #include "object.h"
+#include "frame.h"
 
 
 //http://stackoverflow.com/questions/7830054/how-to-draw-a-point-on-mouseclick-on-a-qgraphicsscene
@@ -54,7 +55,7 @@ private:
     int tool;
     QColor drawColor;
     bool mouseClicked;
-    QGraphicsScene * scene;
+    Frame * frame;
     Object * baseObject;
 };
 

@@ -7,7 +7,7 @@
 class Object : public QGraphicsItemGroup
 {
 public:
-    Object();
+    Object(qreal x = 0, qreal y = 0);
     void addPixel(Pixel * pixel);
     void deletePixel();
 private:

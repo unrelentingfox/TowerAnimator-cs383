@@ -4,11 +4,13 @@
 AnimationView::AnimationView(QWidget *parent) :
     QGraphicsView(parent)
 {
+    this->setAlignment(Qt::AlignCenter);
+    this->setFixedSize(Globals::ANIMATION_WINDOW_SIZE_X+2, Globals::ANIMATION_WINDOW_SIZE_Y+2);
     tool = this->DRAW;
-    scene = new QGraphicsScene();
-    this->setScene(scene);
+    frame = new Frame();
+    this->setScene(frame);
     baseObject = new Object();
-    scene->addItem(baseObject);
+    frame->addItem(baseObject);
     mouseClicked = false;
 }
 
@@ -40,7 +42,7 @@ void AnimationView::getTower()
 }
 
 /**
- * @brief AnimationView::saveFrame, Returns a QList of all of the pixels and objects that are in the current scene.
+ * @brief AnimationView::saveFrame, Returns a QList of all of the pixels and objects that are in the current frame.
  */
 void AnimationView::saveFrame()
 {
@@ -48,7 +50,7 @@ void AnimationView::saveFrame()
 }
 
 /**
- * @brief AnimationView::loadFrame, Loads in a FrameStorage object and creates the scene from that info.
+ * @brief AnimationView::loadFrame, Loads in a FrameStorage object and creates the frame from that info.
  */
 void AnimationView::loadFrame()
 {
@@ -66,11 +68,11 @@ void AnimationView::drawBackground(QPainter *painter, const QRectF &rect)
     QPen pen;
     painter->setPen(pen);
 
-    qreal left = int(rect.left()) - (int(rect.left()) % GRID_SIZE);
-    qreal top = int(rect.top()) - (int(rect.top()) % GRID_SIZE);
+    qreal left = int(rect.left()) - (int(rect.left()) % Globals::GRID_SIZE);
+    qreal top = int(rect.top()) - (int(rect.top()) % Globals::GRID_SIZE);
     QVector<QPointF> points;
-    for (qreal x = left; x < rect.right(); x += GRID_SIZE){
-        for (qreal y = top; y < rect.bottom(); y += GRID_SIZE){
+    for (qreal x = left; x < rect.right(); x += Globals::GRID_SIZE){
+        for (qreal y = top; y < rect.bottom(); y += Globals::GRID_SIZE){
             points.append(QPointF(x,y));
         }
     }
@@ -144,15 +146,15 @@ int AnimationView::drawPixel(QMouseEvent * e)
     //Overwrite any pixel that is already there.
     //erasePixel(e);
 
+    //check to make sure the click is within the bounds of the scene
+
+
+
     //Draw new pixel
-    Pixel * pixel = new Pixel(pt.x(),pt.y(),PIXEL_SIZE, red, green, blue);
-    scene->addItem(pixel);
+    Pixel * pixel = new Pixel(pt.x(),pt.y(),Globals::PIXEL_SIZE, red, green, blue);
+    frame->addItem(pixel);
     //Add it to the object
     baseObject->addToGroup(pixel);
-
-
-    //output coords of new pixel for debugging
-    qDebug() << pt.x() << ", " << pt.y();
 
     return 1;
 }
@@ -168,9 +170,9 @@ int AnimationView::erasePixel(QMouseEvent * e)
     QPointF pt = mapToScene(e->pos());
 
     //Check for an object to delete.
-    if(QGraphicsItem * item = scene->itemAt(pt, QTransform()))
+    if(QGraphicsItem * item = frame->itemAt(pt, QTransform()))
     {
-        scene->removeItem(item);
+        frame->removeItem(item);
         return 1;
     }
     else
