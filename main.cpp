@@ -5,13 +5,16 @@
 #include <QFile>
 #include <QDebug>
 #include <stdio.h>
+#include <iostream>
 #include <errno.h>
 #include <string>
 #include <QString>
+#include<QList>
+#include<QTCore>
 /*Parser for TAN2 filetype */
 
 //Path to  the tan file on your local machine
-QString F_Name = "C:/Users/Alex/Documents/parser (2)/title2012.tan";
+QString F_Name = "C:/Users/colton/Documents/parser/gtr.TAN2";
 
 //declarations
 int LIST_InsertHeadNode(Pixel_List_N **, int, int, int, int, int);
@@ -54,6 +57,7 @@ void write(Pixel_List_N *head)
 
 void read()
 {
+  QTextStream out(stdout);
   QFile file(F_Name);
   if(file.open(QIODevice::ReadOnly|QIODevice::Text))
   {
@@ -85,6 +89,8 @@ void read()
     //Version number determines how to parse the file
     if(ver2 == 4)
     {
+
+
       //frame count and window dimentions need to split up the 3 pieces of information to pass on
       line = stream.readLine()+ '\n';
       QByteArray lin = line.toLatin1();
@@ -135,6 +141,10 @@ void read()
           //int* MS_1 = new int[grid.Frame_ct];
           MS[frame_ct] = ms_1;
 
+          //Create the Linked List that will store the individual frames.
+          QLinkedList<Pixel_N> frame;
+          //QLinkedList<Pixel_N>::iterator iterator;
+
           //This loop will iterate through the frame and populate the linked list based on the height and width of the input file
           //Skip the first 5 lines of empty pixels from the file
           line=stream.readLine();
@@ -176,11 +186,18 @@ void read()
                 b = atoi(pt); //Blue color value
                 pt = strtok(NULL, " ");
 
-                /* Insert info into new pixel linked-list node. */
-                Pixel_List_N *listHead = NULL;
-                LIST_InsertHeadNode(&listHead, r, g, b, pix_x_val, pix_y_val, frame_ct+1);
-                PrintPixels(listHead);
-                pix_x_val++; //increment the X position value
+                /* Insert info into the pixel struct */
+                Pixel_N pix;
+                pix.R = r;
+                pix.G = g;
+                pix.B = b;
+                pix.X = pix_x_val;
+                pix.Y = pix_y_val;
+                pix.CT = frame_ct+1;
+                frame.append(pix);
+
+                //increment the X position value
+                pix_x_val++;
               }
               //discard the last 4 pixels in the line
               for(width = 0; width < grid.Width; width++)
@@ -190,7 +207,8 @@ void read()
                 pt = strtok(NULL, " ");
               }
             }
-            pix_y_val++; //increment the y value of the pixel
+            //increment the y value of the pixel
+            pix_y_val++;
 
           }
           //skip the last 5 lines of the frame
@@ -200,9 +218,26 @@ void read()
           line=stream.readLine();
           line=stream.readLine();
 
-          //increment the frame number counter
-          frame_ct++;
+
+          //Print out the frame of 40 pixels
+
+          out << "Pixels contained in Frame# " << frame_ct+1 << endl;
+          /*Printing out the linked list of 40 pixels that represents
+          a frame...Used to confirm the linked list was created properly */
+          for (Pixel_N pixel_n : frame)
+          {
+                  out << "R:" << pixel_n.getRval() << ", "
+                      << "G:" << pixel_n.getGval() << ", "
+                      << "B:" << pixel_n.getBval() << ", "
+                      << "X:" << pixel_n.getXval() << ", "
+                      << "Y:" << pixel_n.getYval() << ", "
+                      << endl;
+           }
+
+           //increment the frame number counter
+           frame_ct++;
        }while(!line.isNull());
+
      }
    }
    else
@@ -258,6 +293,9 @@ void read()
       int* MS = new int[grid.Frame_ct];
       MS[frame_ct] = totalMS;
       printf("total milliseconds = %d\n", MS[frame_ct]);
+
+      //Create the Linked List that will store the individual frames.
+      QLinkedList<Pixel_N> frame;
       int pix_y_val = 0; //y position value for linked list
       //populate the pixel struct with info
       for(int j = 0; j < 10; j++) //Each frame consists of 10 lines
@@ -278,13 +316,38 @@ void read()
           b = atoi(pt); //Blue color value
           pt = strtok(NULL, " ");
           /* Insert a linked-list node. */
-          Pixel_List_N *listHead = NULL;
-          LIST_InsertHeadNode(&listHead, r, g, b, pix_x_val, pix_y_val, frame_ct+1);
-          PrintPixels(listHead);
-          pix_x_val++; //increment the X position value
+
+          /* Insert info into the pixel struct */
+
+          Pixel_N pix;
+          pix.R = r;
+          pix.G = g;
+          pix.B = b;
+          pix.X = pix_x_val;
+          pix.Y = pix_y_val;
+          pix.CT = frame_ct+1;
+          frame.append(pix);
+
+          //increment the X position value
+          pix_x_val++;
        }
-         pix_y_val++; //increment the y value
+       //increment the y value
+       pix_y_val++;
       }
+      //Print out the frame of 40 pixels
+      out << "Pixels contained in Frame# " << frame_ct+1 << endl;
+      /*Printing out the linked list of 40 pixels that represents
+      a frame...Used to confirm the linked list was created properly */
+      for (Pixel_N pixel_n : frame)
+      {
+              out << "R:" << pixel_n.getRval() << ", "
+                  << "G:" << pixel_n.getGval() << ", "
+                  << "B:" << pixel_n.getBval() << ", "
+                  << "X:" << pixel_n.getXval() << ", "
+                  << "Y:" << pixel_n.getYval() << ", "
+                  << endl;
+       }
+
         frame_ct++; //increment the frame counter
      }while(!line.isNull());
 
@@ -295,12 +358,6 @@ void read()
    file.close();
    qDebug() << "Reading finished";
 }
-
-
-
-
-
-
 
 
 

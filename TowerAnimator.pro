@@ -33,7 +33,8 @@ HEADERS  += mainwindow.h \
     timelinegraphics.h \
     pixel.h \
     object.h \
-    algorithms.h
+    algorithms.h \
+    struct.h
 
 FORMS    += mainwindow.ui
 
