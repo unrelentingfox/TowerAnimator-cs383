@@ -30,12 +30,24 @@ private slots:
 
     void on_blueLineEdit_textEdited(const QString &arg1);
 
+    void on_actionNew_File_triggered();
+
+    void on_actionSave_triggered();
+
+    void on_actionSave_As_triggered();
+
+    void on_actionImport_triggered();
+
+    void on_actionExport_triggered();
+
 private:
     Ui::MainWindow *ui;
     QTableWidget* m_pTableWidget;
     QStringList m_TableHeader;
     void addFramePixel(QGraphicsScene* scene, int y, int x);
     void addTimelineFrame(QHBoxLayout* layout );
+    QString fileName;
+    bool editedSinceLastSave = false;
 };
 
 #endif // MAINWINDOW_H

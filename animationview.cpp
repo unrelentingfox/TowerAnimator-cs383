@@ -82,5 +82,5 @@ void AnimationView::drawBackground(QPainter *painter, const QRectF &rect)
 void AnimationView::mousePressEvent(QMouseEvent *e)
 {
     //set changes here
-    QGraphicsRectItem::mouseMoveEvent(e);
+    //QGraphicsScene::mouseMoveEvent(e);
 }
