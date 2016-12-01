@@ -1,7 +1,9 @@
 #include "object.h"
 
-Object::Object()
+Object::Object(qreal x, qreal y)
 {
+    this->setX(x);
+    this->setY(y);
     setFlag(ItemIsMovable,true);
     setFlag(ItemIsSelectable,true);
     setFlag(ItemSendsScenePositionChanges,true);

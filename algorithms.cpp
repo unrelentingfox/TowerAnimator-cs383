@@ -16,12 +16,12 @@ int Algorithms::roundToGrid(int x)
     int remainder;
 
 
-    //Round the coordinate to a multiple of GRID_SIZE.
-    remainder = coordinate % GRID_SIZE;
+    //Round the coordinate to a multiple of Globals::GRID_SIZE.
+    remainder = coordinate % Globals::GRID_SIZE;
     if(remainder == 0)
         coordinate = coordinate;
-    else if(remainder >= GRID_SIZE/2)
-        coordinate = coordinate-remainder+GRID_SIZE;
+    else if(remainder >= Globals::GRID_SIZE/2)
+        coordinate = coordinate-remainder+Globals::GRID_SIZE;
     else
         coordinate = coordinate-remainder;
 
@@ -31,7 +31,6 @@ int Algorithms::roundToGrid(int x)
 int Algorithms::roundPixelToGrid(int x)
 {
     x = roundToGrid(x);
-    //move the coordinate so it is centered at the mouse click.
-    x = x-PIXEL_SIZE/2;
+    x = x + Globals::PIXEL_OFFSET;
     return x;
 }

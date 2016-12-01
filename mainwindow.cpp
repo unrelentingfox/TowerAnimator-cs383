@@ -28,31 +28,31 @@ MainWindow::~MainWindow()
 
 void MainWindow::drawButtonPress()
 {
-    ui->AnimationWidget->setTool(AnimationView::DRAW);
+    ui->AnimationWidget->setTool(Globals::DRAW_TOOL);
 }
 
 void MainWindow::eraseButtonPress()
 {
-    ui->AnimationWidget->setTool(AnimationView::ERASE);
+    ui->AnimationWidget->setTool(Globals::ERASE_TOOL);
 }
 
 void MainWindow::moveButtonPress()
 {
-    ui->AnimationWidget->setTool(AnimationView::MOVE);
+    ui->AnimationWidget->setTool(Globals::MOVE_TOOL);
 }
 
-void MainWindow::on_redEdit_textEdited(const QString &arg1)
+void MainWindow::on_redLineEdit_textEdited(const QString &arg1)
 {
     ui->AnimationWidget->setRed(arg1.toInt());
 }
 
-void MainWindow::on_greenEdit_textEdited(const QString &arg1)
+void MainWindow::on_greenLineEdit_textEdited(const QString &arg1)
 {
     ui->AnimationWidget->setGreen(arg1.toInt());
 
 }
 
-void MainWindow::on_blueEdit_textEdited(const QString &arg1)
+void MainWindow::on_blueLineEdit_textEdited(const QString &arg1)
 {
     ui->AnimationWidget->setBlue(arg1.toInt());
 }
