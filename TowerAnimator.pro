@@ -35,7 +35,8 @@ HEADERS  += mainwindow.h \
     pixel.h \
     object.h \
     algorithms.h \
-    frame.h
+    frame.h \
+    struct.h
 
 FORMS    += mainwindow.ui
 
