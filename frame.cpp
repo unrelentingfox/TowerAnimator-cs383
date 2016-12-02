@@ -1,4 +1,5 @@
 #include "frame.h"
+#include <QFile>
 
 Frame::Frame(int frameNum, double frameDuration)
 {
@@ -36,8 +37,8 @@ void Frame::setBlue(int b)
     blue = b;
 }
 
-//QList<class Pixel *> Frame::getTowerContents()
-//{
+QList<class Pixel *> Frame::getTowerContents()
+{
 //    Pixel * tempPixel;
 //    Pixel * tempStorage;
 //    QList<Pixel> pixelList;
@@ -54,7 +55,31 @@ void Frame::setBlue(int b)
 //        qDebug() << tempPixel->mapFromItem(tower, QPointF(Globals::TOWER_POSITION_X,Globals::TOWER_POSITION_Y)) << tempPixel->red << tempPixel->green << tempPixel->blue;
 //    }
 //    return pixelList;
-//}
+}
+
+void Frame::write()
+{
+    QList<Pixel> pList;// = getTowerContents();
+    QString filename = "out.txt";
+    QFile file(filename);
+    int height = pList.size() / 20;     //40 pixels/frame, 5 vars/pixel -> 200 vars/frame -> 10 lines/frame
+    int wr[height][12];
+    if(file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        // We're going to streaming text to the file
+        QTextStream stream( &file );
+        for(int i = 0; i < height; i++){
+            for(int j = 0; j < 12; j++){
+                stream << wr[i][j] << " ";
+            }
+            stream << endl;
+            if((i+1) % 10 == 0){
+                stream << endl;
+            }
+        }
+        file.close();
+    }
+}
 
 void Frame::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
 {
