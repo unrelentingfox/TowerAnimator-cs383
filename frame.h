@@ -10,13 +10,18 @@
 class Frame : public QGraphicsScene
 {
 public:
-    Frame();
+    Frame(int frameNum, int duration);
     void setTool(int t);
     void setRed(int r);
     void setGreen(int g);
     void setBlue(int b);
 
+    //storage info
+    double duration;
+    int frameNumber;
+    QLinkedList<storagePixel> pixels;
     QList<storagePixel> getTowerContents();
+
 private:
     QGraphicsRectItem * tower;
     void mouseMoveEvent(QGraphicsSceneMouseEvent * mouseEvent);
