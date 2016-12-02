@@ -81,6 +81,8 @@ void Frame::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 {
     mouseClicked = true;
 
+    emit iWasSelected(this);
+
     switch (tool){
     case Globals::ERASE_TOOL:
         //getTowerContents();
