@@ -1,4 +1,4 @@
-#include "storageframe.h"
+#include "frame.h"
 
 class storageTimeline
 {
@@ -7,7 +7,7 @@ private:
     int getNumOfFrames();
 public:
     int currFrame; // ??
-    QList<Frame> frames; //possibly needs to be <Frame *>
+    QList<class Frame *> frames; //possibly needs to be <Frame *>
     storageTimeline();
     ~storageTimeline();
     // make wrapper function that calls Frame getTowerFunction
