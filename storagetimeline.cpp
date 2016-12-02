@@ -12,6 +12,7 @@ storageTimeline::~storageTimeline()
 
 void storageTimeline::addFrame(double duration)
 {
+    // call method to get tower contents from frame class
     //add new frame to the timeline
     frames.append(storageFrame(duration, currFrame));
 }
@@ -31,4 +32,7 @@ void storageTimeline::removeFrame(int frameNum)
     }
 }
 
+void storageTimeline::moveFrames(int startFrameNum, int endFrameNum, int newLocation)
+{
 
+}

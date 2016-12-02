@@ -1,3 +1,5 @@
+// add storage to normal pixel class, combine
+
 class storagePixel
 {
 public:
