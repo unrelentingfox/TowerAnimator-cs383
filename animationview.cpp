@@ -61,6 +61,7 @@ void AnimationView::loadFrame()
 void AnimationView::displaySelected(Frame *scene)
 {
     this->setScene(scene);
+    frame = scene;
 }
 
 void AnimationView::acceptFrameConnection(Frame *frame)
