@@ -1,4 +1,4 @@
-#include <QLinkedList>
+/*#include <QLinkedList>
 #include <QString>
 #include "storagepixel.h"
 
@@ -13,5 +13,5 @@ public:
     void addPixel(int x, int y, int R, int G, int B);
     // call Pixel destructor, remove from linked list of pixels
     void removePixel(int x, int y);
-};
+};/*/
 

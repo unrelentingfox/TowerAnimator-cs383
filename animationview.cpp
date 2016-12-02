@@ -47,6 +47,7 @@ void AnimationView::getTower()
 void AnimationView::saveFrame()
 {
     //@todo create this function
+    //set frame number and add frame to list? keyframe?
 }
 
 /**
@@ -82,5 +83,5 @@ void AnimationView::drawBackground(QPainter *painter, const QRectF &rect)
 void AnimationView::mousePressEvent(QMouseEvent *e)
 {
     //set changes here
-    //QGraphicsScene::mouseMoveEvent(e);
+    QGraphicsView::mousePressEvent(e);
 }

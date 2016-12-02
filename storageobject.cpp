@@ -1,4 +1,4 @@
-
+/*
 #include "storageobject.h"
 
 storageObject::storageObject(QString newObjectName)
@@ -32,3 +32,4 @@ void storageObject::removePixel(int x, int y)
         i++;
     }
 }
+*/

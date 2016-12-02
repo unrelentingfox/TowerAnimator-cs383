@@ -44,7 +44,6 @@ private slots:
     void drawBackground(QPainter *painter, const QRectF &rect);
     void mousePressEvent(QMouseEvent * e);
 
-
 private:
     QColor drawColor;
     bool mouseClicked;

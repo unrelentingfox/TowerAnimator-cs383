@@ -40,6 +40,8 @@ private slots:
 
     void on_actionExport_triggered();
 
+    void on_keyFrameButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     QTableWidget* m_pTableWidget;

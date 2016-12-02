@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     TimelineGraphics timeline;
 //    ui->scrollArea->setWidget(timeline.timelineWidget());
-
+    // make timeline instance
 
     //connect draw and erase buttons to the tool variable in AnimationView
     connect(ui->drawButton, SIGNAL (released()), this, SLOT (drawButtonPress()));
@@ -130,4 +130,9 @@ void MainWindow::on_actionExport_triggered()
     // get the file name and location import file
     fileName = QFileDialog::getOpenFileName(this,
     tr("Open File"), "/home/", tr("Tan Files (*.tan *.tan2)"));
+}
+
+void MainWindow::on_keyFrameButton_clicked()
+{
+    // call storage timeline add frame
 }

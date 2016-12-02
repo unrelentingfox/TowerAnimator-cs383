@@ -3,7 +3,9 @@
 storageFrame::storageFrame(double duration, int currFrame)
 {
     duration = duration;
-    frameNum = currFrame++;
+    frame = new Frame();
+    // get frame number from class, with method
+    //frameNum = currFrame++;
 }
 
 storageFrame::~storageFrame()
@@ -11,12 +13,12 @@ storageFrame::~storageFrame()
     //delete Frame;
 }
 
-void storageFrame::addObject(QString objectName)
+/*void storageFrame::addObject(QString objectName)
 {
     objects.append(storageObject(objectName));
-}
+}*/
 
-void storageFrame::removeObject(QString objectName)
+/*void storageFrame::removeObject(QString objectName)
 {
     // iterate through list until object with objectName is found
     QLinkedList<storageObject>::iterator i = objects.begin();
@@ -29,4 +31,4 @@ void storageFrame::removeObject(QString objectName)
         }
         i++;
     }
-}
+}*/
