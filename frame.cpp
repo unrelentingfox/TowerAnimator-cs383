@@ -1,11 +1,14 @@
 #include "frame.h"
 
-Frame::Frame()
+Frame::Frame(int frameNum, int frameDuration)
 {
+    duration = frameDuration;
+    frameNumber = frameNum;
     tool = Globals::DRAW_TOOL;
     red = 0;
     green = 0;
     blue = 0;
+    duration = 1;
     mouseClicked = false;
 
     this->setSceneRect(0,0,Globals::ANIMATION_WINDOW_SIZE_X,Globals::ANIMATION_WINDOW_SIZE_Y);

@@ -7,7 +7,7 @@ private:
     int getNumOfFrames();
 public:
     int currFrame; // ??
-    QLinkedList<storageFrame> frames;
+    QList<Frame> frames; //possibly needs to be <Frame *>
     storageTimeline();
     ~storageTimeline();
     // make wrapper function that calls Frame getTowerFunction
