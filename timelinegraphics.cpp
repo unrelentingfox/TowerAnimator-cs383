@@ -1,4 +1,5 @@
 #include "timelinegraphics.h"
+#include "frame.h"
 #include <QHBoxLayout>
 #include <QGraphicsScene>
 #include <QGraphicsView>
@@ -7,6 +8,7 @@
 TimelineGraphics::TimelineGraphics()
 {
     timeline = new QWidget;
+    layout = new QHBoxLayout;
     loadTimeline();
 }
 
@@ -15,13 +17,13 @@ QWidget* TimelineGraphics::timelineWidget()
     return timeline;
 }
 
-void TimelineGraphics::loadTimeline() {
-    layout = new QHBoxLayout;
-    for(int i=0; i<50; i++) {
-        addTimelineFrame(layout);
+void TimelineGraphics::loadTimeline()
+{
+    for(int i=0; i<1; i++) {
+        addTimelineFrame();
     }
 
-    timeline->setLayout(layout);
+    timeline->setLayout(this->layout);
     timeline->setMaximumHeight(500);
 }
 
@@ -32,18 +34,21 @@ void TimelineGraphics::addFramePixel(QGraphicsScene* scene, int x, int y)
    scene->addItem(item1);
 }
 
-void TimelineGraphics::addTimelineFrame(QHBoxLayout* layout )
+void TimelineGraphics::addTimelineFrame()
 {
     QGraphicsView* view = new QGraphicsView;
-       QGraphicsScene* scene = new QGraphicsScene;
-          scene->addText("frame #");
+       Frame* scene = new Frame;
+         /* scene->addText("frame #");
 
           for(int x=0; x<4; x++) {
               for(int y=0; y<10; y++) {
                   addFramePixel(scene, x, y);
               }
-          }
+          }*/
     view->setScene(scene);
     view->setMaximumWidth(100);
-    layout->addWidget(view);
+    emit connectNewFrame(scene);
+    this->layout->addWidget(view);
 }
+
+

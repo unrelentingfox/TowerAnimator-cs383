@@ -12,14 +12,25 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    TimelineGraphics timeline;
-//    ui->scrollArea->setWidget(timeline.timelineWidget());
+    TimelineGraphics* timeline = new TimelineGraphics;
+    ui->timelineArea->setWidget(timeline->timelineWidget());
     // make timeline instance
 
     //connect draw and erase buttons to the tool variable in AnimationView
     connect(ui->drawButton, SIGNAL (released()), this, SLOT (drawButtonPress()));
     connect(ui->eraseButton, SIGNAL (released()), this, SLOT (eraseButtonPress()));
     connect(ui->moveButton, SIGNAL (released()), this, SLOT (moveButtonPress()));
+    connect(timeline, SIGNAL( testSignal(QGraphicsScene*)), ui->AnimationWidget, SLOT(sceneSelected(QGraphicsScene*)));
+    connect(timeline, SIGNAL(connectNewFrame(Frame*)), ui->AnimationWidget, SLOT(acceptFrameConnection(Frame*)));
+
+    timeline->addTimelineFrame();
+    timeline->addTimelineFrame();
+
+    timeline->addTimelineFrame();
+    timeline->addTimelineFrame();
+    timeline->addTimelineFrame();
+    timeline->addTimelineFrame();
+    timeline->addTimelineFrame();
 
 }
 
