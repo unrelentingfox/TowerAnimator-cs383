@@ -3,6 +3,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsRectItem>
 #include <QGraphicsSceneMouseEvent>
+#include <QMutableListIterator>
 #include "global.h"
 #include "pixel.h"
 #include <QDebug>

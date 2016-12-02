@@ -2,8 +2,10 @@
 
 storageTimeline::storageTimeline()
 {
-   // constructor
-
+   // add initial frame with default duration
+    class Frame * newFrame;
+    newFrame = new Frame(getNumOfFrames(), 0);
+    frames.append(newFrame);
 }
 
 storageTimeline::~storageTimeline()
@@ -16,28 +18,47 @@ void storageTimeline::addFrame(double duration)
     // call method to get tower contents from frame class
     //add new frame to the timeline
     //int frameNum = getNumOfFrames();
+    // need to use getTowerContents from frame class (think keyframing)
+    // need a place to set duration, if not defined use default from globals
     class Frame * newFrame;
-    newFrame = new Frame(0, 0);
+    newFrame = new Frame(getNumOfFrames(), duration);
     frames.append(newFrame);
 }
 
 void storageTimeline::removeFrame(int frameNum)
-{/*
-    // USE i.operator *()->
+{
+    // Use i.operator *()->
     // iterate through list until correct frame number is found
-    QList<class Frame>::iterator i = frames.begin();
+//    QList<class Frame>::iterator i.operator*() = frames.begin();
 
-    while(i != frames.end())
+//    while(i.operator*() != frames.end())
+//    {
+//        if(i.operator*()->frameNumber == frameNum){
+//            frames.erase(i);
+//            break;
+//        }
+//        i++;
+//    }
+
+/*    QMutableListIterator<int> iterator(frames);
+    while(iterator.hasNext())
     {
-        if(i.operator *->frameNumber == frameNum){
-            frames.erase(i);
-            break;
+        int val = iterator.next();
+        if(val==frameNum)
+        {
+            iterator.remove();
         }
-        i++;
-    }*/
+    }
+*/
 }
 
 void storageTimeline::moveFrames(int startFrameNum, int endFrameNum, int newLocation)
 {
 
+}
+
+int storageTimeline::getNumOfFrames()
+{
+    // increment numOfFrames after, so return value before increment
+    return numOfFrames++;
 }
