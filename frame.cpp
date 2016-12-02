@@ -39,22 +39,22 @@ void Frame::setBlue(int b)
 
 QList<class Pixel *> Frame::getTowerContents()
 {
-//    Pixel * tempPixel;
-//    Pixel * tempStorage;
-//    QList<Pixel> pixelList;
+    Pixel * tempPixel;
+    Pixel * tempStorage;
+    QList<Pixel *> pixelList;
 
-//    //get a list of the items that are within the tower
-//    QList<QGraphicsItem *> list = items(Globals::TOWER_POSITION_X, Globals::TOWER_POSITION_Y, Globals::TOWER_WIDTH, Globals::TOWER_HEIGHT, Qt::IntersectsItemBoundingRect , Qt::DescendingOrder);
+    //get a list of the items that are within the tower
+    QList<QGraphicsItem *> list = items(Globals::TOWER_POSITION_X, Globals::TOWER_POSITION_Y, Globals::TOWER_WIDTH, Globals::TOWER_HEIGHT, Qt::IntersectsItemBoundingRect , Qt::DescendingOrder);
 
 
-//    QList<QGraphicsItem *>::iterator i;
-//    for (i = list.begin(); i != list.end(); ++i){
-//        tempPixel = qgraphicsitem_cast<Pixel*>(i.operator *());
-//        //this is just a place holder to show proof of functionality.
-//        //need to convert this information into a list of storagepixel or something so it is easily accessable without having to cast.
-//        qDebug() << tempPixel->mapFromItem(tower, QPointF(Globals::TOWER_POSITION_X,Globals::TOWER_POSITION_Y)) << tempPixel->red << tempPixel->green << tempPixel->blue;
-//    }
-//    return pixelList;
+    QList<QGraphicsItem *>::iterator i;
+    for (i = list.begin(); i != list.end(); ++i){
+        tempPixel = qgraphicsitem_cast<Pixel*>(i.operator *());
+        //this is just a place holder to show proof of functionality.
+        //need to convert this information into a list of storagepixel or something so it is easily accessable without having to cast.
+        qDebug() << tempPixel->mapFromItem(tower, QPointF(Globals::TOWER_POSITION_X,Globals::TOWER_POSITION_Y)) << tempPixel->red << tempPixel->green << tempPixel->blue;
+    }
+    return pixelList;
 }
 
 void Frame::write()
@@ -62,14 +62,14 @@ void Frame::write()
     QList<Pixel> pList;// = getTowerContents();
     QString filename = "out.txt";
     QFile file(filename);
-    int height = pList.size() / 20;     //40 pixels/frame, 5 vars/pixel -> 200 vars/frame -> 10 lines/frame
-    int wr[height][12];
+//    int height = pList.size() / 20;     //40 pixels/frame, 5 vars/pixel -> 200 vars/frame -> 10 lines/frame
+    int wr[Globals::TOWER_SIZE_X][Globals::TOWER_SIZE_Y]; //array length needs to be a constant value so just use the size of the tower in Globals
     if(file.open(QIODevice::WriteOnly | QIODevice::Text))
     {
         // We're going to streaming text to the file
         QTextStream stream( &file );
-        for(int i = 0; i < height; i++){
-            for(int j = 0; j < 12; j++){
+        for(int i = 0; i < Globals::TOWER_SIZE_Y; i++){
+            for(int j = 0; j < Globals::TOWER_SIZE_X; j++){
                 stream << wr[i][j] << " ";
             }
             stream << endl;
