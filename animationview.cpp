@@ -7,7 +7,7 @@ AnimationView::AnimationView(QWidget *parent) :
     this->setAlignment(Qt::AlignCenter);
     this->setFixedSize(Globals::ANIMATION_WINDOW_SIZE_X+2, Globals::ANIMATION_WINDOW_SIZE_Y+2);
 //    tool = this->DRAW;
-    frame = new Frame();
+    Frame * frame = new Frame(0, 0);
     this->setScene(frame);
     baseObject = new Object();
     frame->addItem(baseObject);

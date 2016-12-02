@@ -1,6 +1,6 @@
 #include "frame.h"
 
-Frame::Frame(int frameNum, int frameDuration)
+Frame::Frame(int frameNum, double frameDuration)
 {
     duration = frameDuration;
     frameNumber = frameNum;
@@ -36,25 +36,25 @@ void Frame::setBlue(int b)
     blue = b;
 }
 
-QList<storagePixel> Frame::getTowerContents()
-{
-    Pixel * tempPixel;
-    storagePixel * tempStorage;
-    QList<storagePixel> pixelList;
+//QList<class Pixel *> Frame::getTowerContents()
+//{
+//    Pixel * tempPixel;
+//    Pixel * tempStorage;
+//    QList<Pixel> pixelList;
 
-    //get a list of the items that are within the tower
-    QList<QGraphicsItem *> list = items(Globals::TOWER_POSITION_X, Globals::TOWER_POSITION_Y, Globals::TOWER_WIDTH, Globals::TOWER_HEIGHT, Qt::IntersectsItemBoundingRect , Qt::DescendingOrder);
+//    //get a list of the items that are within the tower
+//    QList<QGraphicsItem *> list = items(Globals::TOWER_POSITION_X, Globals::TOWER_POSITION_Y, Globals::TOWER_WIDTH, Globals::TOWER_HEIGHT, Qt::IntersectsItemBoundingRect , Qt::DescendingOrder);
 
 
-    QList<QGraphicsItem *>::iterator i;
-    for (i = list.begin(); i != list.end(); ++i){
-        tempPixel = qgraphicsitem_cast<Pixel*>(i.operator *());
-        //this is just a place holder to show proof of functionality.
-        //need to convert this information into a list of storagepixel or something so it is easily accessable without having to cast.
-        qDebug() << tempPixel->mapFromItem(tower, QPointF(Globals::TOWER_POSITION_X,Globals::TOWER_POSITION_Y)) << tempPixel->red << tempPixel->green << tempPixel->blue;
-    }
-    return pixelList;
-}
+//    QList<QGraphicsItem *>::iterator i;
+//    for (i = list.begin(); i != list.end(); ++i){
+//        tempPixel = qgraphicsitem_cast<Pixel*>(i.operator *());
+//        //this is just a place holder to show proof of functionality.
+//        //need to convert this information into a list of storagepixel or something so it is easily accessable without having to cast.
+//        qDebug() << tempPixel->mapFromItem(tower, QPointF(Globals::TOWER_POSITION_X,Globals::TOWER_POSITION_Y)) << tempPixel->red << tempPixel->green << tempPixel->blue;
+//    }
+//    return pixelList;
+//}
 
 void Frame::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
 {
@@ -83,7 +83,7 @@ void Frame::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 
     switch (tool){
     case Globals::ERASE_TOOL:
-        getTowerContents();
+        //getTowerContents();
 //        erasePixel(mouseEvent);
         break;
     case Globals::DRAW_TOOL:

@@ -6,11 +6,11 @@
 #include "global.h"
 #include "pixel.h"
 #include <QDebug>
-#include <storagepixel.h>
+
 class Frame : public QGraphicsScene
 {
 public:
-    Frame(int frameNum, int duration);
+    Frame(int frameNum=0, double frameDuration=0);
     void setTool(int t);
     void setRed(int r);
     void setGreen(int g);
@@ -19,8 +19,7 @@ public:
     //storage info
     double duration;
     int frameNumber;
-    QLinkedList<storagePixel> pixels;
-    QList<storagePixel> getTowerContents();
+    //QList<class Pixel> getTowerContents();
 
 private:
     QGraphicsRectItem * tower;
