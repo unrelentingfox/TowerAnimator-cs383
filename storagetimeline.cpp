@@ -27,29 +27,17 @@ void storageTimeline::addFrame(double duration)
 
 void storageTimeline::removeFrame(int frameNum)
 {
-    // Use i.operator *()->
     // iterate through list until correct frame number is found
-//    QList<class Frame>::iterator i.operator*() = frames.begin();
 
-//    while(i.operator*() != frames.end())
-//    {
-//        if(i.operator*()->frameNumber == frameNum){
-//            frames.erase(i);
-//            break;
-//        }
-//        i++;
-//    }
+    int timelineSize = frames.size();
 
-/*    QMutableListIterator<int> iterator(frames);
-    while(iterator.hasNext())
+    for(int index=0; index<timelineSize; index++)
     {
-        int val = iterator.next();
-        if(val==frameNum)
-        {
-            iterator.remove();
-        }
+       if(frames[index]->frameNumber==frameNum)
+       {
+           frames.removeAt(index);
+       }
     }
-*/
 }
 
 void storageTimeline::moveFrames(int startFrameNum, int endFrameNum, int newLocation)
@@ -62,3 +50,4 @@ int storageTimeline::getNumOfFrames()
     // increment numOfFrames after, so return value before increment
     return numOfFrames++;
 }
+
