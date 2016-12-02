@@ -19,7 +19,8 @@ public:
     //storage info
     double duration;
     int frameNumber;
-    //QList<class Pixel> getTowerContents();
+    QList<class Pixel *> getTowerContents();
+    void write();
 
 private:
     QGraphicsRectItem * tower;
