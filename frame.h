@@ -4,6 +4,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsRectItem>
 #include <QGraphicsSceneMouseEvent>
+#include <QMutableListIterator>
 #include "frame.h"
 #include "global.h"
 #include "pixel.h"

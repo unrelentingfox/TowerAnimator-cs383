@@ -24,5 +24,6 @@ public:
     const static int TOWER_WIDTH = TOWER_SIZE_X*GRID_SIZE; //Just converting the number of windows into pixels.
     const static int TOWER_HEIGHT = TOWER_SIZE_Y*GRID_SIZE;
     // DO NOT CHANGE THE VARIABLES ABOVE!
+    const static int DEFAULT_DURATION = 1;
 };
 #endif // GLOBALVARIABLES_H
