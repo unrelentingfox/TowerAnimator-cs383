@@ -7,10 +7,10 @@ AnimationView::AnimationView(QWidget *parent) :
     this->setAlignment(Qt::AlignCenter);
     this->setFixedSize(Globals::ANIMATION_WINDOW_SIZE_X+2, Globals::ANIMATION_WINDOW_SIZE_Y+2);
 //    tool = this->DRAW;
-    Frame * frame = new Frame(0, 0);
+   /* Frame * frame = new Frame(0, 0);
     this->setScene(frame);
     baseObject = new Object();
-    frame->addItem(baseObject);
+    frame->addItem(baseObject);*/
     mouseClicked = false;
 }
 
@@ -56,6 +56,17 @@ void AnimationView::saveFrame()
 void AnimationView::loadFrame()
 {
 
+}
+
+void AnimationView::displaySelected(Frame *scene)
+{
+    this->setScene(scene);
+    frame = scene;
+}
+
+void AnimationView::acceptFrameConnection(Frame *frame)
+{
+    connect(frame, SIGNAL(iWasSelected(Frame*)), this, SLOT(displaySelected(Frame*)));
 }
 
 /**

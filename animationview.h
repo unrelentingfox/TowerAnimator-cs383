@@ -39,6 +39,8 @@ public slots:
     void getTower();
     void saveFrame();
     void loadFrame();
+    void displaySelected(Frame*);
+    void acceptFrameConnection(Frame*);
 
 private slots:
     void drawBackground(QPainter *painter, const QRectF &rect);

@@ -1,17 +1,23 @@
 #ifndef FRAME_H
 #define FRAME_H
+#include <QObject>
 #include <QGraphicsScene>
 #include <QGraphicsRectItem>
 #include <QGraphicsSceneMouseEvent>
 #include <QMutableListIterator>
+#include "frame.h"
 #include "global.h"
 #include "pixel.h"
 #include <QDebug>
 
 class Frame : public QGraphicsScene
 {
+    Q_OBJECT
+signals:
+    void iWasSelected(Frame*);
 public:
     Frame(int frameNum=0, double frameDuration=0);
+    virtual ~Frame() {};
     void setTool(int t);
     void setRed(int r);
     void setGreen(int g);

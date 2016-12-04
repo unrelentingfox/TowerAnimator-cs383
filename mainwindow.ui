@@ -298,7 +298,7 @@
     <item>
      <layout class="QVBoxLayout" name="timeLineLayout">
       <item>
-       <widget class="QScrollArea" name="timeLinePlaceHolder">
+       <widget class="QScrollArea" name="timelineArea">
         <property name="widgetResizable">
          <bool>true</bool>
         </property>
