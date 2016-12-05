@@ -5,6 +5,13 @@ Algorithms::Algorithms()
 
 }
 
+QPointF Algorithms::roundToGrid(QPointF pt)
+{
+    pt.setX(roundToGrid(pt.x()));
+    pt.setY(roundToGrid(pt.y()));
+    return pt;
+}
+
 /**
  * @brief Algorithms::roundToGrid, Fixes coordinates so that all pixels are aligned to a grid.
  * @param x
@@ -15,7 +22,6 @@ int Algorithms::roundToGrid(int x)
     int coordinate = x;
     int remainder;
 
-
     //Round the coordinate to a multiple of Globals::GRID_SIZE.
     remainder = coordinate % Globals::GRID_SIZE;
     if(remainder == 0)
@@ -25,12 +31,19 @@ int Algorithms::roundToGrid(int x)
     else
         coordinate = coordinate-remainder;
 
-    return coordinate;
+    return coordinate + Globals::PIXEL_OFFSET;
 }
 
-int Algorithms::roundPixelToGrid(int x)
+QPointF Algorithms::roundClickToGrid(QPointF pt)
 {
+    pt.setX(roundClickToGrid(pt.x()));
+    pt.setY(roundClickToGrid(pt.y()));
+    return pt;
+}
+
+int Algorithms::roundClickToGrid(int x)
+{
+    x = x - Globals::MOUSE_OFFSET;
     x = roundToGrid(x);
-    x = x + Globals::PIXEL_OFFSET;
     return x;
 }

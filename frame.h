@@ -36,6 +36,7 @@ private:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent * mouseEvent);
 
     void drawPixel(QGraphicsSceneMouseEvent *mouseEvent);
+    bool isInBounds(QPointF pt);
 
     bool mouseClicked;
 

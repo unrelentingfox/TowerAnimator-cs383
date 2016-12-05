@@ -131,8 +131,8 @@ void Frame::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent)
 void Frame::drawPixel(QGraphicsSceneMouseEvent *mouseEvent)
 {
     //Get x and y position of mouse click.
-    QPointF pt = mouseEvent->scenePos();
-
+    QPointF pt = Algorithms::roundClickToGrid(mouseEvent->scenePos());
+    if(isInBounds(pt)){
     //check to see if the an object is selected.
     //Overwrite any pixel that is already there.
     //erasePixel(mouseEvent);
@@ -146,4 +146,10 @@ void Frame::drawPixel(QGraphicsSceneMouseEvent *mouseEvent)
     this->addItem(pixel);
     //Add it to the object
 //    baseObject->addToGroup(pixel);
+    }
+}
+
+bool Frame::isInBounds(QPointF pt)
+{
+return true;
 }

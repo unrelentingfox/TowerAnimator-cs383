@@ -12,7 +12,9 @@ public:
     const static int TOWER_SIZE_Y = 10;//How many windows? (must be a multiple of 2)
     const static int GRID_SIZE = 20;//How many pixels should the grid be? (must be a miltiple of 4)
 
-    const static int MOUSE_OFFSET = 5; //mouse clicks happen
+    const static int MOUSE_OFFSET = 10; //mouse clicks happen
+
+    const static int DEFAULT_DURATION = 1;
 
     // DO NOT CHANGE THE VARIABLES BELOW! They are set automatically based upon the variables above.
     const static int PIXEL_SIZE = GRID_SIZE/2; //Pixel size is always half of the grid size.
@@ -24,6 +26,5 @@ public:
     const static int TOWER_WIDTH = TOWER_SIZE_X*GRID_SIZE; //Just converting the number of windows into pixels.
     const static int TOWER_HEIGHT = TOWER_SIZE_Y*GRID_SIZE;
     // DO NOT CHANGE THE VARIABLES ABOVE!
-    const static int DEFAULT_DURATION = 1;
 };
 #endif // GLOBALVARIABLES_H

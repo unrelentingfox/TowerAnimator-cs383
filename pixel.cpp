@@ -8,8 +8,8 @@ int Pixel::type()
 Pixel::Pixel(int x, int y, int size, QColor color, QGraphicsItem * parent)
 {
 //    this->setParentItem(parent);
-    x = Algorithms::roundPixelToGrid(x);
-    y = Algorithms::roundPixelToGrid(y);
+    x = Algorithms::roundToGrid(x);
+    y = Algorithms::roundToGrid(y);
     this->setRect(0,0,size,size);
     this->setBrush(QBrush(color));
     this->setPos(x,y);

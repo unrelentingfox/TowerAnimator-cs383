@@ -26,7 +26,6 @@ class AnimationView : public QGraphicsView
 public:
     explicit AnimationView(QWidget *parent = 0);
 
-
 signals:
 
 public slots:
