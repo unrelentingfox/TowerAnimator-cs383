@@ -151,5 +151,17 @@ void Frame::drawPixel(QGraphicsSceneMouseEvent *mouseEvent)
 
 bool Frame::isInBounds(QPointF pt)
 {
-return true;
+    bool inBounds = true;
+
+    if(pt.x() > Globals::ANIMATION_WINDOW_SIZE_X-Globals::PIXEL_OFFSET)
+        inBounds = false;
+    else if(pt.x() < Globals::PIXEL_OFFSET)
+        inBounds = false;
+    if(pt.y() > Globals::ANIMATION_WINDOW_SIZE_Y-Globals::PIXEL_OFFSET)
+        inBounds = false;
+    else if(pt.y() < Globals::PIXEL_OFFSET)
+        inBounds = false;
+
+    return inBounds;
+
 }
