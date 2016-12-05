@@ -6,6 +6,7 @@ storageTimeline::storageTimeline()
     class Frame * newFrame;
     newFrame = new Frame(getNumOfFrames(), 0);
     frames.append(newFrame);
+    numOfFrames = 1;
 }
 
 storageTimeline::~storageTimeline()
@@ -15,14 +16,21 @@ storageTimeline::~storageTimeline()
 
 void storageTimeline::addFrame(double duration)
 {
-    // call method to get tower contents from frame class
-    //add new frame to the timeline
-    //int frameNum = getNumOfFrames();
+    // add new frame to the timeline
     // need to use getTowerContents from frame class (think keyframing)
     // need a place to set duration, if not defined use default from globals
     class Frame * newFrame;
     newFrame = new Frame(getNumOfFrames(), duration);
     frames.append(newFrame);
+    numOfFrames++;
+    qDebug("Frame is added to storage timeline.");
+
+}
+
+void storageTimeline::getFrameTower()
+// return type should be a list of pixel not void
+{
+    // call getTowerContents
 }
 
 void storageTimeline::removeFrame(int frameNum)
@@ -47,7 +55,7 @@ void storageTimeline::moveFrames(int startFrameNum, int endFrameNum, int newLoca
 
 int storageTimeline::getNumOfFrames()
 {
-    // increment numOfFrames after, so return value before increment
-    return numOfFrames++;
+    // increment numOfFrames in addFrame
+    return numOfFrames;
 }
 

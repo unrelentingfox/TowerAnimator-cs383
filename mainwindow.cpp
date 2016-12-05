@@ -4,7 +4,6 @@
 #include "read.h"
 #include <QGraphicsGridLayout>
 #include <QGraphicsScene>
-#include <QMessageBox>
 #include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -16,6 +15,9 @@ MainWindow::MainWindow(QWidget *parent) :
     TimelineGraphics* timeline = new TimelineGraphics;
     ui->timelineArea->setWidget(timeline->timelineWidget());
     // make timeline instance
+
+    // make storage timeline instance
+    // storageTimeline* storeTimeline = new storageTimeline;
 
     //connect draw and erase buttons to the tool variable in AnimationView
     connect(ui->drawButton, SIGNAL (released()), this, SLOT (drawButtonPress()));
@@ -149,4 +151,8 @@ void MainWindow::on_actionExport_triggered()
 void MainWindow::on_keyFrameButton_clicked()
 {
     // call storage timeline add frame
+    storeTimeline->addFrame(0);
+    int num = storeTimeline->getNumOfFrames();
+    qDebug() << "Number of Frames:" << num;
+    qDebug() << "Size of frames list: " << storeTimeline->frames.size();
 }

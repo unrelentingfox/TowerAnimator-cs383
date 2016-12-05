@@ -5,8 +5,9 @@
 #include <QTableWidget>
 #include <QGraphicsScene>
 #include <QHboxLayout>
-
+#include <QMessageBox>
 #include "global.h"
+#include "storagetimeline.h"
 
 namespace Ui {
 class MainWindow;
@@ -50,6 +51,7 @@ private:
     void addTimelineFrame(QHBoxLayout* layout );
     QString fileName;
     bool editedSinceLastSave = false;
+    storageTimeline* storeTimeline = new storageTimeline;
 };
 
 #endif // MAINWINDOW_H
