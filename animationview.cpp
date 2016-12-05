@@ -64,7 +64,7 @@ void AnimationView::displaySelected(Frame *scene)
     frame = scene;
 }
 
-void AnimationView::acceptFrameConnection(Frame *frame)
+void AnimationView::acceptFrameConnection(TimelineView *frame)
 {
     connect(frame, SIGNAL(iWasSelected(Frame*)), this, SLOT(displaySelected(Frame*)));
 }

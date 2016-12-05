@@ -265,7 +265,7 @@
             <property name="sizeIncrement">
              <size>
               <width>15</width>
-              <height>15</height>
+              <height>5</height>
              </size>
             </property>
             <property name="cursor" stdset="0">
@@ -299,6 +299,12 @@
      <layout class="QVBoxLayout" name="timeLineLayout">
       <item>
        <widget class="QScrollArea" name="timelineArea">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>225</height>
+         </size>
+        </property>
         <property name="widgetResizable">
          <bool>true</bool>
         </property>
@@ -308,7 +314,7 @@
            <x>0</x>
            <y>0</y>
            <width>1198</width>
-           <height>165</height>
+           <height>223</height>
           </rect>
          </property>
         </widget>
