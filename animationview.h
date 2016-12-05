@@ -12,6 +12,7 @@
 #include "pixel.h"
 #include "object.h"
 #include "frame.h"
+#include "timelineview.h"
 
 
 //http://stackoverflow.com/questions/7830054/how-to-draw-a-point-on-mouseclick-on-a-qgraphicsscene
@@ -39,8 +40,8 @@ public slots:
     void getTower();
     void saveFrame();
     void loadFrame();
-    void displaySelected(Frame*);
-    void acceptFrameConnection(Frame*);
+    void displaySelected(Frame *);
+    void acceptFrameConnection(TimelineView *);
 
 private slots:
     void drawBackground(QPainter *painter, const QRectF &rect);

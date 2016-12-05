@@ -36,8 +36,11 @@ void TimelineGraphics::addFramePixel(QGraphicsScene* scene, int x, int y)
 
 void TimelineGraphics::addTimelineFrame()
 {
-    QGraphicsView* view = new QGraphicsView;
-       Frame* scene = new Frame;
+    TimelineView* view = new TimelineView;
+    Frame* scene = new Frame;
+    view->frame = scene;
+    view->setHorizontalScrollBarPolicy ( Qt::ScrollBarAlwaysOff );
+    view->setVerticalScrollBarPolicy ( Qt::ScrollBarAlwaysOff );
          /* scene->addText("frame #");
 
           for(int x=0; x<4; x++) {
@@ -46,8 +49,10 @@ void TimelineGraphics::addTimelineFrame()
               }
           }*/
     view->setScene(scene);
-    view->setMaximumWidth(100);
-    emit connectNewFrame(scene);
+    view->setMaximumWidth(80);
+    view->setMaximumHeight(200);
+    //view->scale(0.5, 0.5);
+    emit connectNewFrame(view);
     this->layout->addWidget(view);
 }
 
