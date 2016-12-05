@@ -2,6 +2,7 @@
 #define TIMELINEGRAPHICS_H
 
 #include "frame.h"
+#include "timelineview.h"
 #include <QMainWindow>
 #include <QObject>
 #include <QWidget>
@@ -12,7 +13,7 @@ class TimelineGraphics : public QObject
 {
     Q_OBJECT
 signals:
-    void connectNewFrame(Frame*);
+    void connectNewFrame(TimelineView*);
 public:
     TimelineGraphics();
     void loadTimeline();
