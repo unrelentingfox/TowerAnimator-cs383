@@ -50,9 +50,25 @@ void TimelineGraphics::addTimelineFrame()
     view->setFixedSize(80, 200);
    // view->setMaximumHeight(200);
     //view->scale(0.5, 0.5);
-    emit connectNewFrame(view);
-    emit view->iWasSelected(scene);
+    emit connectNewFrame(view); //connects frame to animationview
+    connect(view, SIGNAL (iWasSelected(TimelineView*)), this, SLOT (currentFrame(TimelineView*)));
+    emit view->iWasSelected(view);
     this->layout->addWidget(view);
 }
 
+void TimelineGraphics::currentFrame(TimelineView* view)
+{
+    this->selectedView = view;
+}
+
+void TimelineGraphics::deleteView(TimelineView* view)
+{
+    layout->removeWidget(view);
+    delete view;
+}
+
+void TimelineGraphics::deleteCurrentView()
+{
+    deleteView(this->selectedView);
+}
 

@@ -40,7 +40,7 @@ public slots:
     void getTower();
     void saveFrame();
     void loadFrame();
-    void displaySelected(Frame *);
+    void displaySelected(TimelineView *);
     void acceptFrameConnection(TimelineView *);
 
 private slots:

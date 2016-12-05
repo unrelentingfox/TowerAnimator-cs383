@@ -24,10 +24,14 @@ public:
 private:
     QWidget* timeline;
     QHBoxLayout* layout;
+    TimelineView* selectedView;
+    void deleteView(TimelineView *view);
 
 public slots:
     void addTimelineFrame();
+    void currentFrame(TimelineView *view);
 
+    void deleteCurrentView();
 };
 
 #endif // TIMELINEGRAPHICS_H

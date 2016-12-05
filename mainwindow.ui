@@ -248,6 +248,13 @@
            </property>
           </widget>
          </item>
+         <item>
+          <widget class="QPushButton" name="delteFrame">
+           <property name="text">
+            <string>Delete Frame</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </widget>
       </item>
