@@ -19,11 +19,14 @@ public:
     void loadTimeline();
     void addFramePixel(QGraphicsScene* scene, int x, int y);
     QWidget* timelineWidget();
-    void addTimelineFrame();
+
 
 private:
     QWidget* timeline;
     QHBoxLayout* layout;
+
+public slots:
+    void addTimelineFrame();
 
 };
 

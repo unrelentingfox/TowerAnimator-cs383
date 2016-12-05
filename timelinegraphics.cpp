@@ -9,6 +9,7 @@ TimelineGraphics::TimelineGraphics()
 {
     timeline = new QWidget;
     layout = new QHBoxLayout;
+    layout->setAlignment(Qt::AlignLeft);
     loadTimeline();
 }
 
@@ -19,10 +20,6 @@ QWidget* TimelineGraphics::timelineWidget()
 
 void TimelineGraphics::loadTimeline()
 {
-    for(int i=0; i<1; i++) {
-        addTimelineFrame();
-    }
-
     timeline->setLayout(this->layout);
     timeline->setMaximumHeight(500);
 }
@@ -49,10 +46,12 @@ void TimelineGraphics::addTimelineFrame()
               }
           }*/
     view->setScene(scene);
-    view->setMaximumWidth(80);
-    view->setMaximumHeight(200);
+    //view->setMaximumWidth(80);
+    view->setFixedSize(80, 200);
+   // view->setMaximumHeight(200);
     //view->scale(0.5, 0.5);
     emit connectNewFrame(view);
+    emit view->iWasSelected(scene);
     this->layout->addWidget(view);
 }
 

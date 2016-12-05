@@ -241,6 +241,13 @@
            </property>
           </widget>
          </item>
+         <item>
+          <widget class="QPushButton" name="AddFrame">
+           <property name="text">
+            <string>New Frame</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </widget>
       </item>
@@ -304,6 +311,9 @@
           <width>0</width>
           <height>225</height>
          </size>
+        </property>
+        <property name="verticalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
         </property>
         <property name="widgetResizable">
          <bool>true</bool>
