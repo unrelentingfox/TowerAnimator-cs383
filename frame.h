@@ -13,8 +13,6 @@
 class Frame : public QGraphicsScene
 {
     Q_OBJECT
-signals:
-    void iWasSelected(Frame*);
 public:
     Frame(int frameNum=0, double frameDuration=0);
     virtual ~Frame() {};
