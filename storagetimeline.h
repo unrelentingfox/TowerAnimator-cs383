@@ -12,7 +12,7 @@ public:
     storageTimeline();
     ~storageTimeline();
     // make wrapper function that calls Frame getTowerFunction
-    getFrameTower();
+    void getFrameTower();
     // add frame to timeline
     // use global iterator for life of timeline to generate frame num
     void addFrame(double duration);
