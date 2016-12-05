@@ -26,6 +26,7 @@ public:
     //storage info
     double duration;
     int frameNumber;
+    QList<class Pixel *> getPixels();
     QList<class Pixel *> getTowerContents();
     void write();
 
@@ -36,13 +37,14 @@ private:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent * mouseEvent);
 
     void drawPixel(QGraphicsSceneMouseEvent *mouseEvent);
+    bool isInBounds(QPointF pt);
+
+    QList<class Pixel *> trimPixelList(QList<QGraphicsItem *> list);
 
     bool mouseClicked;
 
     int tool;
-    int red;
-    int green;
-    int blue;
+    QColor drawColor;
 
 
 };

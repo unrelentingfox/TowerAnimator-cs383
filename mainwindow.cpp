@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->drawButton, SIGNAL (released()), this, SLOT (drawButtonPress()));
     connect(ui->eraseButton, SIGNAL (released()), this, SLOT (eraseButtonPress()));
     connect(ui->moveButton, SIGNAL (released()), this, SLOT (moveButtonPress()));
-    connect(timeline, SIGNAL( testSignal(QGraphicsScene*)), ui->AnimationWidget, SLOT(sceneSelected(QGraphicsScene*)));
+    connect(timeline, SIGNAL( testSignal(Frame*)), ui->AnimationWidget, SLOT(loadFrame(Frame*)));
     connect(timeline, SIGNAL(connectNewFrame(TimelineView*)), ui->AnimationWidget, SLOT(acceptFrameConnection(TimelineView*)));
 
     timeline->addTimelineFrame();
