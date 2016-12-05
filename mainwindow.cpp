@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "timelineGraphics.h"
+#include "read.h"
 #include <QGraphicsGridLayout>
 #include <QGraphicsScene>
 #include <QMessageBox>
@@ -134,6 +135,8 @@ void MainWindow::on_actionImport_triggered()
     // get the file name and location import file
     fileName = QFileDialog::getOpenFileName(this,
     tr("Open File"), "/home/", tr("Tan Files (*.tan *.tan2)"));
+    readfile f;
+    f.read(fileName);
 }
 
 void MainWindow::on_actionExport_triggered()

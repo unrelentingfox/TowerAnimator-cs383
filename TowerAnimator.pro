@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     pixel.cpp \
     object.cpp \
     algorithms.cpp \
-    frame.cpp
+    frame.cpp \
+    read.cpp
 
 HEADERS  += mainwindow.h \
     global.h \
@@ -30,7 +31,8 @@ HEADERS  += mainwindow.h \
     object.h \
     algorithms.h \
     frame.h \
-    struct.h
+    struct.h \
+    read.h
 
 FORMS    += mainwindow.ui
 
