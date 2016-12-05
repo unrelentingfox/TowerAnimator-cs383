@@ -40,9 +40,7 @@ private:
     bool mouseClicked;
 
     int tool;
-    int red;
-    int green;
-    int blue;
+    QColor drawColor;
 
 
 };

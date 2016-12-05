@@ -6,9 +6,6 @@ Frame::Frame(int frameNum, double frameDuration)
     duration = frameDuration;
     frameNumber = frameNum;
     tool = Globals::DRAW_TOOL;
-    red = 0;
-    green = 0;
-    blue = 0;
     duration = 1;
     mouseClicked = false;
 
@@ -24,17 +21,17 @@ void Frame::setTool(int t)
 
 void Frame::setRed(int r)
 {
-    red = r;
+    drawColor.setRed(r);
 }
 
 void Frame::setGreen(int g)
 {
-    green = g;
+    drawColor.setGreen(g);
 }
 
 void Frame::setBlue(int b)
 {
-    blue = b;
+    drawColor.setBlue(b);
 }
 
 QList<class Pixel *> Frame::getTowerContents()
@@ -46,13 +43,12 @@ QList<class Pixel *> Frame::getTowerContents()
     //get a list of the items that are within the tower
     QList<QGraphicsItem *> list = items(Globals::TOWER_POSITION_X, Globals::TOWER_POSITION_Y, Globals::TOWER_WIDTH, Globals::TOWER_HEIGHT, Qt::IntersectsItemBoundingRect , Qt::DescendingOrder);
 
-
     QList<QGraphicsItem *>::iterator i;
     for (i = list.begin(); i != list.end(); ++i){
         tempPixel = qgraphicsitem_cast<Pixel*>(i.operator *());
         //this is just a place holder to show proof of functionality.
         //need to convert this information into a list of storagepixel or something so it is easily accessable without having to cast.
-        qDebug() << tempPixel->mapFromItem(tower, QPointF(Globals::TOWER_POSITION_X,Globals::TOWER_POSITION_Y)) << tempPixel->red << tempPixel->green << tempPixel->blue;
+        qDebug() << tempPixel->mapFromItem(tower, QPointF(Globals::TOWER_POSITION_X,Globals::TOWER_POSITION_Y)) << tempPixel->red() << tempPixel->green() << tempPixel->blue();
     }
     return pixelList;
 }
@@ -146,7 +142,7 @@ void Frame::drawPixel(QGraphicsSceneMouseEvent *mouseEvent)
 
 
     //Draw new pixel
-    Pixel * pixel = new Pixel(pt.x(),pt.y(),Globals::PIXEL_SIZE, red, green, blue, tower);
+    Pixel * pixel = new Pixel(pt.x(),pt.y(),Globals::PIXEL_SIZE, drawColor);
     this->addItem(pixel);
     //Add it to the object
 //    baseObject->addToGroup(pixel);

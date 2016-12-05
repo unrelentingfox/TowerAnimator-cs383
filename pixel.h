@@ -17,11 +17,14 @@ class Pixel : public QGraphicsRectItem
 {
 public:
     int type();
-    Pixel(int x, int y, int size, int r, int g, int b, QGraphicsItem *parent);
-    int red;
-    int green;
-    int blue;
+    Pixel(int x, int y, int size, QColor color, QGraphicsItem * parent=0);
+    QColor color();
+    int red();
+    int green();
+    int blue();
+
 private:
+    QColor pixelColor;
 };
 
 #endif // PIXEL_H
