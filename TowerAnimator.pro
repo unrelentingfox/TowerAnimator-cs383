@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     object.cpp \
     algorithms.cpp \
     frame.cpp \
-    timelineview.cpp
+    timelineview.cpp \
+    read.cpp
 
 HEADERS  += mainwindow.h \
     global.h \
@@ -32,9 +33,11 @@ HEADERS  += mainwindow.h \
     algorithms.h \
     frame.h \
     struct.h \
-    timelineview.h
+    timelineview.h \
+    read.h
 
 FORMS    += mainwindow.ui
 
 DISTFILES += \
     .gitignore
+>>>>>>> master
