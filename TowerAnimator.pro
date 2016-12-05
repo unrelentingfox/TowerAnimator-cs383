@@ -40,4 +40,3 @@ FORMS    += mainwindow.ui
 
 DISTFILES += \
     .gitignore
->>>>>>> master
