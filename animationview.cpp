@@ -6,25 +6,30 @@ AnimationView::AnimationView(QWidget *parent) :
 {
     this->setAlignment(Qt::AlignCenter);
     this->setFixedSize(Globals::ANIMATION_WINDOW_SIZE_X+2, Globals::ANIMATION_WINDOW_SIZE_Y+2);
+    currentFrame = 0;
 }
 
 void AnimationView::setTool(int x)
 {
-    currentFrame->setTool(x);
+    if(currentFrame != 0)
+        currentFrame->setTool(x);
 }
 void AnimationView::setRed(int r)
 {
-    currentFrame->setRed(r);
+    if(currentFrame != 0)
+        currentFrame->setRed(r);
 }
 
 void AnimationView::setGreen(int g)
 {
-    currentFrame->setGreen(g);
+    if(currentFrame != 0)
+        currentFrame->setGreen(g);
 }
 
 void AnimationView::setBlue(int b)
 {
-    currentFrame->setBlue(b);
+    if(currentFrame != 0)
+        currentFrame->setBlue(b);
 }
 
 /**

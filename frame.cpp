@@ -34,24 +34,23 @@ void Frame::setBlue(int b)
     drawColor.setBlue(b);
 }
 
+QList<Pixel *> Frame::getPixels()
+{
+    //get a list of the pixels that are in the scene
+    QList<QGraphicsItem *> list = items(0,0, Globals::ANIMATION_WINDOW_SIZE_X, Globals::ANIMATION_WINDOW_SIZE_Y, Qt::IntersectsItemBoundingRect , Qt::DescendingOrder);
+
+    return trimPixelList(list);
+}
+
 QList<class Pixel *> Frame::getTowerContents()
 {
-    Pixel * tempPixel;
-    Pixel * tempStorage;
-    QList<Pixel *> pixelList;
+    //get a list of the pixels that are in the scene
+    QList<QGraphicsItem *> list = items(Globals::TOWER_POSITION_X, Globals::TOWER_POSITION_Y, Globals::TOWER_WIDTH,Globals::TOWER_WIDTH,Qt::IntersectsItemBoundingRect , Qt::DescendingOrder);
 
-    //get a list of the items that are within the tower
-    QList<QGraphicsItem *> list = items(Globals::TOWER_POSITION_X, Globals::TOWER_POSITION_Y, Globals::TOWER_WIDTH, Globals::TOWER_HEIGHT, Qt::IntersectsItemBoundingRect , Qt::DescendingOrder);
-
-    QList<QGraphicsItem *>::iterator i;
-    for (i = list.begin(); i != list.end(); ++i){
-        tempPixel = qgraphicsitem_cast<Pixel*>(i.operator *());
-        //this is just a place holder to show proof of functionality.
-        //need to convert this information into a list of storagepixel or something so it is easily accessable without having to cast.
-        qDebug() << tempPixel->mapFromItem(tower, QPointF(Globals::TOWER_POSITION_X,Globals::TOWER_POSITION_Y)) << tempPixel->red() << tempPixel->green() << tempPixel->blue();
-    }
-    return pixelList;
+    return trimPixelList(list);
 }
+
+
 
 void Frame::write()
 {
@@ -106,7 +105,7 @@ void Frame::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 
     switch (tool){
     case Globals::ERASE_TOOL:
-        //getTowerContents();
+        getPixels();
 //        erasePixel(mouseEvent);
         break;
     case Globals::DRAW_TOOL:
@@ -133,19 +132,17 @@ void Frame::drawPixel(QGraphicsSceneMouseEvent *mouseEvent)
     //Get x and y position of mouse click.
     QPointF pt = Algorithms::roundClickToGrid(mouseEvent->scenePos());
     if(isInBounds(pt)){
-    //check to see if the an object is selected.
-    //Overwrite any pixel that is already there.
-    //erasePixel(mouseEvent);
+        //check to see if the an object is selected.
+        //Overwrite any pixel that is already there.
+        //erasePixel(mouseEvent);
 
-    //check to make sure the click is within the bounds of the scene
+        //check to make sure the click is within the bounds of the scene
 
-
-
-    //Draw new pixel
-    Pixel * pixel = new Pixel(pt.x(),pt.y(),Globals::PIXEL_SIZE, drawColor);
-    this->addItem(pixel);
-    //Add it to the object
-//    baseObject->addToGroup(pixel);
+        //Draw new pixel
+        Pixel * pixel = new Pixel(pt.x(),pt.y(),Globals::PIXEL_SIZE, drawColor);
+        this->addItem(pixel);
+        //Add it to the object
+        //    baseObject->addToGroup(pixel);
     }
 }
 
@@ -164,4 +161,21 @@ bool Frame::isInBounds(QPointF pt)
 
     return inBounds;
 
+}
+
+QList<Pixel *> Frame::trimPixelList(QList<QGraphicsItem *> list)
+{
+    Pixel * tempPixel;
+    QList<Pixel *> pixelList;
+    QList<QGraphicsItem *>::iterator i;
+    for (i = list.begin(); i != list.end(); ++i){
+        // cast each graphics item to a pixel so that the pixel functions can be used to retrieve data
+        tempPixel = qgraphicsitem_cast<Pixel*>(i.operator *());
+        if(tempPixel != 0){
+            pixelList.append(tempPixel);
+        }
+        qDebug() << tempPixel->towerPos() << tempPixel->red() << tempPixel->green() << tempPixel->blue();
+    }
+    qDebug() << pixelList;
+    return pixelList;
 }
