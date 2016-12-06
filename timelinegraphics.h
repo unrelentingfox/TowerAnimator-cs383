@@ -16,20 +16,22 @@ class TimelineGraphics : public QObject
     Q_OBJECT
 signals:
     void connectNewFrame(TimelineView*);
+    void scrollToSelected(TimelineView*);
 public:
     TimelineGraphics();
     void loadTimeline();
     void addFramePixel(QGraphicsScene* scene, int x, int y);
     QWidget* timelineWidget();
-
+    QHBoxLayout* layout;
+    bool isPlaying;
 
 private:
     QWidget* timeline;
-    QHBoxLayout* layout;
+
     TimelineView* selectedView;
     void deleteView(TimelineView *view);
     storageTimeline* timelinelist;
-    bool isPlaying;
+
     void playback(int start);
 
 public slots:

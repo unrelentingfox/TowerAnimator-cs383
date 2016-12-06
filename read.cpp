@@ -9,7 +9,7 @@
 //int LIST_InsertHeadNode(Pixel_List_N **, int, int, int, int, int);
 readfile::readfile()
 {
-
+    loading = false;
 }
 
 int readfile::read(QString F_Name)
@@ -229,6 +229,7 @@ int readfile::read(QString F_Name)
      int duration = 0;
      do
      {
+       loading = true;
        line=stream.readLine(); //frame start time
        /*Convert the old style time to the new format in milliseconds
        using ":" and "." as the respective delimiters */
@@ -324,7 +325,7 @@ int readfile::read(QString F_Name)
            QTest::qWait(1);
      }//while(frame_ct < 100);
      while(!line.isNull());
-
+     loading = false;
    }
 
  }

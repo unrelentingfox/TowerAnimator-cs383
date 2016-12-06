@@ -222,7 +222,7 @@
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>225</height>
+          <height>300</height>
          </size>
         </property>
         <property name="verticalScrollBarPolicy">
@@ -237,7 +237,7 @@
            <x>0</x>
            <y>0</y>
            <width>1198</width>
-           <height>223</height>
+           <height>298</height>
           </rect>
          </property>
         </widget>

@@ -60,21 +60,32 @@ void TimelineGraphics::addTimelineFrame(Frame* scene)
     connect(view, SIGNAL (iWasSelected(TimelineView*)), this, SLOT (currentFrame(TimelineView*)));
 
     //make the new frame the selected frame
-    emit view->iWasSelected(view);
 
-    //add to layout
-    this->layout->addWidget(view);
+
+    //add to layout inserting after currently selected frame
+    int index = 0;
+    if (selectedView) {
+        index = layout->indexOf(this->selectedView);
+    }
+    qDebug() << index;
+    layout->insertWidget(index+1, view);
+
 
     //add to storage class
     timelinelist->addFrame(scene);
+
+    //set focus
+    emit view->iWasSelected(view);
 }
 
 void TimelineGraphics::currentFrame(TimelineView* view)
 {
-    if(selectedView)
+    if(selectedView) {
         selectedView->setBackgroundBrush(Qt::white);
+    }
     this->selectedView = view;
-    selectedView->setBackgroundBrush(Qt::lightGray);
+    selectedView->setBackgroundBrush(Qt::black);
+    emit scrollToSelected(selectedView);
 }
 
 void TimelineGraphics::deleteView(TimelineView* view)
@@ -97,7 +108,7 @@ void TimelineGraphics::deleteCurrentView()
     if(!view)
         return 0;
     int index = layout->indexOf(view);
-    std::cout << index;
+    qDebug() << index;
 
     //delete the view
     deleteView(this->selectedView);

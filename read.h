@@ -15,6 +15,7 @@ public:
     virtual ~readfile() {};
     readfile();
     int read(QString);
+    bool loading;
 };
 
 #endif // READ_H

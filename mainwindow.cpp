@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(colorDialog, SIGNAL(currentColorChanged(const QColor &)), ui->AnimationWidget, SLOT(colorChange(const QColor &)));
 
     // make timeline instance
-    TimelineGraphics* timeline = new TimelineGraphics;
+    timeline = new TimelineGraphics;
     ui->timelineArea->setWidget(timeline->timelineWidget());
 
     //connect ui main buttons
@@ -34,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->restart, SIGNAL(released()), timeline, SLOT(restartPlayback()));
     connect(ui->resume, SIGNAL(released()), timeline, SLOT(resumePlayback()));
     connect(ui->stop, SIGNAL(released()), timeline, SLOT(stopPlayback()));
+    connect(timeline, SIGNAL(scrollToSelected(TimelineView*)), this, SLOT(ScrollToSelected(TimelineView*)));
 
     connect(timeline, SIGNAL(connectNewFrame(TimelineView*)), ui->AnimationWidget, SLOT(acceptFrameConnection(TimelineView*)));
 
@@ -47,6 +48,17 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::ScrollToSelected(TimelineView* view)
+{
+    qDebug() << "signaled";
+    if(!rf->loading && !timeline->isPlaying)
+        QTest::qWait(2);
+    ui->timelineArea->ensureVisible(view->pos().x()+100, 1);
+    ui->timelineArea->ensureVisible(view->pos().x(), 1);
+
+    //ui->timelineArea->ensureVisible(100000000, 0, 0, 0);
 }
 
 void MainWindow::drawButtonPress()
