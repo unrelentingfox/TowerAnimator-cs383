@@ -37,15 +37,17 @@ void storageTimeline::removeFrame(int frameNum)
 {
     // iterate through list until correct frame number is found
 
-    int timelineSize = frames.size();
+//    int timelineSize = frames.size();
 
-    for(int index=0; index<timelineSize; index++)
-    {
-       if(frames[index]->frameNumber==frameNum)
-       {
-           frames.removeAt(index);
-       }
-    }
+//    for(int index=0; index<timelineSize; index++)
+//    {
+//       if(frames[index]->frameNumber==frameNum)
+//       {
+//           frames.removeAt(index);
+//       }
+//    }
+    frames.removeAt(frameNum);
+    numOfFrames--;
 }
 
 void storageTimeline::moveFrames(int startFrameNum, int endFrameNum, int newLocation)

@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    rf = new readfile;
     QColorDialog* colorDialog = new QColorDialog(QColorDialog::NoButtons);
     colorDialog->setOption(QColorDialog::NoButtons | QColorDialog::DontUseNativeDialog);
 
@@ -30,8 +31,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->moveButton, SIGNAL (released()), this, SLOT (moveButtonPress()));
     connect(ui->AddFrame, SIGNAL(released()), timeline, SLOT (addTimelineFrame()));
     connect(ui->delteFrame, SIGNAL(released()), timeline, SLOT(deleteCurrentView()));
+    connect(ui->playback, SIGNAL(released()), timeline, SLOT(playback()));
 
     connect(timeline, SIGNAL(connectNewFrame(TimelineView*)), ui->AnimationWidget, SLOT(acceptFrameConnection(TimelineView*)));
+
+    connect(rf, SIGNAL(loadFrame(Frame*)), timeline, SLOT(addTimelineFrame(Frame*)));
 
     //add first frame
     timeline->addTimelineFrame();
@@ -138,8 +142,8 @@ void MainWindow::on_actionImport_triggered()
     // get the file name and location import file
     fileName = QFileDialog::getOpenFileName(this,
     tr("Open File"), "/home/", tr("Tan Files (*.tan *.tan2)"));
-    readfile f;
-    f.read(fileName);
+    //readfile f;
+    rf->read(fileName);
 }
 
 void MainWindow::on_actionExport_triggered()

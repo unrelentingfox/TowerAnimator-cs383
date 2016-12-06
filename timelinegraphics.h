@@ -9,6 +9,7 @@
 #include <QWidget>
 #include <QHBoxLayout>
 #include <QGraphicsScene>
+#include <QTest>
 
 class TimelineGraphics : public QObject
 {
@@ -31,9 +32,11 @@ private:
 
 public slots:
     void addTimelineFrame();
+    void addTimelineFrame(Frame *scene);
     void currentFrame(TimelineView *view);
 
     void deleteCurrentView();
+    void playback();
 };
 
 #endif // TIMELINEGRAPHICS_H

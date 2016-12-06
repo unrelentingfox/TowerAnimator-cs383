@@ -7,6 +7,7 @@
 #include <QHboxLayout>
 
 #include "global.h"
+#include "read.h"
 
 namespace Ui {
 class MainWindow;
@@ -50,6 +51,7 @@ private:
     void addTimelineFrame(QHBoxLayout* layout );
     QString fileName;
     bool editedSinceLastSave = false;
+    readfile* rf;
 };
 
 #endif // MAINWINDOW_H

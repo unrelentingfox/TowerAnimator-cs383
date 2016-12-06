@@ -25,6 +25,7 @@ public:
     QList<class Pixel *> getTowerContents();
     void write();
 
+    void addPixel(Pixel *pixel);
 public slots:
     void colorChange(QColor);
 private:

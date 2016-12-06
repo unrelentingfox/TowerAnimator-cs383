@@ -36,8 +36,13 @@ void TimelineGraphics::addFramePixel(QGraphicsScene* scene, int x, int y)
 
 void TimelineGraphics::addTimelineFrame()
 {
+    addTimelineFrame(new Frame(0,1));
+}
+
+void TimelineGraphics::addTimelineFrame(Frame* scene)
+{
     TimelineView* view = new TimelineView;
-    Frame* scene = new Frame(timelinelist->getNumOfFrames());
+    //Frame* scene = new Frame(timelinelist->getNumOfFrames());
 
     //initialize the view
     view->frame = scene;
@@ -60,7 +65,7 @@ void TimelineGraphics::addTimelineFrame()
     this->layout->addWidget(view);
 
     //add to storage class
-    //timelinelist->addFrame(scene);
+    timelinelist->addFrame(scene);
 }
 
 void TimelineGraphics::currentFrame(TimelineView* view)
@@ -75,6 +80,7 @@ void TimelineGraphics::deleteView(TimelineView* view)
 {
     //remove the layout
     layout->removeWidget(view);
+    timelinelist->removeFrame(layout->indexOf(view));
     //timelinelist->removeFrame(view->frame->frameNumber);
     delete view->frame;
     delete view;
@@ -114,3 +120,17 @@ void TimelineGraphics::deleteCurrentView()
     }
 }
 
+void TimelineGraphics::playback()
+{
+//    QList::Iterator i;
+//    for (i = timelinelist->frames.begin(); i != list.end(); ++i) {
+//        emit timelinelist[i].
+//    }
+    QLayoutItem* item;
+    TimelineView* view;
+    for(int i = 0; item = layout->itemAt(i); i++) {
+        view = item->widget();
+        emit view->iWasSelected(view);
+        QTest::qWait(view->frame->duration);
+    }
+}

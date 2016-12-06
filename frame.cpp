@@ -3,10 +3,11 @@
 
 Frame::Frame(int frameNum, double frameDuration)
 {
+    duration = 1;
     duration = frameDuration;
     frameNumber = frameNum;
     tool = Globals::DRAW_TOOL;
-    duration = 1;
+
     mouseClicked = false;
 
     this->setSceneRect(0,0,Globals::ANIMATION_WINDOW_SIZE_X,Globals::ANIMATION_WINDOW_SIZE_Y);
@@ -136,6 +137,11 @@ void Frame::drawPixel(QGraphicsSceneMouseEvent *mouseEvent)
         //Add it to the object
         //    baseObject->addToGroup(pixel);
     }
+}
+
+void Frame::addPixel(Pixel *pixel)
+{
+    this->addItem(pixel);
 }
 
 bool Frame::isInBounds(QPointF pt)
