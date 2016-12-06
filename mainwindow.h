@@ -23,6 +23,7 @@ private slots:
     void drawButtonPress();
     void eraseButtonPress();
     void moveButtonPress();
+    void colorButtonPress();
 
     void on_redLineEdit_textEdited(const QString &arg1);
 
@@ -41,6 +42,8 @@ private slots:
     void on_actionExport_triggered();
 
     void on_keyFrameButton_clicked();
+
+    void on_actionColor_triggered();
 
 private:
     Ui::MainWindow *ui;

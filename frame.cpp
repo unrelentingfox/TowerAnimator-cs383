@@ -59,32 +59,6 @@ QList<class Pixel *> Frame::getTowerContents()
     return trimPixelList(list);
 }
 
-
-
-void Frame::write()
-{
-    QList<Pixel> pList;// = getTowerContents();
-    QString filename = "out.txt";
-    QFile file(filename);
-//    int height = pList.size() / 20;     //40 pixels/frame, 5 vars/pixel -> 200 vars/frame -> 10 lines/frame
-    int wr[Globals::TOWER_SIZE_X][Globals::TOWER_SIZE_Y]; //array length needs to be a constant value so just use the size of the tower in Globals
-    if(file.open(QIODevice::WriteOnly | QIODevice::Text))
-    {
-        // We're going to streaming text to the file
-        QTextStream stream( &file );
-        for(int i = 0; i < Globals::TOWER_SIZE_Y; i++){
-            for(int j = 0; j < Globals::TOWER_SIZE_X; j++){
-                stream << wr[i][j] << " ";
-            }
-            stream << endl;
-            if((i+1) % 10 == 0){
-                stream << endl;
-            }
-        }
-        file.close();
-    }
-}
-
 void Frame::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
 {
 

@@ -2,11 +2,13 @@
 #include "ui_mainwindow.h"
 #include "timelineGraphics.h"
 #include "read.h"
+#include "write.h"
 #include <QGraphicsGridLayout>
 #include <QGraphicsScene>
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QColorDialog>
+#include <QColor>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -56,6 +58,16 @@ void MainWindow::moveButtonPress()
     ui->AnimationWidget->setTool(Globals::MOVE_TOOL);
     editedSinceLastSave = true;
 }
+
+void MainWindow::colorButtonPress()
+{/*
+    //QWidget *p;
+    QColor color = QColorDialog::getColor(Qt::white,this,"Choose Color");
+    if(color.isValid()){
+        printf("HI");
+    }
+
+*/}
 
 void MainWindow::on_redLineEdit_textEdited(const QString &arg1)
 {
@@ -137,14 +149,35 @@ void MainWindow::on_actionImport_triggered()
     f.read(fileName);
 }
 
+/**
+ * @brief MainWindow::on_actionExport_triggered
+ *        Asks user for .tan file name, and calls write, which saves the data in a .tan format
+ * @author Alex Wezensky
+ */
 void MainWindow::on_actionExport_triggered()
 {
-    // get the file name and location import file
-    fileName = QFileDialog::getOpenFileName(this,
-    tr("Open File"), "/home/", tr("Tan Files (*.tan *.tan2)"));
+    //save and name the new exported tan file
+    fileName = QFileDialog::getSaveFileName(this, tr("Export File"), "/home/", tr("Tan Files (*.tan *.tan2)"));
+    writefile w;
+    w.write(fileName);
 }
 
 void MainWindow::on_keyFrameButton_clicked()
 {
     // call storage timeline add frame
+}
+
+/**
+ * @brief MainWindow::on_actionColor_triggered
+ *        Adds "color" option in File menu, sends color info in the same way
+ *        that it is sent by editing the values individually.
+ * @author Alex Wezensky
+ */
+void MainWindow::on_actionColor_triggered()
+{
+    QColor color = QColorDialog::getColor(Qt::white,this,"Choose Color");
+    ui->AnimationWidget->setRed(color.red());
+    ui->AnimationWidget->setGreen(color.green());
+    ui->AnimationWidget->setBlue(color.blue());
+    editedSinceLastSave = true;
 }
