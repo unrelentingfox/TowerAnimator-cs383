@@ -26,7 +26,6 @@ public:
     int frameNumber;
     QList<class Pixel *> getPixels();
     QList<class Pixel *> getTowerContents();
-    void write();
 
 public slots:
     void colorChange(QColor *);
