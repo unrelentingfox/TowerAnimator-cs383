@@ -25,11 +25,7 @@ class AnimationView : public QGraphicsView
 {
     Q_OBJECT
 public:
-    static const int MOVE = 3;
-    static const int DRAW = 1;
-    static const int ERASE = 0;
     explicit AnimationView(QWidget *parent = 0);
-
 
 signals:
     void setFrameColor(QColor*);
@@ -41,20 +37,15 @@ public slots:
     void setBlue(int);
     void getTower();
     void saveFrame();
-    void loadFrame();
+    void loadFrame(Frame*);
     void displaySelected(TimelineView *);
-    void acceptFrameConnection(TimelineView *);    
+    void acceptFrameConnection(TimelineView *framView);    
     void colorChange(QColor*);
 
 private slots:
     void drawBackground(QPainter *painter, const QRectF &rect);
-    void mousePressEvent(QMouseEvent * e);
-
 private:
-    QColor drawColor;
-    bool mouseClicked;
-    Frame * frame;
-    Object * baseObject;
+    Frame * currentFrame;
 };
 
 #endif // ANIMATIONVIEW_H

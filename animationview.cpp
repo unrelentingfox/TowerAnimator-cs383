@@ -6,31 +6,30 @@ AnimationView::AnimationView(QWidget *parent) :
 {
     this->setAlignment(Qt::AlignCenter);
     this->setFixedSize(Globals::ANIMATION_WINDOW_SIZE_X+2, Globals::ANIMATION_WINDOW_SIZE_Y+2);
-//    tool = this->DRAW;
-   /* Frame * frame = new Frame(0, 0);
-    this->setScene(frame);
-    baseObject = new Object();
-    frame->addItem(baseObject);*/
-    mouseClicked = false;
+    currentFrame = 0;
 }
 
 void AnimationView::setTool(int x)
 {
-    frame->setTool(x);
+    if(currentFrame != 0)
+        currentFrame->setTool(x);
 }
 void AnimationView::setRed(int r)
 {
-    frame->setRed(r);
+    if(currentFrame != 0)
+        currentFrame->setRed(r);
 }
 
 void AnimationView::setGreen(int g)
 {
-    frame->setGreen(g);
+    if(currentFrame != 0)
+        currentFrame->setGreen(g);
 }
 
 void AnimationView::setBlue(int b)
 {
-    frame->setBlue(b);
+    if(currentFrame != 0)
+        currentFrame->setBlue(b);
 }
 
 void AnimationView::colorChange(QColor* color)
@@ -58,15 +57,16 @@ void AnimationView::saveFrame()
 /**
  * @brief AnimationView::loadFrame, Loads in a FrameStorage object and creates the frame from that info.
  */
-void AnimationView::loadFrame()
+void AnimationView::loadFrame(Frame* frame)
 {
-
+    this->setScene(frame);
+    currentFrame = frame;
 }
 
 void AnimationView::displaySelected(TimelineView *view)
 {
     this->setScene(view->frame);
-    frame = view->frame;
+    currentFrame = view->frame;
 }
 
 void AnimationView::acceptFrameConnection(TimelineView *view)
@@ -97,8 +97,3 @@ void AnimationView::drawBackground(QPainter *painter, const QRectF &rect)
     painter->drawPoints(points.data(), points.size());
 }
 
-void AnimationView::mousePressEvent(QMouseEvent *e)
-{
-    //set changes here
-    QGraphicsView::mousePressEvent(e);
-}

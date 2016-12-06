@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "timelineGraphics.h"
+#include "read.h"
 #include <QGraphicsGridLayout>
 #include <QGraphicsScene>
 #include <QMessageBox>
@@ -26,6 +27,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->eraseButton, SIGNAL (released()), this, SLOT (eraseButtonPress()));
     connect(ui->moveButton, SIGNAL (released()), this, SLOT (moveButtonPress()));
     connect(ui->AddFrame, SIGNAL(released()), timeline, SLOT (addTimelineFrame()));
+    connect(timeline, SIGNAL( testSignal(Frame*)), ui->AnimationWidget, SLOT(loadFrame(Frame*)));
     connect(timeline, SIGNAL(connectNewFrame(TimelineView*)), ui->AnimationWidget, SLOT(acceptFrameConnection(TimelineView*)));
     connect(ui->delteFrame, SIGNAL(released()), timeline, SLOT(deleteCurrentView()));
 
@@ -131,6 +133,8 @@ void MainWindow::on_actionImport_triggered()
     // get the file name and location import file
     fileName = QFileDialog::getOpenFileName(this,
     tr("Open File"), "/home/", tr("Tan Files (*.tan *.tan2)"));
+    readfile f;
+    f.read(fileName);
 }
 
 void MainWindow::on_actionExport_triggered()
