@@ -37,7 +37,7 @@ void TimelineGraphics::addFramePixel(QGraphicsScene* scene, int x, int y)
 void TimelineGraphics::addTimelineFrame()
 {
     TimelineView* view = new TimelineView;
-    Frame* scene = new Frame;
+    Frame* scene = new Frame(timelinelist->getNumOfFrames());
 
     //initialize the view
     view->frame = scene;
@@ -60,7 +60,7 @@ void TimelineGraphics::addTimelineFrame()
     this->layout->addWidget(view);
 
     //add to storage class
-    timelinelist->addFrame(scene);
+    //timelinelist->addFrame(scene);
 }
 
 void TimelineGraphics::currentFrame(TimelineView* view)
@@ -75,7 +75,8 @@ void TimelineGraphics::deleteView(TimelineView* view)
 {
     //remove the layout
     layout->removeWidget(view);
-    timelinelist->removeFrame(view->frame);
+    //timelinelist->removeFrame(view->frame->frameNumber);
+    delete view->frame;
     delete view;
     selectedView = NULL;
 }

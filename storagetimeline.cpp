@@ -30,6 +30,7 @@ void storageTimeline::addFrame(double duration)
 void storageTimeline::addFrame(Frame* frame)
 {
     frames.append(frame);
+    numOfFrames++;
 }
 
 void storageTimeline::removeFrame(int frameNum)
