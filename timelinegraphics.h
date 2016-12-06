@@ -44,6 +44,7 @@ public slots:
     void resumePlayback();
     void restartPlayback();
     void stopPlayback();
+    void gotoCurrentFrame();
 };
 
 #endif // TIMELINEGRAPHICS_H

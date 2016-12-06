@@ -35,6 +35,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->resume, SIGNAL(released()), timeline, SLOT(resumePlayback()));
     connect(ui->stop, SIGNAL(released()), timeline, SLOT(stopPlayback()));
     connect(timeline, SIGNAL(scrollToSelected(TimelineView*)), this, SLOT(ScrollToSelected(TimelineView*)));
+    connect(ui->gotoCurrentFrame, SIGNAL(released()), timeline, SLOT(gotoCurrentFrame()));
 
     connect(timeline, SIGNAL(connectNewFrame(TimelineView*)), ui->AnimationWidget, SLOT(acceptFrameConnection(TimelineView*)));
 
@@ -55,8 +56,9 @@ void MainWindow::ScrollToSelected(TimelineView* view)
     qDebug() << "signaled";
     if(!rf->loading && !timeline->isPlaying)
         QTest::qWait(2);
-    ui->timelineArea->ensureVisible(view->pos().x()+100, 1);
-    ui->timelineArea->ensureVisible(view->pos().x(), 1);
+    ui->timelineArea->ensureVisible(view->pos().x(), 50);
+    ui->timelineArea->ensureVisible(view->pos().x()+200, 50);
+
 
     //ui->timelineArea->ensureVisible(100000000, 0, 0, 0);
 }

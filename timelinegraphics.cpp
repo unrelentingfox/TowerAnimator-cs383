@@ -164,3 +164,8 @@ void TimelineGraphics::stopPlayback()
 {
     isPlaying = false;
 }
+
+void TimelineGraphics::gotoCurrentFrame()
+{
+    emit selectedView->iWasSelected(selectedView);
+}
