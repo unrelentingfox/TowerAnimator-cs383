@@ -16,25 +16,25 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     QColorDialog* colorDialog = new QColorDialog(QColorDialog::NoButtons);
     colorDialog->setOption(QColorDialog::NoButtons | QColorDialog::DontUseNativeDialog);
-    //ui->AnimationWidget->colorChange(colorDialog->currentColor());
-    //QColor colortype = colorDialog->currentColor();
-    //qDebug() << "color name:";
-    //qDebug() << colortype.name();
+
     ui->colorSelector->addWidget(colorDialog);
     connect(colorDialog, SIGNAL(currentColorChanged(const QColor &)), ui->AnimationWidget, SLOT(colorChange(const QColor &)));
 
+    // make timeline instance
     TimelineGraphics* timeline = new TimelineGraphics;
     ui->timelineArea->setWidget(timeline->timelineWidget());
-    // make timeline instance
 
-    //connect draw and erase buttons to the tool variable in AnimationView
+    //connect ui main buttons
     connect(ui->drawButton, SIGNAL (released()), this, SLOT (drawButtonPress()));
     connect(ui->eraseButton, SIGNAL (released()), this, SLOT (eraseButtonPress()));
     connect(ui->moveButton, SIGNAL (released()), this, SLOT (moveButtonPress()));
     connect(ui->AddFrame, SIGNAL(released()), timeline, SLOT (addTimelineFrame()));
-    connect(timeline, SIGNAL( testSignal(Frame*)), ui->AnimationWidget, SLOT(loadFrame(Frame*)));
-    connect(timeline, SIGNAL(connectNewFrame(TimelineView*)), ui->AnimationWidget, SLOT(acceptFrameConnection(TimelineView*)));
     connect(ui->delteFrame, SIGNAL(released()), timeline, SLOT(deleteCurrentView()));
+
+    connect(timeline, SIGNAL(connectNewFrame(TimelineView*)), ui->AnimationWidget, SLOT(acceptFrameConnection(TimelineView*)));
+
+    //add first frame
+    timeline->addTimelineFrame();
 
 }
 

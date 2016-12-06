@@ -87,8 +87,19 @@ void TimelineGraphics::deleteCurrentView()
 
     //select a new frame based on index of last frame
     QLayoutItem* item = layout->itemAt(index);
-    TimelineView* view2 = item->widget();
-    //frameLayout = item->layout();
-    emit view2->iWasSelected(view2);
+    if(item)
+    {
+        TimelineView* view2 = item->widget();
+        emit view2->iWasSelected(view2);
+    }
+    else {
+        item = layout->itemAt(index-1);
+        if(item) {
+            TimelineView* view2 = item->widget();
+            emit view2->iWasSelected(view2);
+        } else {
+            addTimelineFrame();
+        }
+    }
 }
 

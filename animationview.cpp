@@ -14,28 +14,15 @@ void AnimationView::setTool(int x)
     if(currentFrame != 0)
         currentFrame->setTool(x);
 }
-//void AnimationView::setRed(int r)
-//{
-//    if(currentFrame != 0)
-//        currentFrame->setRed(r);
-//}
-
-//void AnimationView::setGreen(int g)
-//{
-//    if(currentFrame != 0)
-//        currentFrame->setGreen(g);
-//}
-
-//void AnimationView::setBlue(int b)
-//{
-//    if(currentFrame != 0)
-//        currentFrame->setBlue(b);
-//}
 
 void AnimationView::colorChange(const QColor &color)
 {
-    qDebug() << "color changed to: " << color;
-    emit setFrameColor(color);
+
+    currentColor.setRed(color.red());
+    currentColor.setGreen(color.green());
+    currentColor.setBlue(color.blue());
+    //qDebug() << "color changed to: " << color;
+    emit setFrameColor(currentColor);
 }
 
 /**
@@ -68,12 +55,13 @@ void AnimationView::displaySelected(TimelineView *view)
 {
     this->setScene(view->frame);
     currentFrame = view->frame;
+    emit setFrameColor(currentColor);
 }
 
 void AnimationView::acceptFrameConnection(TimelineView *view)
 {
     connect(view, SIGNAL(iWasSelected(TimelineView*)), this, SLOT(displaySelected(TimelineView*)));
-    connect(this, SIGNAL(setFrameColor(const QColor &)), view->frame, SLOT(colorChange(const QColor &)));
+    connect(this, SIGNAL(setFrameColor(QColor)), view->frame, SLOT(colorChange(QColor)));
 }
 
 /**

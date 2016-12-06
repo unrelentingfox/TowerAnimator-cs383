@@ -17,9 +17,6 @@ public:
     Frame(int frameNum=0, double frameDuration=0);
     virtual ~Frame() {};
     void setTool(int t);
-    void setRed(int r);
-    void setGreen(int g);
-    void setBlue(int b);
 
     //storage info
     double duration;
@@ -29,7 +26,7 @@ public:
     void write();
 
 public slots:
-    void colorChange(const QColor &);
+    void colorChange(QColor);
 private:
     QGraphicsRectItem * tower;
     void mouseMoveEvent(QGraphicsSceneMouseEvent * mouseEvent);

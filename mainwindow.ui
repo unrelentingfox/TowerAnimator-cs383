@@ -27,7 +27,7 @@
        <widget class="QFrame" name="toolBar">
         <property name="maximumSize">
          <size>
-          <width>64</width>
+          <width>100</width>
           <height>16777215</height>
          </size>
         </property>
@@ -102,115 +102,10 @@
           </widget>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="redEdit">
-           <item>
-            <widget class="QLabel" name="redLabel">
-             <property name="maximumSize">
-              <size>
-               <width>10</width>
-               <height>20</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>R:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="redLineEdit">
-             <property name="maximumSize">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-             <property name="maxLength">
-              <number>3</number>
-             </property>
-             <property name="dragEnabled">
-              <bool>false</bool>
-             </property>
-             <property name="placeholderText">
-              <string>0-255</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
+          <layout class="QHBoxLayout" name="redEdit"/>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="greenEdit">
-           <item>
-            <widget class="QLabel" name="greenLabel">
-             <property name="maximumSize">
-              <size>
-               <width>10</width>
-               <height>20</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>G:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="greenLineEdit">
-             <property name="maximumSize">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-             <property name="maxLength">
-              <number>3</number>
-             </property>
-             <property name="dragEnabled">
-              <bool>false</bool>
-             </property>
-             <property name="placeholderText">
-              <string>0-255</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="blueEdit">
-           <item>
-            <widget class="QLabel" name="blueLabel">
-             <property name="maximumSize">
-              <size>
-               <width>10</width>
-               <height>20</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>B:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="blueLineEdit">
-             <property name="maximumSize">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-             <property name="inputMask">
-              <string/>
-             </property>
-             <property name="maxLength">
-              <number>3</number>
-             </property>
-             <property name="dragEnabled">
-              <bool>false</bool>
-             </property>
-             <property name="placeholderText">
-              <string>0-255</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
+          <layout class="QHBoxLayout" name="greenEdit"/>
          </item>
          <item>
           <spacer name="verticalSpacer_2">
@@ -224,22 +119,6 @@
             </size>
            </property>
           </spacer>
-         </item>
-         <item>
-          <widget class="QToolButton" name="keyFrameButton">
-           <property name="minimumSize">
-            <size>
-             <width>60</width>
-             <height>60</height>
-            </size>
-           </property>
-           <property name="cursor">
-            <cursorShape>PointingHandCursor</cursorShape>
-           </property>
-           <property name="text">
-            <string>KeyFrame</string>
-           </property>
-          </widget>
          </item>
          <item>
           <widget class="QPushButton" name="AddFrame">
@@ -298,7 +177,7 @@
        </layout>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="colorSelector" stretch=""/>
+       <layout class="QVBoxLayout" name="colorSelector"/>
       </item>
      </layout>
     </item>
