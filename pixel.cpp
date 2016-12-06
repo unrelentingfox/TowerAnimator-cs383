@@ -16,7 +16,7 @@ Pixel::Pixel(int x, int y, int size, QColor color, QGraphicsItem * parent)
     this->setPos(x,y);
 
     //output coords of new pixel for debugging
-    qDebug() << x << ", " << y;
+    //qDebug() << x << ", " << y;
 }
 
 QPointF Pixel::towerPos()

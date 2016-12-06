@@ -7,6 +7,9 @@
 #include <QHboxLayout>
 
 #include "global.h"
+#include "read.h"
+#include "timelineview.h"
+#include "timelinegraphics.h"
 
 namespace Ui {
 class MainWindow;
@@ -19,6 +22,8 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+public slots:
+    void ScrollToSelected(TimelineView *view);
 private slots:
     void drawButtonPress();
     void eraseButtonPress();
@@ -50,6 +55,8 @@ private:
     void addTimelineFrame(QHBoxLayout* layout );
     QString fileName;
     bool editedSinceLastSave = false;
+    readfile* rf;
+    TimelineGraphics* timeline;
 };
 
 #endif // MAINWINDOW_H

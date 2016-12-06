@@ -18,7 +18,7 @@ typedef struct Layout
     int Width;
 }Layout_N;
 
-typedef struct Pixel
+typedef struct loadPixel
 {
    int R;
    int G;
@@ -37,27 +37,27 @@ typedef struct Pixel
 }Pixel_N;
 
 //used for printing out the values of the pixels
-int Pixel::getRval() const
+int loadPixel::getRval() const
 {
   return R;
 }
-int Pixel::getGval() const
+int loadPixel::getGval() const
 {
   return G;
 }
-int Pixel::getBval() const
+int loadPixel::getBval() const
 {
   return B;
 }
-int Pixel::getXval() const
+int loadPixel::getXval() const
 {
   return X;
 }
-int Pixel::getYval() const
+int loadPixel::getYval() const
 {
   return Y;
 }
-int Pixel::getCTval() const
+int loadPixel::getCTval() const
 {
   return CT;
 }

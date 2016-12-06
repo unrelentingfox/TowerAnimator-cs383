@@ -7,35 +7,60 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QColorDialog>
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    rf = new readfile;
     QColorDialog* colorDialog = new QColorDialog(QColorDialog::NoButtons);
-    colorDialog->setOption(QColorDialog::NoButtons, true);
+    colorDialog->setOption(QColorDialog::NoButtons | QColorDialog::DontUseNativeDialog);
+
     ui->colorSelector->addWidget(colorDialog);
-    connect(colorDialog, SIGNAL(currentColorChanged(QColor*)), ui->AnimationWidget, SLOT(colorChange(QColor*)));
+    connect(colorDialog, SIGNAL(currentColorChanged(const QColor &)), ui->AnimationWidget, SLOT(colorChange(const QColor &)));
 
-    TimelineGraphics* timeline = new TimelineGraphics;
-    ui->timelineArea->setWidget(timeline->timelineWidget());
     // make timeline instance
+    timeline = new TimelineGraphics;
+    ui->timelineArea->setWidget(timeline->timelineWidget());
 
-    //connect draw and erase buttons to the tool variable in AnimationView
+    //connect ui main buttons
     connect(ui->drawButton, SIGNAL (released()), this, SLOT (drawButtonPress()));
     connect(ui->eraseButton, SIGNAL (released()), this, SLOT (eraseButtonPress()));
     connect(ui->moveButton, SIGNAL (released()), this, SLOT (moveButtonPress()));
     connect(ui->AddFrame, SIGNAL(released()), timeline, SLOT (addTimelineFrame()));
-    connect(timeline, SIGNAL( testSignal(Frame*)), ui->AnimationWidget, SLOT(loadFrame(Frame*)));
-    connect(timeline, SIGNAL(connectNewFrame(TimelineView*)), ui->AnimationWidget, SLOT(acceptFrameConnection(TimelineView*)));
     connect(ui->delteFrame, SIGNAL(released()), timeline, SLOT(deleteCurrentView()));
+    connect(ui->restart, SIGNAL(released()), timeline, SLOT(restartPlayback()));
+    connect(ui->resume, SIGNAL(released()), timeline, SLOT(resumePlayback()));
+    connect(ui->stop, SIGNAL(released()), timeline, SLOT(stopPlayback()));
+    connect(timeline, SIGNAL(scrollToSelected(TimelineView*)), this, SLOT(ScrollToSelected(TimelineView*)));
+    connect(ui->gotoCurrentFrame, SIGNAL(released()), timeline, SLOT(gotoCurrentFrame()));
+
+    connect(timeline, SIGNAL(connectNewFrame(TimelineView*)), ui->AnimationWidget, SLOT(acceptFrameConnection(TimelineView*)));
+
+    connect(rf, SIGNAL(loadFrame(Frame*)), timeline, SLOT(addTimelineFrame(Frame*)));
+
+    //add first frame
+    timeline->addTimelineFrame();
 
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::ScrollToSelected(TimelineView* view)
+{
+    qDebug() << "signaled";
+    if(!rf->loading && !timeline->isPlaying)
+        QTest::qWait(2);
+    ui->timelineArea->ensureVisible(view->pos().x(), 50);
+    ui->timelineArea->ensureVisible(view->pos().x()+200, 50);
+
+
+    //ui->timelineArea->ensureVisible(100000000, 0, 0, 0);
 }
 
 void MainWindow::drawButtonPress()
@@ -59,21 +84,21 @@ void MainWindow::moveButtonPress()
 
 void MainWindow::on_redLineEdit_textEdited(const QString &arg1)
 {
-    ui->AnimationWidget->setRed(arg1.toInt());
-    editedSinceLastSave = true;
+//    ui->AnimationWidget->setRed(arg1.toInt());
+//    editedSinceLastSave = true;
 }
 
 void MainWindow::on_greenLineEdit_textEdited(const QString &arg1)
 {
-    ui->AnimationWidget->setGreen(arg1.toInt());
-    editedSinceLastSave = true;
+//    ui->AnimationWidget->setGreen(arg1.toInt());
+//    editedSinceLastSave = true;
 
 }
 
 void MainWindow::on_blueLineEdit_textEdited(const QString &arg1)
 {
-    ui->AnimationWidget->setBlue(arg1.toInt());
-    editedSinceLastSave = true;
+//    ui->AnimationWidget->setBlue(arg1.toInt());
+//    editedSinceLastSave = true;
 }
 
 void MainWindow::on_actionNew_File_triggered()
@@ -133,8 +158,8 @@ void MainWindow::on_actionImport_triggered()
     // get the file name and location import file
     fileName = QFileDialog::getOpenFileName(this,
     tr("Open File"), "/home/", tr("Tan Files (*.tan *.tan2)"));
-    readfile f;
-    f.read(fileName);
+    //readfile f;
+    rf->read(fileName);
 }
 
 void MainWindow::on_actionExport_triggered()

@@ -4,7 +4,6 @@ class storageTimeline
 {
 private:
     int numOfFrames; // track number of frames created
-    int getNumOfFrames();
 public:
     int currFrame; // ??
     QList<class Frame *> frames; //possibly needs to be <Frame *>
@@ -18,4 +17,5 @@ public:
     void removeFrame(int frameNum);
     void moveFrames(int startFrameNum, int endFrameNum, int newLocation);
     void addFrame(Frame *frame);
+    int getNumOfFrames();
 };
