@@ -17,4 +17,5 @@ public:
     // remove frame from timeline
     void removeFrame(int frameNum);
     void moveFrames(int startFrameNum, int endFrameNum, int newLocation);
+    void addFrame(Frame *frame);
 };

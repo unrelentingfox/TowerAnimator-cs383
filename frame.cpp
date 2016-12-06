@@ -22,6 +22,15 @@ void Frame::setTool(int t)
     tool = t;
 }
 
+void Frame::colorChange(QColor* color)
+{
+    int* r, g, b;
+    color->getRgb(r, g, b);
+    setRed(r);
+    setGreen(g);
+    setBlue(b);
+}
+
 void Frame::setRed(int r)
 {
     red = r;

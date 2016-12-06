@@ -33,6 +33,11 @@ void AnimationView::setBlue(int b)
     frame->setBlue(b);
 }
 
+void AnimationView::colorChange(QColor* color)
+{
+
+}
+
 /**
  * @brief AnimationView::getTower, Returns a QList of all of the pixels that are within the tower rectangle.
  */
@@ -67,6 +72,7 @@ void AnimationView::displaySelected(TimelineView *view)
 void AnimationView::acceptFrameConnection(TimelineView *view)
 {
     connect(view, SIGNAL(iWasSelected(TimelineView*)), this, SLOT(displaySelected(TimelineView*)));
+    connect(this, SIGNAL(setFrameColor(QColor*)), view->frame, SLOT(colorChange(QColor*)));
 }
 
 /**

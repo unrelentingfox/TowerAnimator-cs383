@@ -27,6 +27,8 @@ public:
     QList<class Pixel *> getTowerContents();
     void write();
 
+public slots:
+    void colorChange(QColor *);
 private:
     QGraphicsRectItem * tower;
     void mouseMoveEvent(QGraphicsSceneMouseEvent * mouseEvent);

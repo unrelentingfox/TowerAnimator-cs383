@@ -298,14 +298,7 @@
        </layout>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="objectLayout" stretch="0,0">
-        <item>
-         <widget class="QListWidget" name="objectListPlaceHolder"/>
-        </item>
-        <item>
-         <widget class="QTableView" name="objectEditPlaceHolder"/>
-        </item>
-       </layout>
+       <layout class="QVBoxLayout" name="colorSelector" stretch=""/>
       </item>
      </layout>
     </item>

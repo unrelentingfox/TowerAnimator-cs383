@@ -25,6 +25,11 @@ void storageTimeline::addFrame(double duration)
     frames.append(newFrame);
 }
 
+void storageTimeline::addFrame(Frame* frame)
+{
+    frames.append(frame);
+}
+
 void storageTimeline::removeFrame(int frameNum)
 {
     // iterate through list until correct frame number is found

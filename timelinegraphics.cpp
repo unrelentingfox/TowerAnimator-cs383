@@ -10,6 +10,7 @@ TimelineGraphics::TimelineGraphics()
 {
     timeline = new QWidget;
     layout = new QHBoxLayout;
+    timelinelist = new storageTimeline;
     layout->setAlignment(Qt::AlignLeft);
     loadTimeline();
 }
@@ -56,6 +57,9 @@ void TimelineGraphics::addTimelineFrame()
 
     //add to layout
     this->layout->addWidget(view);
+
+    //add to storage class
+    timelinelist->addFrame(scene);
 }
 
 void TimelineGraphics::currentFrame(TimelineView* view)
@@ -67,7 +71,7 @@ void TimelineGraphics::deleteView(TimelineView* view)
 {
     //remove the layout
     layout->removeWidget(view);
-    delete view->frame;
+    timelinelist->removeFrame(view->frame);
     delete view;
 }
 

@@ -3,6 +3,7 @@
 
 #include "frame.h"
 #include "timelineview.h"
+#include "storagetimeline.h"
 #include <QMainWindow>
 #include <QObject>
 #include <QWidget>
@@ -26,6 +27,7 @@ private:
     QHBoxLayout* layout;
     TimelineView* selectedView;
     void deleteView(TimelineView *view);
+    storageTimeline* timelinelist;
 
 public slots:
     void addTimelineFrame();
