@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     object.cpp \
     algorithms.cpp \
     frame.cpp \
-    timelineview.cpp
+    timelineview.cpp \
+    read.cpp
     read.cpp
 
 HEADERS  += mainwindow.h \
@@ -33,7 +34,8 @@ HEADERS  += mainwindow.h \
     algorithms.h \
     frame.h \
     struct.h \
-    timelineview.h
+    timelineview.h \
+    read.h
     read.h
 
 FORMS    += mainwindow.ui
