@@ -12,7 +12,7 @@ class TimelineView : public QGraphicsView
 {
     Q_OBJECT
 signals:
-    void iWasSelected(Frame*);
+    void iWasSelected(TimelineView*);
 public:
     TimelineView();
     Frame *frame;

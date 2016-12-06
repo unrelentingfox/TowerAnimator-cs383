@@ -3,6 +3,7 @@
 
 #include "frame.h"
 #include "timelineview.h"
+#include "storagetimeline.h"
 #include <QMainWindow>
 #include <QObject>
 #include <QWidget>
@@ -19,12 +20,20 @@ public:
     void loadTimeline();
     void addFramePixel(QGraphicsScene* scene, int x, int y);
     QWidget* timelineWidget();
-    void addTimelineFrame();
+
 
 private:
     QWidget* timeline;
     QHBoxLayout* layout;
+    TimelineView* selectedView;
+    void deleteView(TimelineView *view);
+    storageTimeline* timelinelist;
 
+public slots:
+    void addTimelineFrame();
+    void currentFrame(TimelineView *view);
+
+    void deleteCurrentView();
 };
 
 #endif // TIMELINEGRAPHICS_H

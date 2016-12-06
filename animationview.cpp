@@ -32,6 +32,11 @@ void AnimationView::setBlue(int b)
         currentFrame->setBlue(b);
 }
 
+void AnimationView::colorChange(QColor* color)
+{
+
+}
+
 /**
  * @brief AnimationView::getTower, Returns a QList of all of the pixels that are within the tower rectangle.
  */
@@ -52,15 +57,22 @@ void AnimationView::saveFrame()
 /**
  * @brief AnimationView::loadFrame, Loads in a FrameStorage object and creates the frame from that info.
  */
-void AnimationView::loadFrame(Frame *frame)
+void AnimationView::loadFrame(Frame* frame)
 {
     this->setScene(frame);
     currentFrame = frame;
 }
 
-void AnimationView::acceptFrameConnection(TimelineView *frameView)
+void AnimationView::displaySelected(TimelineView *view)
 {
-    connect(frameView, SIGNAL(iWasSelected(Frame*)), this, SLOT(loadFrame(Frame*)));
+    this->setScene(view->frame);
+    currentFrame = view->frame;
+}
+
+void AnimationView::acceptFrameConnection(TimelineView *view)
+{
+    connect(view, SIGNAL(iWasSelected(TimelineView*)), this, SLOT(displaySelected(TimelineView*)));
+    connect(this, SIGNAL(setFrameColor(QColor*)), view->frame, SLOT(colorChange(QColor*)));
 }
 
 /**
