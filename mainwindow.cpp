@@ -31,7 +31,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->moveButton, SIGNAL (released()), this, SLOT (moveButtonPress()));
     connect(ui->AddFrame, SIGNAL(released()), timeline, SLOT (addTimelineFrame()));
     connect(ui->delteFrame, SIGNAL(released()), timeline, SLOT(deleteCurrentView()));
-    connect(ui->playback, SIGNAL(released()), timeline, SLOT(playback()));
+    connect(ui->restart, SIGNAL(released()), timeline, SLOT(restartPlayback()));
+    connect(ui->resume, SIGNAL(released()), timeline, SLOT(resumePlayback()));
+    connect(ui->stop, SIGNAL(released()), timeline, SLOT(stopPlayback()));
 
     connect(timeline, SIGNAL(connectNewFrame(TimelineView*)), ui->AnimationWidget, SLOT(acceptFrameConnection(TimelineView*)));
 

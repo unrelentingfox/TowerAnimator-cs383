@@ -29,6 +29,8 @@ private:
     TimelineView* selectedView;
     void deleteView(TimelineView *view);
     storageTimeline* timelinelist;
+    bool isPlaying;
+    void playback(int start);
 
 public slots:
     void addTimelineFrame();
@@ -36,7 +38,10 @@ public slots:
     void currentFrame(TimelineView *view);
 
     void deleteCurrentView();
-    void playback();
+
+    void resumePlayback();
+    void restartPlayback();
+    void stopPlayback();
 };
 
 #endif // TIMELINEGRAPHICS_H

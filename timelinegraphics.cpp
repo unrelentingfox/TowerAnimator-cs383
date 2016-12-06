@@ -25,6 +25,7 @@ void TimelineGraphics::loadTimeline()
     timeline->setLayout(this->layout);
     timeline->setMaximumHeight(500);
     selectedView = NULL;
+    isPlaying = false;
 }
 
 void TimelineGraphics::addFramePixel(QGraphicsScene* scene, int x, int y)
@@ -120,17 +121,35 @@ void TimelineGraphics::deleteCurrentView()
     }
 }
 
-void TimelineGraphics::playback()
+void TimelineGraphics::playback(int start)
 {
-//    QList::Iterator i;
-//    for (i = timelinelist->frames.begin(); i != list.end(); ++i) {
-//        emit timelinelist[i].
+//    if(isPlaying) {
+//        isPlaying = false;
+//        return 0;
 //    }
+    isPlaying = true;
     QLayoutItem* item;
     TimelineView* view;
-    for(int i = 0; item = layout->itemAt(i); i++) {
+    for(int i = start; item = layout->itemAt(i); i++) {
         view = item->widget();
         emit view->iWasSelected(view);
         QTest::qWait(view->frame->duration);
+        if(!isPlaying)
+            return 0;
     }
+}
+
+void TimelineGraphics::restartPlayback()
+{
+    playback(0);
+}
+
+void TimelineGraphics::resumePlayback()
+{
+    playback(layout->indexOf(selectedView));
+}
+
+void TimelineGraphics::stopPlayback()
+{
+    isPlaying = false;
 }
