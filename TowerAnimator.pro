@@ -38,3 +38,5 @@ FORMS    += mainwindow.ui
 
 DISTFILES += \
     .gitignore
+
+QMAKE_CXXFLAGS += -fpermissive
