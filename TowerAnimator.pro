@@ -22,6 +22,7 @@ SOURCES += main.cpp\
     frame.cpp \
     timelineview.cpp \
     read.cpp
+    read.cpp
 
 HEADERS  += mainwindow.h \
     global.h \
@@ -35,8 +36,11 @@ HEADERS  += mainwindow.h \
     struct.h \
     timelineview.h \
     read.h
+    read.h
 
 FORMS    += mainwindow.ui
 
 DISTFILES += \
     .gitignore
+
+QMAKE_CXXFLAGS += -fpermissive

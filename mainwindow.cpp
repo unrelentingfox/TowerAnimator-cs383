@@ -6,12 +6,17 @@
 #include <QGraphicsScene>
 #include <QMessageBox>
 #include <QFileDialog>
+#include <QColorDialog>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    QColorDialog* colorDialog = new QColorDialog(QColorDialog::NoButtons);
+    colorDialog->setOption(QColorDialog::NoButtons, true);
+    ui->colorSelector->addWidget(colorDialog);
+    connect(colorDialog, SIGNAL(currentColorChanged(QColor*)), ui->AnimationWidget, SLOT(colorChange(QColor*)));
 
     TimelineGraphics* timeline = new TimelineGraphics;
     ui->timelineArea->setWidget(timeline->timelineWidget());
@@ -21,17 +26,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->drawButton, SIGNAL (released()), this, SLOT (drawButtonPress()));
     connect(ui->eraseButton, SIGNAL (released()), this, SLOT (eraseButtonPress()));
     connect(ui->moveButton, SIGNAL (released()), this, SLOT (moveButtonPress()));
+    connect(ui->AddFrame, SIGNAL(released()), timeline, SLOT (addTimelineFrame()));
     connect(timeline, SIGNAL( testSignal(Frame*)), ui->AnimationWidget, SLOT(loadFrame(Frame*)));
     connect(timeline, SIGNAL(connectNewFrame(TimelineView*)), ui->AnimationWidget, SLOT(acceptFrameConnection(TimelineView*)));
-
-    timeline->addTimelineFrame();
-    timeline->addTimelineFrame();
-
-    timeline->addTimelineFrame();
-    timeline->addTimelineFrame();
-    timeline->addTimelineFrame();
-    timeline->addTimelineFrame();
-    timeline->addTimelineFrame();
+    connect(ui->delteFrame, SIGNAL(released()), timeline, SLOT(deleteCurrentView()));
 
 }
 

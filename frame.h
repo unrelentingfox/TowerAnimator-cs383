@@ -13,8 +13,6 @@
 class Frame : public QGraphicsScene
 {
     Q_OBJECT
-signals:
-    void iWasSelected(Frame*);
 public:
     Frame(int frameNum=0, double frameDuration=0);
     virtual ~Frame() {};
@@ -30,6 +28,8 @@ public:
     QList<class Pixel *> getTowerContents();
     void write();
 
+public slots:
+    void colorChange(QColor *);
 private:
     QGraphicsRectItem * tower;
     void mouseMoveEvent(QGraphicsSceneMouseEvent * mouseEvent);

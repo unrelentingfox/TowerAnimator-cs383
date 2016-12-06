@@ -7,6 +7,7 @@
 #include <QMouseEvent>
 #include <QPointF>
 #include <QDebug>
+#include <QColor>
 
 #include "global.h"
 #include "pixel.h"
@@ -27,6 +28,7 @@ public:
     explicit AnimationView(QWidget *parent = 0);
 
 signals:
+    void setFrameColor(QColor*);
 
 public slots:
     void setTool(int);
@@ -35,8 +37,10 @@ public slots:
     void setBlue(int);
     void getTower();
     void saveFrame();
-    void loadFrame(Frame *);
-    void acceptFrameConnection(TimelineView *frameView);
+    void loadFrame(Frame*);
+    void displaySelected(TimelineView *);
+    void acceptFrameConnection(TimelineView *framView);    
+    void colorChange(QColor*);
 
 private slots:
     void drawBackground(QPainter *painter, const QRectF &rect);

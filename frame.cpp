@@ -19,6 +19,15 @@ void Frame::setTool(int t)
     tool = t;
 }
 
+void Frame::colorChange(QColor* color)
+{
+    int* r, g, b;
+    color->getRgb(r, g, b);
+    setRed(r);
+    setGreen(g);
+    setBlue(b);
+}
+
 void Frame::setRed(int r)
 {
     drawColor.setRed(r);
@@ -100,8 +109,6 @@ void Frame::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
 void Frame::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 {
     mouseClicked = true;
-
-    //emit iWasSelected(this);
 
     switch (tool){
     case Globals::ERASE_TOOL:
