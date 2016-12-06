@@ -24,6 +24,7 @@ void TimelineGraphics::loadTimeline()
 {
     timeline->setLayout(this->layout);
     timeline->setMaximumHeight(500);
+    selectedView = NULL;
 }
 
 void TimelineGraphics::addFramePixel(QGraphicsScene* scene, int x, int y)
@@ -64,7 +65,10 @@ void TimelineGraphics::addTimelineFrame()
 
 void TimelineGraphics::currentFrame(TimelineView* view)
 {
+    if(selectedView)
+        selectedView->setBackgroundBrush(Qt::white);
     this->selectedView = view;
+    selectedView->setBackgroundBrush(Qt::lightGray);
 }
 
 void TimelineGraphics::deleteView(TimelineView* view)
@@ -73,12 +77,17 @@ void TimelineGraphics::deleteView(TimelineView* view)
     layout->removeWidget(view);
     timelinelist->removeFrame(view->frame);
     delete view;
+    selectedView = NULL;
 }
 
 void TimelineGraphics::deleteCurrentView()
 {
     // get index of view to be deleted
+    if(!selectedView)
+        return 0;
     TimelineView* view = this->selectedView;
+    if(!view)
+        return 0;
     int index = layout->indexOf(view);
     std::cout << index;
 
@@ -86,6 +95,7 @@ void TimelineGraphics::deleteCurrentView()
     deleteView(this->selectedView);
 
     //select a new frame based on index of last frame
+
     QLayoutItem* item = layout->itemAt(index);
     if(item)
     {
