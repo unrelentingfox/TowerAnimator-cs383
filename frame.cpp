@@ -19,15 +19,17 @@ void Frame::setTool(int t)
     tool = t;
 }
 
-void Frame::colorChange(QColor* color)
+void Frame::colorChange(const QColor &color)
 {
-    int* r, g, b;
-    color->getRgb(r, g, b);
-    setRed(r);
-    setGreen(g);
-    setBlue(b);
+    int *r, *g, *b;
+    //color.getRgb(r, g, b)
+    qDebug() << "redColor: " << color.red();
+    drawColor.setRed(color.red());
+    drawColor.setGreen(color.green());
+    drawColor.setBlue(color.blue());
+    qDebug() << drawColor;
 }
-
+/*
 void Frame::setRed(int r)
 {
     drawColor.setRed(r);
@@ -42,7 +44,7 @@ void Frame::setBlue(int b)
 {
     drawColor.setBlue(b);
 }
-
+*/
 QList<Pixel *> Frame::getPixels()
 {
     //get a list of the pixels that are in the scene

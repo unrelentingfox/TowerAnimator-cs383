@@ -7,6 +7,7 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QColorDialog>
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -14,9 +15,13 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     QColorDialog* colorDialog = new QColorDialog(QColorDialog::NoButtons);
-    colorDialog->setOption(QColorDialog::NoButtons, true);
+    colorDialog->setOption(QColorDialog::NoButtons | QColorDialog::DontUseNativeDialog);
+    //ui->AnimationWidget->colorChange(colorDialog->currentColor());
+    //QColor colortype = colorDialog->currentColor();
+    //qDebug() << "color name:";
+    //qDebug() << colortype.name();
     ui->colorSelector->addWidget(colorDialog);
-    connect(colorDialog, SIGNAL(currentColorChanged(QColor*)), ui->AnimationWidget, SLOT(colorChange(QColor*)));
+    connect(colorDialog, SIGNAL(currentColorChanged(const QColor &)), ui->AnimationWidget, SLOT(colorChange(const QColor &)));
 
     TimelineGraphics* timeline = new TimelineGraphics;
     ui->timelineArea->setWidget(timeline->timelineWidget());
@@ -59,21 +64,21 @@ void MainWindow::moveButtonPress()
 
 void MainWindow::on_redLineEdit_textEdited(const QString &arg1)
 {
-    ui->AnimationWidget->setRed(arg1.toInt());
-    editedSinceLastSave = true;
+//    ui->AnimationWidget->setRed(arg1.toInt());
+//    editedSinceLastSave = true;
 }
 
 void MainWindow::on_greenLineEdit_textEdited(const QString &arg1)
 {
-    ui->AnimationWidget->setGreen(arg1.toInt());
-    editedSinceLastSave = true;
+//    ui->AnimationWidget->setGreen(arg1.toInt());
+//    editedSinceLastSave = true;
 
 }
 
 void MainWindow::on_blueLineEdit_textEdited(const QString &arg1)
 {
-    ui->AnimationWidget->setBlue(arg1.toInt());
-    editedSinceLastSave = true;
+//    ui->AnimationWidget->setBlue(arg1.toInt());
+//    editedSinceLastSave = true;
 }
 
 void MainWindow::on_actionNew_File_triggered()

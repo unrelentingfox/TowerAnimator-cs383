@@ -29,7 +29,7 @@ public:
     void write();
 
 public slots:
-    void colorChange(QColor *);
+    void colorChange(const QColor &);
 private:
     QGraphicsRectItem * tower;
     void mouseMoveEvent(QGraphicsSceneMouseEvent * mouseEvent);

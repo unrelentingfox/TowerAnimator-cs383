@@ -8,6 +8,7 @@
 #include <QPointF>
 #include <QDebug>
 #include <QColor>
+#include <QDebug>
 
 #include "global.h"
 #include "pixel.h"
@@ -28,19 +29,19 @@ public:
     explicit AnimationView(QWidget *parent = 0);
 
 signals:
-    void setFrameColor(QColor*);
+    void setFrameColor(const QColor &);
 
 public slots:
     void setTool(int);
-    void setRed(int);
-    void setGreen(int);
-    void setBlue(int);
+//    void setRed(int);
+//    void setGreen(int);
+//    void setBlue(int);
     void getTower();
     void saveFrame();
     void loadFrame(Frame*);
     void displaySelected(TimelineView *);
     void acceptFrameConnection(TimelineView *framView);    
-    void colorChange(QColor*);
+    void colorChange(const QColor &);
 
 private slots:
     void drawBackground(QPainter *painter, const QRectF &rect);
