@@ -203,8 +203,11 @@ int readfile::read(QString F_Name)
               color.setRed(pixel_n.getRval());
               color.setGreen(pixel_n.getGval());
               color.setBlue(pixel_n.getBval());
-              Pixel* p = new Pixel(pixel_n.getXval() * Globals::GRID_SIZE + Globals::TOWER_POSITION_X, pixel_n.getYval() * Globals::GRID_SIZE + Globals::TOWER_POSITION_Y, Globals::PIXEL_SIZE, color);
-              frame->addPixel(p);
+
+              if(!(color.red() == 0 && color.green() == 0 && color.blue() == 0 )){
+                Pixel* p = new Pixel(pixel_n.getXval() * Globals::GRID_SIZE + Globals::TOWER_POSITION_X, pixel_n.getYval() * Globals::GRID_SIZE + Globals::TOWER_POSITION_Y, Globals::PIXEL_SIZE, color);
+                frame->addPixel(p);
+              }
            }
            emit loadFrame(frame);
            //increment the frame number counter
@@ -333,8 +336,11 @@ int readfile::read(QString F_Name)
          color.setRed(pixel_n.getRval());
          color.setGreen(pixel_n.getGval());
          color.setBlue(pixel_n.getBval());
-         Pixel* p = new Pixel(pixel_n.getXval() * Globals::GRID_SIZE + Globals::TOWER_POSITION_X, pixel_n.getYval() * Globals::GRID_SIZE + Globals::TOWER_POSITION_Y, Globals::PIXEL_SIZE, color);
-         frame->addPixel(p);
+
+         if(!(color.red() == 0 && color.green() == 0 && color.blue() == 0 )){
+            Pixel* p = new Pixel(pixel_n.getXval() * Globals::GRID_SIZE + Globals::TOWER_POSITION_X, pixel_n.getYval() * Globals::GRID_SIZE + Globals::TOWER_POSITION_Y, Globals::PIXEL_SIZE, color);
+            frame->addPixel(p);
+         }
 
        }
        emit loadFrame(frame);
