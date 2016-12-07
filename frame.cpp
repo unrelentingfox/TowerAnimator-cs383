@@ -77,7 +77,7 @@ void Frame::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
     if(mouseClicked){
         switch (tool){
         case Globals::ERASE_TOOL:
-//            erasePixel(mouseEvent);
+            erasePixel(mouseEvent);
             break;
         case Globals::DRAW_TOOL:
             drawPixel(mouseEvent);
@@ -98,8 +98,7 @@ void Frame::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 
     switch (tool){
     case Globals::ERASE_TOOL:
-        getPixels();
-//        erasePixel(mouseEvent);
+        erasePixel(mouseEvent);
         break;
     case Globals::DRAW_TOOL:
         drawPixel(mouseEvent);
@@ -127,7 +126,7 @@ void Frame::drawPixel(QGraphicsSceneMouseEvent *mouseEvent)
     if(isInBounds(pt)){
         //check to see if the an object is selected.
         //Overwrite any pixel that is already there.
-        //erasePixel(mouseEvent);
+        erasePixel(mouseEvent);
 
         //check to make sure the click is within the bounds of the scene
 
@@ -136,6 +135,22 @@ void Frame::drawPixel(QGraphicsSceneMouseEvent *mouseEvent)
         this->addItem(pixel);
         //Add it to the object
         //    baseObject->addToGroup(pixel);
+    }
+}
+
+int Frame::erasePixel(QGraphicsSceneMouseEvent *mouseEvent)
+{
+    //Get x and y position of mouse click.
+    QPointF pt = Algorithms::roundClickToGrid(mouseEvent->scenePos());
+    QGraphicsItem * item = this->itemAt(pt, QTransform());
+    if(item != tower)
+    {
+        this->removeItem(item);
+        return 1;
+    }
+    else
+    {
+        return 0;
     }
 }
 
