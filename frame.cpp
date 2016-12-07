@@ -143,7 +143,7 @@ int Frame::erasePixel(QGraphicsSceneMouseEvent *mouseEvent)
     //Get x and y position of mouse click.
     QPointF pt = Algorithms::roundClickToGrid(mouseEvent->scenePos());
     QGraphicsItem * item = this->itemAt(pt, QTransform());
-    if(item != tower)
+    if(item != 0 && item != tower)
     {
         this->removeItem(item);
         return 1;
