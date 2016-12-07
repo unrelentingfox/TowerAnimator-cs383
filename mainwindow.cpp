@@ -83,25 +83,6 @@ void MainWindow::moveButtonPress()
     editedSinceLastSave = true;
 }
 
-void MainWindow::on_redLineEdit_textEdited(const QString &arg1)
-{
-//    ui->AnimationWidget->setRed(arg1.toInt());
-//    editedSinceLastSave = true;
-}
-
-void MainWindow::on_greenLineEdit_textEdited(const QString &arg1)
-{
-//    ui->AnimationWidget->setGreen(arg1.toInt());
-//    editedSinceLastSave = true;
-
-}
-
-void MainWindow::on_blueLineEdit_textEdited(const QString &arg1)
-{
-//    ui->AnimationWidget->setBlue(arg1.toInt());
-//    editedSinceLastSave = true;
-}
-
 void MainWindow::on_actionNew_File_triggered()
 {
     //if the file is edited
@@ -168,9 +149,4 @@ void MainWindow::on_actionExport_triggered()
     // get the file name and location import file
     fileName = QFileDialog::getOpenFileName(this,
     tr("Open File"), "/home/", tr("Tan Files (*.tan *.tan2)"));
-}
-
-void MainWindow::on_keyFrameButton_clicked()
-{
-    // call storage timeline add frame
 }
