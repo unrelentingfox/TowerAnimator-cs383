@@ -45,13 +45,39 @@ QList<class Pixel *> Frame::getTowerContents()
     return trimPixelList(list);
 }
 
+
+
+void Frame::write()
+{
+    QList<Pixel> pList;// = getTowerContents();
+    QString filename = "out.txt";
+    QFile file(filename);
+//    int height = pList.size() / 20;     //40 pixels/frame, 5 vars/pixel -> 200 vars/frame -> 10 lines/frame
+    int wr[Globals::TOWER_SIZE_X][Globals::TOWER_SIZE_Y]; //array length needs to be a constant value so just use the size of the tower in Globals
+    if(file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        // We're going to streaming text to the file
+        QTextStream stream( &file );
+        for(int i = 0; i < Globals::TOWER_SIZE_Y; i++){
+            for(int j = 0; j < Globals::TOWER_SIZE_X; j++){
+                stream << wr[i][j] << " ";
+            }
+            stream << endl;
+            if((i+1) % 10 == 0){
+                stream << endl;
+            }
+        }
+        file.close();
+    }
+}
+
 void Frame::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
 {
 
     if(mouseClicked){
         switch (tool){
         case Globals::ERASE_TOOL:
-//            erasePixel(mouseEvent);
+            erasePixel(mouseEvent);
             break;
         case Globals::DRAW_TOOL:
             drawPixel(mouseEvent);
@@ -72,8 +98,7 @@ void Frame::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 
     switch (tool){
     case Globals::ERASE_TOOL:
-        getPixels();
-//        erasePixel(mouseEvent);
+        erasePixel(mouseEvent);
         break;
     case Globals::DRAW_TOOL:
         drawPixel(mouseEvent);
@@ -101,7 +126,7 @@ void Frame::drawPixel(QGraphicsSceneMouseEvent *mouseEvent)
     if(isInBounds(pt)){
         //check to see if the an object is selected.
         //Overwrite any pixel that is already there.
-        //erasePixel(mouseEvent);
+        erasePixel(mouseEvent);
 
         //check to make sure the click is within the bounds of the scene
 
@@ -110,6 +135,22 @@ void Frame::drawPixel(QGraphicsSceneMouseEvent *mouseEvent)
         this->addItem(pixel);
         //Add it to the object
         //    baseObject->addToGroup(pixel);
+    }
+}
+
+int Frame::erasePixel(QGraphicsSceneMouseEvent *mouseEvent)
+{
+    //Get x and y position of mouse click.
+    QPointF pt = Algorithms::roundClickToGrid(mouseEvent->scenePos());
+    QGraphicsItem * item = this->itemAt(pt, QTransform());
+    if(item != 0 && item != tower)
+    {
+        this->removeItem(item);
+        return 1;
+    }
+    else
+    {
+        return 0;
     }
 }
 
@@ -143,11 +184,11 @@ QList<Pixel *> Frame::trimPixelList(QList<QGraphicsItem *> list)
     for (i = list.begin(); i != list.end(); ++i){
         // cast each graphics item to a pixel so that the pixel functions can be used to retrieve data
         tempPixel = qgraphicsitem_cast<Pixel*>(i.operator *());
-        if(tempPixel != 0){
+        if(tempPixel != tower){
             pixelList.append(tempPixel);
         }
-        qDebug() << tempPixel->towerPos() << tempPixel->red() << tempPixel->green() << tempPixel->blue();
+//        qDebug() << tempPixel->towerPos() << tempPixel->red() << tempPixel->green() << tempPixel->blue();
     }
-    qDebug() << pixelList;
+//    qDebug() << pixelList;
     return pixelList;
 }

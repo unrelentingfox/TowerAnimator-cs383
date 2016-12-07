@@ -23,6 +23,7 @@ public:
     int frameNumber;
     QList<class Pixel *> getPixels();
     QList<class Pixel *> getTowerContents();
+    void write();
 
     void addPixel(Pixel *pixel);
 public slots:
@@ -34,6 +35,7 @@ private:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent * mouseEvent);
 
     void drawPixel(QGraphicsSceneMouseEvent *mouseEvent);
+    int erasePixel(QGraphicsSceneMouseEvent *mouseEvent);
     bool isInBounds(QPointF pt);
 
     QList<class Pixel *> trimPixelList(QList<QGraphicsItem *> list);

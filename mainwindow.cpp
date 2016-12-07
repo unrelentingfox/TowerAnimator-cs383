@@ -2,13 +2,11 @@
 #include "ui_mainwindow.h"
 #include "timelineGraphics.h"
 #include "read.h"
-#include "write.h"
 #include <QGraphicsGridLayout>
 #include <QGraphicsScene>
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QColorDialog>
-#include <QColor>
 #include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -27,6 +25,9 @@ MainWindow::MainWindow(QWidget *parent) :
     // make timeline instance
     timeline = new TimelineGraphics;
     ui->timelineArea->setWidget(timeline->timelineWidget());
+
+    //set ui colors and size restraints
+    ui->timelineArea->setMinimumHeight(Globals::TOWER_HEIGHT + Globals::PIXEL_SIZE*2);
 
     //connect ui main buttons
     connect(ui->drawButton, SIGNAL (released()), this, SLOT (drawButtonPress()));
@@ -83,25 +84,6 @@ void MainWindow::moveButtonPress()
 {
     ui->AnimationWidget->setTool(Globals::MOVE_TOOL);
     editedSinceLastSave = true;
-}
-
-void MainWindow::on_redLineEdit_textEdited(const QString &arg1)
-{
-//    ui->AnimationWidget->setRed(arg1.toInt());
-//    editedSinceLastSave = true;
-}
-
-void MainWindow::on_greenLineEdit_textEdited(const QString &arg1)
-{
-//    ui->AnimationWidget->setGreen(arg1.toInt());
-//    editedSinceLastSave = true;
-
-}
-
-void MainWindow::on_blueLineEdit_textEdited(const QString &arg1)
-{
-//    ui->AnimationWidget->setBlue(arg1.toInt());
-//    editedSinceLastSave = true;
 }
 
 void MainWindow::on_actionNew_File_triggered()
@@ -165,20 +147,9 @@ void MainWindow::on_actionImport_triggered()
     rf->read(fileName);
 }
 
-/**
- * @brief MainWindow::on_actionExport_triggered
- *        Asks user for .tan file name, and calls write, which saves the data in a .tan format
- * @author Alex Wezensky
- */
 void MainWindow::on_actionExport_triggered()
 {
-    //save and name the new exported tan file
-    fileName = QFileDialog::getSaveFileName(this, tr("Export File"), "/home/", tr("Tan Files (*.tan *.tan2)"));
-    writefile w;
-    w.write(fileName);
-}
-
-void MainWindow::on_keyFrameButton_clicked()
-{
-    // call storage timeline add frame
+    // get the file name and location import file
+    fileName = QFileDialog::getOpenFileName(this,
+    tr("Open File"), "/home/", tr("Tan Files (*.tan *.tan2)"));
 }
