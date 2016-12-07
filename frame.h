@@ -17,9 +17,6 @@ public:
     Frame(int frameNum=0, double frameDuration=0);
     virtual ~Frame() {};
     void setTool(int t);
-    void setRed(int r);
-    void setGreen(int g);
-    void setBlue(int b);
 
     //storage info
     double duration;
@@ -27,8 +24,9 @@ public:
     QList<class Pixel *> getPixels();
     QList<class Pixel *> getTowerContents();
 
+    void addPixel(Pixel *pixel);
 public slots:
-    void colorChange(QColor *);
+    void colorChange(QColor);
 private:
     QGraphicsRectItem * tower;
     void mouseMoveEvent(QGraphicsSceneMouseEvent * mouseEvent);

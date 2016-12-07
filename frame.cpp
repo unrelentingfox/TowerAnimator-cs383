@@ -3,10 +3,11 @@
 
 Frame::Frame(int frameNum, double frameDuration)
 {
+    duration = 1;
     duration = frameDuration;
     frameNumber = frameNum;
     tool = Globals::DRAW_TOOL;
-    duration = 1;
+
     mouseClicked = false;
 
     this->setSceneRect(0,0,Globals::ANIMATION_WINDOW_SIZE_X,Globals::ANIMATION_WINDOW_SIZE_Y);
@@ -19,28 +20,13 @@ void Frame::setTool(int t)
     tool = t;
 }
 
-void Frame::colorChange(QColor* color)
+void Frame::colorChange(QColor color)
 {
-    int* r, g, b;
-    color->getRgb(r, g, b);
-    setRed(r);
-    setGreen(g);
-    setBlue(b);
-}
-
-void Frame::setRed(int r)
-{
-    drawColor.setRed(r);
-}
-
-void Frame::setGreen(int g)
-{
-    drawColor.setGreen(g);
-}
-
-void Frame::setBlue(int b)
-{
-    drawColor.setBlue(b);
+    //qDebug() << "redColor: " << color.red();
+    drawColor.setRed(color.red());
+    drawColor.setGreen(color.green());
+    drawColor.setBlue(color.blue());
+    //qDebug() << drawColor;
 }
 
 QList<Pixel *> Frame::getPixels()
@@ -125,6 +111,11 @@ void Frame::drawPixel(QGraphicsSceneMouseEvent *mouseEvent)
         //Add it to the object
         //    baseObject->addToGroup(pixel);
     }
+}
+
+void Frame::addPixel(Pixel *pixel)
+{
+    this->addItem(pixel);
 }
 
 bool Frame::isInBounds(QPointF pt)

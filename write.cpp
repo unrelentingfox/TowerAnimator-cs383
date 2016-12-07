@@ -30,29 +30,37 @@ void writefile::write(QString nameoffile)
 {
     Frame a;
     QList<Pixel *> pList = a.getTowerContents();
+    qDebug() << pList;
     //QString filename = "out.txt";
     QString filename = nameoffile;
     QFile file(filename);
     //int height = pList.size() / 20;     //40 pixels/frame, 5 vars/pixel -> 200 vars/frame -> 10 lines/frame
-    int wr[Globals::TOWER_SIZE_X][Globals::TOWER_SIZE_Y*4]; //array length needs to be a constant value so just use the size of the tower in Globals
+    int wr[Globals::TOWER_SIZE_X*3][Globals::TOWER_SIZE_Y]; //array length needs to be a constant value so just use the size of the tower in Globals
+    //x=4, y=10
 
-    qDebug() << pList.indexOf(0);//->red();
-    QString str;
-    QDebug dStream(&str);
-    dStream << pList;
-    qDebug() << str;
+    QList<Pixel *>::iterator i;
+    Pixel * tPixel;
+    for (i = pList.begin(); i != pList.end(); i++){
+        tPixel = qgraphicsitem_cast<Pixel*>(i.operator *());
+        qDebug() << tPixel->towerPos() << tPixel->red() << tPixel->green() << tPixel->blue() << pList.size();
+    }
+
+    //qDebug() << pList.indexOf(0);//->red();
 
     //populate the array with pixel data
     int pLcount = 0;
-    for(int i = 0; i < Globals::TOWER_SIZE_X; i++){
-        for(int j = 0; j < Globals::TOWER_SIZE_Y*4; j=j+3){
+    for(int j = 0; j < Globals::TOWER_SIZE_Y; j++){
+        for(int i = 0; i < Globals::TOWER_SIZE_X*3; i=i+3){
+            //qDebug() << "i:" << i << " j:" << j;
             wr[i][j] = pList[0]->red();
-            qDebug() << i << " " << j << " " << pList[0]->red();
-            wr[i][j+1] = pList.at(pLcount)->green();
-            qDebug() << i << " " << j+1 << " " << pList.at(pLcount)->red();
-            wr[i][j+2] = pList.at(pLcount)->blue();
-            qDebug() << i << " " << j+2 << " " << pList.at(pLcount)->red();
-            pLcount++;
+            //qDebug() << "i:" << i << " j:" << j << " red:" << pList[0]->red();
+            wr[i+1][j] = pList[0]->red();
+            //qDebug() << i << " " << j << " " << pList[0]->red();
+            wr[i+2][j] = pList[0]->red();
+            //qDebug() << i << " " << j << " " << pList[0]->red();
+            //pLcount++;
+            //pList.pop_front();
+            //qDebug() << "lul";
         }
     }
 

@@ -27,7 +27,7 @@
        <widget class="QFrame" name="toolBar">
         <property name="maximumSize">
          <size>
-          <width>64</width>
+          <width>100</width>
           <height>16777215</height>
          </size>
         </property>
@@ -102,115 +102,10 @@
           </widget>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="redEdit">
-           <item>
-            <widget class="QLabel" name="redLabel">
-             <property name="maximumSize">
-              <size>
-               <width>10</width>
-               <height>20</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>R:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="redLineEdit">
-             <property name="maximumSize">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-             <property name="maxLength">
-              <number>3</number>
-             </property>
-             <property name="dragEnabled">
-              <bool>false</bool>
-             </property>
-             <property name="placeholderText">
-              <string>0-255</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
+          <layout class="QHBoxLayout" name="redEdit"/>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="greenEdit">
-           <item>
-            <widget class="QLabel" name="greenLabel">
-             <property name="maximumSize">
-              <size>
-               <width>10</width>
-               <height>20</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>G:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="greenLineEdit">
-             <property name="maximumSize">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-             <property name="maxLength">
-              <number>3</number>
-             </property>
-             <property name="dragEnabled">
-              <bool>false</bool>
-             </property>
-             <property name="placeholderText">
-              <string>0-255</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="blueEdit">
-           <item>
-            <widget class="QLabel" name="blueLabel">
-             <property name="maximumSize">
-              <size>
-               <width>10</width>
-               <height>20</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>B:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="blueLineEdit">
-             <property name="maximumSize">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-             <property name="inputMask">
-              <string/>
-             </property>
-             <property name="maxLength">
-              <number>3</number>
-             </property>
-             <property name="dragEnabled">
-              <bool>false</bool>
-             </property>
-             <property name="placeholderText">
-              <string>0-255</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
+          <layout class="QHBoxLayout" name="greenEdit"/>
          </item>
          <item>
           <spacer name="verticalSpacer_2">
@@ -226,18 +121,43 @@
           </spacer>
          </item>
          <item>
-          <widget class="QToolButton" name="keyFrameButton">
-           <property name="minimumSize">
+          <widget class="QPushButton" name="resume">
+           <property name="text">
+            <string>Resume Animation</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="restart">
+           <property name="text">
+            <string>Restart Animation</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="stop">
+           <property name="text">
+            <string>Stop Animation</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
             <size>
-             <width>60</width>
-             <height>60</height>
+             <width>20</width>
+             <height>40</height>
             </size>
            </property>
-           <property name="cursor">
-            <cursorShape>PointingHandCursor</cursorShape>
-           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="gotoCurrentFrame">
            <property name="text">
-            <string>KeyFrame</string>
+            <string>Current Frame</string>
            </property>
           </widget>
          </item>
@@ -309,7 +229,7 @@
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>225</height>
+          <height>300</height>
          </size>
         </property>
         <property name="verticalScrollBarPolicy">
@@ -324,7 +244,7 @@
            <x>0</x>
            <y>0</y>
            <width>1198</width>
-           <height>223</height>
+           <height>298</height>
           </rect>
          </property>
         </widget>
@@ -340,7 +260,7 @@
      <x>0</x>
      <y>0</y>
      <width>1220</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -352,7 +272,6 @@
     <addaction name="actionSave"/>
     <addaction name="actionImport"/>
     <addaction name="actionExport"/>
-    <addaction name="actionColor"/>
    </widget>
    <addaction name="menuFile"/>
   </widget>
@@ -388,11 +307,6 @@
   <action name="actionExport">
    <property name="text">
     <string>Export</string>
-   </property>
-  </action>
-  <action name="actionColor">
-   <property name="text">
-    <string>Color</string>
    </property>
   </action>
  </widget>

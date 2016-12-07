@@ -9,7 +9,7 @@
 //int LIST_InsertHeadNode(Pixel_List_N **, int, int, int, int, int);
 readfile::readfile()
 {
-
+    loading = false;
 }
 
 int readfile::read(QString F_Name)
@@ -225,8 +225,11 @@ int readfile::read(QString F_Name)
      }
 
      int frame_ct = 0;  //total number of frames
+     int totalMS = 0;
+     int duration = 0;
      do
      {
+       loading = true;
        line=stream.readLine(); //frame start time
        /*Convert the old style time to the new format in milliseconds
        using ":" and "." as the respective delimiters */
@@ -246,8 +249,11 @@ int readfile::read(QString F_Name)
         ms = atoi(min_pt);
         printf(", ms: %d\n", ms);
       }
+      duration = totalMS;
+      totalMS = min * 60000 + sec * 1000 + ms;
+      duration = totalMS - duration;
+      printf("duration: = %d\n", duration);
 
-      int totalMS = min * 60000 + sec * 1000 + ms;
       int* MS = new int[grid.Frame_ct];
       MS[frame_ct] = totalMS;
       printf("total milliseconds = %d\n", MS[frame_ct]);
@@ -296,19 +302,30 @@ int readfile::read(QString F_Name)
       out << "Pixels contained in Frame# " << frame_ct+1 << endl;
       /*Printing out the linked list of 40 pixels that represents
       a frame...Used to confirm the linked list was created properly */
+      Frame* frame = new Frame(0, duration);
       for (Pixel_N pixel_n : p_frame)
       {
-              out << "R:" << pixel_n.getRval() << ", "
-                  << "G:" << pixel_n.getGval() << ", "
-                  << "B:" << pixel_n.getBval() << ", "
-                  << "X:" << pixel_n.getXval() << ", "
-                  << "Y:" << pixel_n.getYval() << ", "
-                  << endl;
+//         qDebug() << "R:" << pixel_n.getRval() << ", "
+//                  << "G:" << pixel_n.getGval() << ", "
+//                  << "B:" << pixel_n.getBval() << ", "
+//                  << "X:" << pixel_n.getXval() << ", "
+//                  << "Y:" << pixel_n.getYval() << ", "
+//                  << endl;
+         QColor color;
+         color.setRed(pixel_n.getRval());
+         color.setGreen(pixel_n.getGval());
+         color.setBlue(pixel_n.getBval());
+         Pixel* p = new Pixel(pixel_n.getXval() * Globals::GRID_SIZE + Globals::TOWER_POSITION_X, pixel_n.getYval() * Globals::GRID_SIZE + Globals::TOWER_POSITION_Y, Globals::PIXEL_SIZE, color);
+         frame->addPixel(p);
+
        }
-
-        frame_ct++; //increment the frame counter
-     }while(!line.isNull());
-
+       emit loadFrame(frame);
+       frame_ct++; //increment the frame counter
+       if(frame_ct % 50 == 0)
+           QTest::qWait(1);
+     }//while(frame_ct < 100);
+     while(!line.isNull());
+     loading = false;
    }
 
  }
