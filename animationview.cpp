@@ -83,6 +83,8 @@ void AnimationView::drawBackground(QPainter *painter, const QRectF &rect)
             points.append(QPointF(x,y));
         }
     }
+
     painter->drawPoints(points.data(), points.size());
+    QGraphicsView::drawBackground(painter, rect);
 }
 
