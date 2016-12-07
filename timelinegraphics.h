@@ -32,14 +32,14 @@ private:
     void deleteView(TimelineView *view);
     storageTimeline* timelinelist;
 
-    void playback(int start);
+    int playback(int start);
 
 public slots:
     void addTimelineFrame();
     void addTimelineFrame(Frame *scene);
     void currentFrame(TimelineView *view);
 
-    void deleteCurrentView();
+    int deleteCurrentView();
 
     void resumePlayback();
     void restartPlayback();

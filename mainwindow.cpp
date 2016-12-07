@@ -16,7 +16,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     rf = new readfile;
     QColorDialog* colorDialog = new QColorDialog(QColorDialog::NoButtons);
-    colorDialog->setOption(QColorDialog::NoButtons | QColorDialog::DontUseNativeDialog);
+    colorDialog->setOption(QColorDialog::NoButtons);
+    colorDialog->setOption(QColorDialog::DontUseNativeDialog);
 
     ui->colorSelector->addWidget(colorDialog);
     connect(colorDialog, SIGNAL(currentColorChanged(const QColor &)), ui->AnimationWidget, SLOT(colorChange(const QColor &)));

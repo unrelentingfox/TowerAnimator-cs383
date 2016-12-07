@@ -99,7 +99,7 @@ void TimelineGraphics::deleteView(TimelineView* view)
     selectedView = NULL;
 }
 
-void TimelineGraphics::deleteCurrentView()
+int TimelineGraphics::deleteCurrentView()
 {
     // get index of view to be deleted
     if(!selectedView)
@@ -118,13 +118,13 @@ void TimelineGraphics::deleteCurrentView()
     QLayoutItem* item = layout->itemAt(index);
     if(item)
     {
-        TimelineView* view2 = item->widget();
+        TimelineView* view2 = dynamic_cast<TimelineView *>(item->widget());
         emit view2->iWasSelected(view2);
     }
     else {
         item = layout->itemAt(index-1);
         if(item) {
-            TimelineView* view2 = item->widget();
+            TimelineView* view2 = dynamic_cast<TimelineView *>(item->widget());
             emit view2->iWasSelected(view2);
         } else {
             addTimelineFrame();
@@ -132,7 +132,7 @@ void TimelineGraphics::deleteCurrentView()
     }
 }
 
-void TimelineGraphics::playback(int start)
+int TimelineGraphics::playback(int start)
 {
 //    if(isPlaying) {
 //        isPlaying = false;
@@ -142,7 +142,7 @@ void TimelineGraphics::playback(int start)
     QLayoutItem* item;
     TimelineView* view;
     for(int i = start; item = layout->itemAt(i); i++) {
-        view = item->widget();
+        view = dynamic_cast<TimelineView *>(item->widget());
         emit view->iWasSelected(view);
         QTest::qWait(view->frame->duration);
         if(!isPlaying)
