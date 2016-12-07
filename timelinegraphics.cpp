@@ -84,7 +84,7 @@ void TimelineGraphics::currentFrame(TimelineView* view)
         selectedView->setBackgroundBrush(Qt::white);
     }
     this->selectedView = view;
-    selectedView->setBackgroundBrush(Qt::black);
+    selectedView->setBackgroundBrush(Qt::gray);
     emit scrollToSelected(selectedView);
 }
 
