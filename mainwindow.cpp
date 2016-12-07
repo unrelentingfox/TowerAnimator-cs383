@@ -26,6 +26,9 @@ MainWindow::MainWindow(QWidget *parent) :
     timeline = new TimelineGraphics;
     ui->timelineArea->setWidget(timeline->timelineWidget());
 
+    //set ui colors and size restraints
+    ui->timelineArea->setMinimumHeight(Globals::TOWER_HEIGHT + Globals::PIXEL_SIZE*2);
+
     //connect ui main buttons
     connect(ui->drawButton, SIGNAL (released()), this, SLOT (drawButtonPress()));
     connect(ui->eraseButton, SIGNAL (released()), this, SLOT (eraseButtonPress()));
