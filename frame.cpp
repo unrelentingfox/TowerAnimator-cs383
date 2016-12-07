@@ -172,8 +172,8 @@ QList<Pixel *> Frame::trimPixelList(QList<QGraphicsItem *> list)
         if(tempPixel != tower){
             pixelList.append(tempPixel);
         }
-        qDebug() << tempPixel->towerPos() << tempPixel->red() << tempPixel->green() << tempPixel->blue();
+//        qDebug() << tempPixel->towerPos() << tempPixel->red() << tempPixel->green() << tempPixel->blue();
     }
-    qDebug() << pixelList;
+//    qDebug() << pixelList;
     return pixelList;
 }
