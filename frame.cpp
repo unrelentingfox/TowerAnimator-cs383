@@ -169,11 +169,11 @@ QList<Pixel *> Frame::trimPixelList(QList<QGraphicsItem *> list)
     for (i = list.begin(); i != list.end(); ++i){
         // cast each graphics item to a pixel so that the pixel functions can be used to retrieve data
         tempPixel = qgraphicsitem_cast<Pixel*>(i.operator *());
-        if(tempPixel != 0){
+        if(tempPixel != tower){
             pixelList.append(tempPixel);
         }
-        qDebug() << tempPixel->towerPos() << tempPixel->red() << tempPixel->green() << tempPixel->blue();
+//        qDebug() << tempPixel->towerPos() << tempPixel->red() << tempPixel->green() << tempPixel->blue();
     }
-    qDebug() << pixelList;
+//    qDebug() << pixelList;
     return pixelList;
 }
