@@ -26,6 +26,9 @@ MainWindow::MainWindow(QWidget *parent) :
     timeline = new TimelineGraphics;
     ui->timelineArea->setWidget(timeline->timelineWidget());
 
+    //set ui colors and size restraints
+    ui->timelineArea->setMinimumHeight(Globals::TOWER_HEIGHT + Globals::PIXEL_SIZE*2);
+
     //connect ui main buttons
     connect(ui->drawButton, SIGNAL (released()), this, SLOT (drawButtonPress()));
     connect(ui->eraseButton, SIGNAL (released()), this, SLOT (eraseButtonPress()));
@@ -81,25 +84,6 @@ void MainWindow::moveButtonPress()
 {
     ui->AnimationWidget->setTool(Globals::MOVE_TOOL);
     editedSinceLastSave = true;
-}
-
-void MainWindow::on_redLineEdit_textEdited(const QString &arg1)
-{
-//    ui->AnimationWidget->setRed(arg1.toInt());
-//    editedSinceLastSave = true;
-}
-
-void MainWindow::on_greenLineEdit_textEdited(const QString &arg1)
-{
-//    ui->AnimationWidget->setGreen(arg1.toInt());
-//    editedSinceLastSave = true;
-
-}
-
-void MainWindow::on_blueLineEdit_textEdited(const QString &arg1)
-{
-//    ui->AnimationWidget->setBlue(arg1.toInt());
-//    editedSinceLastSave = true;
 }
 
 void MainWindow::on_actionNew_File_triggered()
@@ -168,9 +152,4 @@ void MainWindow::on_actionExport_triggered()
     // get the file name and location import file
     fileName = QFileDialog::getOpenFileName(this,
     tr("Open File"), "/home/", tr("Tan Files (*.tan *.tan2)"));
-}
-
-void MainWindow::on_keyFrameButton_clicked()
-{
-    // call storage timeline add frame
 }

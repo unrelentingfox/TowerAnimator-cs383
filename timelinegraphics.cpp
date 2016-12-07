@@ -23,7 +23,7 @@ QWidget* TimelineGraphics::timelineWidget()
 void TimelineGraphics::loadTimeline()
 {
     timeline->setLayout(this->layout);
-    timeline->setMaximumHeight(500);
+    timeline->setMaximumHeight(Globals::TOWER_HEIGHT + Globals::PIXEL_SIZE*2);
     selectedView = NULL;
     isPlaying = false;
 }
@@ -51,7 +51,7 @@ void TimelineGraphics::addTimelineFrame(Frame* scene)
     view->setVerticalScrollBarPolicy ( Qt::ScrollBarAlwaysOff );
     view->setScene(scene);
     //view->setMaximumWidth(80);
-    view->setFixedSize(80, 200);
+    view->setFixedSize(Globals::TOWER_WIDTH, Globals::TOWER_HEIGHT);
    // view->setMaximumHeight(200);
     //view->scale(0.5, 0.5);
 
@@ -84,7 +84,7 @@ void TimelineGraphics::currentFrame(TimelineView* view)
         selectedView->setBackgroundBrush(Qt::white);
     }
     this->selectedView = view;
-    selectedView->setBackgroundBrush(Qt::black);
+    selectedView->setBackgroundBrush(Qt::gray);
     emit scrollToSelected(selectedView);
 }
 

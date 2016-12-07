@@ -29,12 +29,6 @@ private slots:
     void eraseButtonPress();
     void moveButtonPress();
 
-    void on_redLineEdit_textEdited(const QString &arg1);
-
-    void on_greenLineEdit_textEdited(const QString &arg1);
-
-    void on_blueLineEdit_textEdited(const QString &arg1);
-
     void on_actionNew_File_triggered();
 
     void on_actionSave_triggered();
@@ -44,8 +38,6 @@ private slots:
     void on_actionImport_triggered();
 
     void on_actionExport_triggered();
-
-    void on_keyFrameButton_clicked();
 
 private:
     Ui::MainWindow *ui;
