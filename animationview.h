@@ -27,6 +27,7 @@ class AnimationView : public QGraphicsView
     Q_OBJECT
 public:
     explicit AnimationView(QWidget *parent = 0);
+    Frame * getCurrentFrame();
 
 signals:
     void setFrameColor(QColor);
