@@ -9,6 +9,11 @@ AnimationView::AnimationView(QWidget *parent) :
     currentFrame = 0;
 }
 
+Frame *AnimationView::getCurrentFrame()
+{
+    return currentFrame;
+}
+
 void AnimationView::setTool(int x)
 {
     if(currentFrame != 0)

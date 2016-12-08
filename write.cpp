@@ -1,4 +1,6 @@
 #include "write.h"
+#include "timelineview.h"
+#include "storagetimeline.h"
 //#include "struct.h"
 #include "frame.h"
 #include <QString>
@@ -26,10 +28,11 @@ writefile::writefile()
     qDebug() << pixelList;
     return pixelList;
 }*/
-void writefile::write(QString nameoffile)
+
+//void writefile::write(QString nameoffile)
+void writefile::write(QString nameoffile, Frame * frame)
 {
-    Frame a;
-    QList<Pixel *> pList = a.getTowerContents();
+    QList<Pixel *> pList = frame->getTowerContents();
     qDebug() << pList;
     //QString filename = "out.txt";
     QString filename = nameoffile;

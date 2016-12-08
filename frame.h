@@ -23,7 +23,6 @@ public:
     int frameNumber;
     QList<class Pixel *> getPixels();
     QList<class Pixel *> getTowerContents();
-    void write();
 
     void addPixel(Pixel *pixel);
 public slots:

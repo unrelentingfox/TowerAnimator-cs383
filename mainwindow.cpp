@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "timelineGraphics.h"
 #include "read.h"
+#include "write.h"
 #include <QGraphicsGridLayout>
 #include <QGraphicsScene>
 #include <QMessageBox>
@@ -147,9 +148,18 @@ void MainWindow::on_actionImport_triggered()
     rf->read(fileName);
 }
 
+/**
+ * @brief MainWindow::on_actionExport_triggered
+ *        Asks user for .tan file name, and calls write, which saves the data in a .tan format
+ * @author Alex Wezensky
+ */
 void MainWindow::on_actionExport_triggered()
 {
-    // get the file name and location import file
-    fileName = QFileDialog::getOpenFileName(this,
-    tr("Open File"), "/home/", tr("Tan Files (*.tan *.tan2)"));
+    //save and name the new exported tan file
+    fileName = QFileDialog::getSaveFileName(this, tr("Export File"), "/home/", tr("Tan Files (*.tan *.tan2)"));
+    writefile w;
+    if(ui->AnimationWidget->getCurrentFrame() != 0){
+        w.write(fileName, ui->AnimationWidget->getCurrentFrame());
+    }
+
 }
