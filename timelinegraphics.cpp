@@ -52,7 +52,7 @@ void TimelineGraphics::addTimelineFrame(Frame* scene)
     view->setScene(scene);
     //view->setMaximumWidth(80);
     view->setFixedSize(Globals::TOWER_WIDTH, Globals::TOWER_HEIGHT);
-   // view->setMaximumHeight(200);
+    // view->setMaximumHeight(200);
     //view->scale(0.5, 0.5);
 
     //make connections

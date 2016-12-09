@@ -24,6 +24,7 @@ SOURCES += main.cpp\
     timelineview.cpp \
     read.cpp \
     write.cpp
+    read.cpp
 
 HEADERS  += mainwindow.h \
     global.h \
@@ -38,6 +39,7 @@ HEADERS  += mainwindow.h \
     timelineview.h \
     read.h \
     write.h
+    read.h
 
 FORMS    += mainwindow.ui
 
