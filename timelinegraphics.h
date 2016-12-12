@@ -19,7 +19,6 @@ signals:
     void scrollToSelected(TimelineView*);
 public:
     TimelineGraphics();
-    void loadTimeline();
     void addFramePixel(QGraphicsScene* scene, int x, int y);
     QWidget* timelineWidget();
     QHBoxLayout* layout;

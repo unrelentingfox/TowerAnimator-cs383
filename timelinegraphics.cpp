@@ -12,20 +12,15 @@ TimelineGraphics::TimelineGraphics()
     layout = new QHBoxLayout;
     timelinelist = new storageTimeline;
     layout->setAlignment(Qt::AlignLeft);
-    loadTimeline();
+    timeline->setLayout(this->layout);
+    timeline->setMaximumHeight(Globals::TOWER_HEIGHT + Globals::PIXEL_SIZE*2);
+    selectedView = NULL;
+    isPlaying = false;
 }
 
 QWidget* TimelineGraphics::timelineWidget()
 {
     return timeline;
-}
-
-void TimelineGraphics::loadTimeline()
-{
-    timeline->setLayout(this->layout);
-    timeline->setMaximumHeight(Globals::TOWER_HEIGHT + Globals::PIXEL_SIZE*2);
-    selectedView = NULL;
-    isPlaying = false;
 }
 
 void TimelineGraphics::addFramePixel(QGraphicsScene* scene, int x, int y)
@@ -130,6 +125,7 @@ int TimelineGraphics::deleteCurrentView()
             addTimelineFrame();
         }
     }
+    return 1;
 }
 
 int TimelineGraphics::playback(int start)
@@ -141,13 +137,14 @@ int TimelineGraphics::playback(int start)
     isPlaying = true;
     QLayoutItem* item;
     TimelineView* view;
-    for(int i = start; item = layout->itemAt(i); i++) {
+    for(int i = start; (item = layout->itemAt(i)); i++) {
         view = dynamic_cast<TimelineView *>(item->widget());
         emit view->iWasSelected(view);
         QTest::qWait(view->frame->duration);
         if(!isPlaying)
             return 0;
     }
+    return 0;
 }
 
 void TimelineGraphics::restartPlayback()
