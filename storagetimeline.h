@@ -1,5 +1,15 @@
 #include "frame.h"
 
+/**
+ * @brief storageTimeline is a class that holds an instance of a timeline.
+ * It contains methods to add and remove frames from the timeline.
+ * It also contains a method to move a frame or frames which is not
+ * being used yet due to time limitations.
+ * It contains an attribute that tracks the number of frames that have been
+ * created since the timeline was initialized.
+ * It also contains a Qlist of frame pointers representing the frames in the
+ * timeline.
+ */
 class storageTimeline
 {
 private:
