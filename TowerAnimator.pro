@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     algorithms.cpp \
     frame.cpp \
     timelineview.cpp \
-    read.cpp
+    read.cpp \
+    write.cpp
     read.cpp
 
 HEADERS  += mainwindow.h \
@@ -36,7 +37,8 @@ HEADERS  += mainwindow.h \
     frame.h \
     struct.h \
     timelineview.h \
-    read.h
+    read.h \
+    write.h
     read.h
 
 FORMS    += mainwindow.ui
