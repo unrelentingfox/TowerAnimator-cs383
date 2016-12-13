@@ -40,7 +40,7 @@ QList<Pixel *> Frame::getPixels()
 QList<class Pixel *> Frame::getTowerContents()
 {
     //get a list of the pixels that are in the scene
-    QList<QGraphicsItem *> list = items(Globals::TOWER_POSITION_X, Globals::TOWER_POSITION_Y, Globals::TOWER_WIDTH,Globals::TOWER_WIDTH,Qt::IntersectsItemBoundingRect , Qt::DescendingOrder);
+    QList<QGraphicsItem *> list = items(Globals::TOWER_POSITION_X, Globals::TOWER_POSITION_Y, Globals::TOWER_WIDTH,Globals::TOWER_HEIGHT,Qt::IntersectsItemBoundingRect , Qt::DescendingOrder);
 
     return trimPixelList(list);
 }
