@@ -6,6 +6,10 @@
 #include "frame.h"
 #include "pixel.h"
 
+/**
+ * @brief The readfile class contains the member loadFrame() which is used to connect
+ * the frames created by readfile() to the slots in the timeline.
+ */
 class readfile : public QObject
 {
     Q_OBJECT

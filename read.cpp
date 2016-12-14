@@ -7,6 +7,12 @@ readfile::readfile()
     loading = false;
 }
 
+/**
+ * @brief readfile::read is the function that is called by MainWindow::on_actionImport_triggered()
+ * when the user imports a tan file.
+ * This function takes the .tan or .tan2 filename as an argument and creates a Qlist of frames.
+ * After each frame is created a connect function is called to connect the frame to its slot in the timeline.
+ */
 int readfile::read(QString F_Name)
 {
   QTextStream out(stdout);
