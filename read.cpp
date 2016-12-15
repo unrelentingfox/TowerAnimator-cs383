@@ -352,8 +352,6 @@ int readfile::read(QString F_Name)
 
  }
   file.close();
+  qDebug() << "Reading finished";
   return 0;
-
-
-   qDebug() << "Reading finished";
 }

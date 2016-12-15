@@ -130,6 +130,7 @@ int TimelineGraphics::deleteCurrentView()
             addTimelineFrame();
         }
     }
+    return 0;
 }
 
 int TimelineGraphics::playback(int start)
@@ -141,13 +142,14 @@ int TimelineGraphics::playback(int start)
     isPlaying = true;
     QLayoutItem* item;
     TimelineView* view;
-    for(int i = start; item = layout->itemAt(i); i++) {
+    for(int i = start; (item = layout->itemAt(i)); i++) {
         view = dynamic_cast<TimelineView *>(item->widget());
         emit view->iWasSelected(view);
         QTest::qWait(view->frame->duration);
         if(!isPlaying)
             return 0;
     }
+    return 0;
 }
 
 void TimelineGraphics::restartPlayback()
