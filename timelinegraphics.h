@@ -22,8 +22,8 @@ public:
     TimelineGraphics();
     QWidget* timelineWidget();
     QHBoxLayout* layout;
-    bool isPlaying;
-
+    bool isPlaying;  
+    void clear();
 private:
     QWidget* timeline;
     TimelineView* selectedView;

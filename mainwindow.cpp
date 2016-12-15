@@ -94,27 +94,41 @@ void MainWindow::moveButtonPress()
 void MainWindow::on_actionNew_File_triggered()
 {
     //if the file is edited
-        if (editedSinceLastSave == true)
-        {
-            QMessageBox::StandardButton Save;
-            Save = QMessageBox::question(this, "",
-                                               "This file has unsaved changes. "
-                                               "Are you sure you want to discard changes?",
-                                                QMessageBox::Yes|QMessageBox::No);
-            if(Save == QMessageBox::Yes)
-            {
-                //call timeline deconstructor
-                //call timeline constructor (create new timeline)
-                editedSinceLastSave = false;
-            }
-            else if (Save == QMessageBox::No)
-            {
-                // do nothing
-            }
-        }
-        else
-        {
-            // do nothing
+    //this doesnt actually work. selecting an editing tool =/= making an edit
+//        if (editedSinceLastSave == true)
+//        {
+//            QMessageBox::StandardButton Save;
+//            Save = QMessageBox::question(this, "",
+//                                               "This file has unsaved changes. "
+//                                               "Are you sure you want to discard changes?",
+//                                                QMessageBox::Yes|QMessageBox::No);
+//            if(Save == QMessageBox::Yes)
+//            {
+//                //call timeline deconstructor
+//                //call timeline constructor (create new timeline)
+//                editedSinceLastSave = false;
+//            }
+//            else if (Save == QMessageBox::No)
+//            {
+//                // do nothing
+//            }
+//        }
+//        else
+//        {
+//            // do nothing
+//    }
+    QMessageBox::StandardButton Save = QMessageBox::question(this, "",
+                                       "If this project has any unsaved changes, they will be lost. "
+                                       "Would you like to save?",
+                                        QMessageBox::Yes|QMessageBox::No);
+    if(Save == QMessageBox::Yes)
+    {
+        this->on_actionSave_As_triggered();
+        timeline->clear();
+    }
+    else if (Save == QMessageBox::No)
+    {
+        timeline->clear();
     }
 }
 
