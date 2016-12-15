@@ -130,30 +130,12 @@ void MainWindow::on_actionSave_triggered()
    }
 }
 
-void MainWindow::on_actionSave_As_triggered()
-{
-    // get the file name and location of where it will be saved
-    fileName = QFileDialog::getOpenFileName(this,
-    tr("Open File"), "/home/", tr("Tan Files (*.tan *.tan2)"));
-    // all changes have been saved
-    editedSinceLastSave = false;
-}
-
-void MainWindow::on_actionImport_triggered()
-{
-    // get the file name and location import file
-    fileName = QFileDialog::getOpenFileName(this,
-    tr("Open File"), "/home/", tr("Tan Files (*.tan *.tan2)"));
-    //readfile f;
-    rf->read(fileName);
-}
-
 /**
- * @brief MainWindow::on_actionExport_triggered
+ * @brief MainWindow::on_actionSave_As_triggered
  *        Asks user for .tan file name, and calls write, which saves the data in a .tan format
  * @author Alex Wezensky
  */
-void MainWindow::on_actionExport_triggered()
+void MainWindow::on_actionSave_As_triggered()
 {
     //save and name the new exported tan file
     fileName = QFileDialog::getSaveFileName(this, tr("Export File"), "/home/", tr("Tan Files (*.tan *.tan2)"));
@@ -182,4 +164,13 @@ void MainWindow::on_actionExport_triggered()
         }
     }
     w.write(fileName, filled, noframes);
+}
+
+void MainWindow::on_actionImport_triggered()
+{
+    // get the file name and location import file
+    fileName = QFileDialog::getOpenFileName(this,
+    tr("Open File"), "/home/", tr("Tan Files (*.tan *.tan2)"));
+    //readfile f;
+    rf->read(fileName);
 }
