@@ -13,11 +13,11 @@ class TimelineView : public QGraphicsView
     Q_OBJECT
 signals:
     void iWasSelected(TimelineView*);
+
 public:
-    TimelineView();
+    TimelineView(Frame *scene);
     Frame *frame;
-private:
-    //QGraphicsScene* scene();
+
 private slots:
     void mousePressEvent(QMouseEvent *e);
 };
