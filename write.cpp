@@ -93,6 +93,12 @@ void writefile::write(QString nameoffile, int** write, int noframes)
     {
         // We're going to stream text to the file
         QTextStream stream( &file );
+        stream << "0.3\n"
+               << "255 191 0 0 0 0 0 0 255\n"
+               << "0 0 0 128 128 128 255 0 0 255 95 0 255 191 0 223 255 0 127 255 0 31 255 0 0 255 63 0 255 159 0 255 255 0 159 255 0 63 255 31 0 255 127 0 255 223 0 255 255 0 191 255 0 95\n"
+               << "255 255 255 211 211 211 127 0 0 127 47 0 127 95 0 111 127 0 63 127 0 15 127 0 0 127 31 0 127 79 0 127 127 0 79 127 0 31 127 15 0 127 63 0 127 111 0 127 127 0 95 127 0 47\n"
+               << noframes << " " << Globals::TOWER_SIZE_Y << " " << Globals::TOWER_SIZE_X << endl
+               << "00:00.000\n";
         for(int j = 0; j < Globals::TOWER_SIZE_Y*noframes; j++){
             for(int i = 0; i < Globals::TOWER_SIZE_X*3; i=i+3){
                 //printf("wr[%d][%d] = %d\n", i, j, wr[i][j]);
