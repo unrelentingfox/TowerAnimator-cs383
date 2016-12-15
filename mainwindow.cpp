@@ -42,6 +42,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(timeline, SIGNAL(scrollToSelected(TimelineView*)), this, SLOT(ScrollToSelected(TimelineView*)));
     connect(ui->gotoCurrentFrame, SIGNAL(released()), timeline, SLOT(gotoCurrentFrame()));
 
+    //signals for frame duration
+    connect(ui->FrameDuration, SIGNAL(valueChanged(int)), timeline, SLOT(DurationChanged(int)));
+    connect(timeline, SIGNAL(displayDuration(int)), ui->FrameDuration, SLOT(setValue(int)));
+
     connect(timeline, SIGNAL(connectNewFrame(TimelineView*)), ui->AnimationWidget, SLOT(acceptFrameConnection(TimelineView*)));
 
     connect(rf, SIGNAL(loadFrame(Frame*)), timeline, SLOT(addTimelineFrame(Frame*)));

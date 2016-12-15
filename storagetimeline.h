@@ -9,6 +9,7 @@
  * created since the timeline was initialized.
  * It also contains a Qlist of frame pointers representing the frames in the
  * timeline.
+ * @author Lydia Engerbretson, Hannah Pearson
  */
 class storageTimeline
 {
