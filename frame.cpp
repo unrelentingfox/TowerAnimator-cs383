@@ -3,7 +3,7 @@
 
 Frame::Frame(int frameNum, double frameDuration)
 {
-    duration = 100;
+    duration = 1;
     duration = frameDuration;
     frameNumber = frameNum;
     tool = Globals::DRAW_TOOL;
@@ -13,6 +13,11 @@ Frame::Frame(int frameNum, double frameDuration)
     this->setSceneRect(0,0,Globals::ANIMATION_WINDOW_SIZE_X,Globals::ANIMATION_WINDOW_SIZE_Y);
     tower = new QGraphicsRectItem( Globals::TOWER_POSITION_X, Globals::TOWER_POSITION_Y, Globals::TOWER_WIDTH, Globals::TOWER_HEIGHT);
     this->addItem(tower);
+}
+
+double Frame::getDuration()
+{
+    return duration;
 }
 
 void Frame::setTool(int t)

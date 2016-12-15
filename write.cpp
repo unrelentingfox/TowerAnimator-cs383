@@ -30,6 +30,22 @@ int** writefile::make(int noframes){
     return wr;
 }
 /**
+ * @brief writefile::make2
+ * @param noframes
+ * @return fdur
+ * Returns an array with the correct dimensions for storing the time stamps based on the number of frames
+ * @author Alex Wezensky
+ */
+double* writefile::make2(int noframes){
+    double* fdur = new double[noframes];
+    //qDebug() << noframes;
+    for(int i = 0; i < noframes; i++){
+        fdur[i] = 0;
+    }
+    return fdur;
+}
+
+/**
  * @brief writefile::populate
  * @param frame
  * @param wr
@@ -64,10 +80,26 @@ int** writefile::populate(Frame * frame, int** wr, int framenumber){
         //qDebug() << myStringList.first() << myStringList.last();
     }
     //qDebug() << wr;
-    for(int i = 0; i < Globals::TOWER_SIZE_X*3; i++)
-        for(int j = 0; j < Globals::TOWER_SIZE_Y*2; j++)
+    //for(int i = 0; i < Globals::TOWER_SIZE_X*3; i++)
+    //    for(int j = 0; j < Globals::TOWER_SIZE_Y*2; j++)
     //        qDebug() << wr[i][j] << " i " << i << " j " << j;
     return wr;
+}
+
+/**
+ * @brief writefile::populate2
+ * @param duration
+ * @param fdur
+ * @param framenumber
+ * @return fdur
+ * Populates the array made in the previous function with the durations of the frames.
+ * Called once for each frame.
+ * @author Alex Wezensky
+ */
+double *writefile::populate2(double duration, double * fdur, int framenumber){
+    fdur[framenumber] = duration;
+    qDebug() << framenumber;
+    return fdur;
 }
 /**
  * @brief writefile::write
@@ -75,20 +107,20 @@ int** writefile::populate(Frame * frame, int** wr, int framenumber){
  * @param write
  * @param noframes
  * Writes the contents of the array filled in the last function to the file with the name given by the user.
+ * Also inserts the time stamps in their proper places after converting them to the proper format.
  * @author Alex Wezensky
  */
-void writefile::write(QString nameoffile, int** write, int noframes)
-{
+void writefile::write(QString nameoffile, int** write, int noframes, double* fdurfilled){
     //QList<Pixel *> pList = frame->getTowerContents();
     //qDebug() << pList;
     QString filename = nameoffile;
     QFile file(filename);
     //int wr[Globals::TOWER_SIZE_X*3][Globals::TOWER_SIZE_Y] = {0}; //x=4, y=10
     int** wr = write;
-    for(int i = 0; i < Globals::TOWER_SIZE_X*3; i++)
+    /*for(int i = 0; i < Globals::TOWER_SIZE_X*3; i++)
         for(int j = 0; j < Globals::TOWER_SIZE_Y*2; j++)
-    //        qDebug() << wr[i][j];
-
+            qDebug() << wr[i][j];*/
+    int milli = -1;
     if(file.open(QIODevice::WriteOnly | QIODevice::Text))
     {
         // We're going to stream text to the file
@@ -97,9 +129,25 @@ void writefile::write(QString nameoffile, int** write, int noframes)
                << "255 191 0 0 0 0 0 0 255\n"
                << "0 0 0 128 128 128 255 0 0 255 95 0 255 191 0 223 255 0 127 255 0 31 255 0 0 255 63 0 255 159 0 255 255 0 159 255 0 63 255 31 0 255 127 0 255 223 0 255 255 0 191 255 0 95\n"
                << "255 255 255 211 211 211 127 0 0 127 47 0 127 95 0 111 127 0 63 127 0 15 127 0 0 127 31 0 127 79 0 127 127 0 79 127 0 31 127 15 0 127 63 0 127 111 0 127 127 0 95 127 0 47\n"
-               << noframes << " " << Globals::TOWER_SIZE_Y << " " << Globals::TOWER_SIZE_X << endl
-               << "00:00.000\n";
+               << noframes << " " << Globals::TOWER_SIZE_Y << " " << Globals::TOWER_SIZE_X << endl;
+               //<< "00:00.000\n";
         for(int j = 0; j < Globals::TOWER_SIZE_Y*noframes; j++){
+            if(j % 10 == 0){
+                milli += fdurfilled[j/10];
+                int minute = milli / 60000;
+                int mremain = milli % 60000;
+                int second = mremain / 1000;
+                int ms = mremain % 1000;
+                if(second < 10 && ms == 0){
+                    stream << "0" << minute << ":0" << second << "." << "000" << "\n";
+                }else if(second < 10){
+                    stream << "0" << minute << ":0" << second << "." << ms << "\n";
+                }else if(ms == 0){
+                    stream << "0" << minute << ":" << second << "." << "000" << "\n";
+                }
+
+            }
+
             for(int i = 0; i < Globals::TOWER_SIZE_X*3; i=i+3){
                 //printf("wr[%d][%d] = %d\n", i, j, wr[i][j]);
                 stream << wr[i][j] << " ";

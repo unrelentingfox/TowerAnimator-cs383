@@ -8,6 +8,7 @@
 
 #include "global.h"
 #include "read.h"
+#include "frame.h"
 #include "timelineview.h"
 #include "timelinegraphics.h"
 

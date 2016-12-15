@@ -16,6 +16,7 @@ class Frame : public QGraphicsScene
 public:
     Frame(int frameNum=0, double frameDuration=0);
     virtual ~Frame() {};
+    double getDuration();
     void setTool(int t);
 
     //storage info
