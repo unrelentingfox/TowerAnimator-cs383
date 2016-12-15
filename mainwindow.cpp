@@ -148,7 +148,8 @@ void MainWindow::on_actionSave_As_triggered()
         w.write(fileName, ui->AnimationWidget->getCurrentFrame());
     }*/
     int noframes = 0;
-    int** wr, filled;
+    int** wr;
+    int** filled;
     double * fdur;
     double * fdurfilled;
     //if(timeline->layout->itemAt(i) != 0){
