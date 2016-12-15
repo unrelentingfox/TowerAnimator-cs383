@@ -10,6 +10,14 @@
 #include "pixel.h"
 #include <QDebug>
 
+/**
+ * @brief the Frame class holds a frame and operations for adding pixels
+ * to and removing pixels from the frame. It also contains important
+ * functions that track and change values corresponding to the state of the
+ * mouse and the currently selected tool, which can be draw, erase, or move.
+ * Essentially, the Frame class defines how the user interacts with Frame objects
+ * as well defining the Frame object itself.
+ */
 class Frame : public QGraphicsScene
 {
     Q_OBJECT
