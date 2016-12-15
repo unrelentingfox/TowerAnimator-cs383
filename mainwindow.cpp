@@ -172,7 +172,7 @@ void MainWindow::on_actionExport_triggered()
             qDebug() << wr[i][j];*/
     for(int i = 0; timeline->layout->itemAt(i) != 0; i++){
         QLayoutItem* item = timeline->layout->itemAt(i);
-        TimelineView * var = new TimelineView;
+        TimelineView * var; // = new TimelineView;
         var = dynamic_cast<TimelineView *> (item->widget());
         //qDebug() << "Hi" << item << var;
         emit var->iWasSelected(var);
