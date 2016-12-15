@@ -158,8 +158,28 @@ void MainWindow::on_actionExport_triggered()
     //save and name the new exported tan file
     fileName = QFileDialog::getSaveFileName(this, tr("Export File"), "/home/", tr("Tan Files (*.tan *.tan2)"));
     writefile w;
-    if(ui->AnimationWidget->getCurrentFrame() != 0){
+    /*if(ui->AnimationWidget->getCurrentFrame() != 0){
         w.write(fileName, ui->AnimationWidget->getCurrentFrame());
+    }*/
+    int i = 0, noframes = 0;
+    int** wr, filled;
+    //if(timeline->layout->itemAt(i) != 0){
+    for(int i = 0; timeline->layout->itemAt(i) != 0; i++)
+        noframes++;
+    wr = w.make(noframes);
+    /*for(int i = 0; i < Globals::TOWER_SIZE_X*3; i++)
+        for(int j = 0; j < Globals::TOWER_SIZE_Y*noframes; j++)
+            qDebug() << wr[i][j];*/
+    for(int i = 0; timeline->layout->itemAt(i) != 0; i++){
+        QLayoutItem* item = timeline->layout->itemAt(i);
+        TimelineView * var = new TimelineView;
+        var = dynamic_cast<TimelineView *> (item->widget());
+        //qDebug() << "Hi" << item << var;
+        emit var->iWasSelected(var);
+        if(ui->AnimationWidget->getCurrentFrame() != 0){
+            //w.write(fileName, ui->AnimationWidget->getCurrentFrame());
+            filled = w.populate(ui->AnimationWidget->getCurrentFrame(), wr, i);
+        }
     }
-
+    w.write(fileName, filled, noframes);
 }
