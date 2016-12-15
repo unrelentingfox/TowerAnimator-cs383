@@ -1,7 +1,7 @@
 #include "frame.h"
 #include <QFile>
 
-Frame::Frame(int frameNum, double frameDuration)
+Frame::Frame(int frameNum, int frameDuration)
 {
     duration = 1;
     duration = frameDuration;

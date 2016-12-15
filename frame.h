@@ -14,12 +14,12 @@ class Frame : public QGraphicsScene
 {
     Q_OBJECT
 public:
-    Frame(int frameNum=0, double frameDuration=0);
+    Frame(int frameNum=0, int frameDuration=0);
     virtual ~Frame() {};
     void setTool(int t);
 
     //storage info
-    double duration;
+    int duration;
     int frameNumber;
     QList<class Pixel *> getPixels();
     QList<class Pixel *> getTowerContents();
