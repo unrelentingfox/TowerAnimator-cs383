@@ -211,3 +211,14 @@ void TimelineGraphics::DurationChanged(int newDuration)
 {
     selectedView->frame->duration = newDuration;
 }
+
+void TimelineGraphics::clear()
+{
+    QLayoutItem* item;
+    while(layout->itemAt(0)) {
+        item = layout->itemAt(0);
+        TimelineView* view = dynamic_cast<TimelineView *>(item->widget());
+        deleteView(view);
+    }
+    addTimelineFrame();
+}
