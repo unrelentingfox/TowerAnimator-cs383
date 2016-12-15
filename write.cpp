@@ -1,7 +1,6 @@
 #include "write.h"
 #include "timelineview.h"
 #include "storagetimeline.h"
-//#include "struct.h"
 #include "frame.h"
 #include <QString>
 #include <QFile>
@@ -12,34 +11,37 @@ writefile::writefile()
 {
 
 }
-/*QList<Pixel *> Frame::trimPixelList(QList<QGraphicsItem *> list)
-{
-    Pixel * tempPixel;
-    QList<Pixel *> pixelList;
-    QList<QGraphicsItem *>::iterator i;
-    for (i = list.begin(); i != list.end(); ++i){
-        // cast each graphics item to a pixel so that the pixel functions can be used to retrieve data
-        tempPixel = qgraphicsitem_cast<Pixel*>(i.operator *());
-        if(tempPixel != 0){
-            pixelList.append(tempPixel);
-        }
-        qDebug() << tempPixel->towerPos() << tempPixel->red() << tempPixel->green() << tempPixel->blue();
-    }
-    qDebug() << pixelList;
-    return pixelList;
-}*/
 
-//void writefile::write(QString nameoffile)
-void writefile::write(QString nameoffile, Frame * frame)
-{
+/**
+ * @brief writefile::make
+ * @param noframes
+ * @return wr[][]
+ * Returns a 2 dimensional array with the correct dimensions based on the number of frames
+ * @author Alex Wezensky
+ */
+int** writefile::make(int noframes){
+    int** wr = new int*[Globals::TOWER_SIZE_X*3];
+    for(int i = 0; i < Globals::TOWER_SIZE_X*3; i++){
+        wr[i] = new int[Globals::TOWER_SIZE_Y*noframes];
+        for(int j = 0; j < Globals::TOWER_SIZE_Y*noframes; j++){
+            wr[i][j] = 0;
+        }
+    }
+    return wr;
+}
+/**
+ * @brief writefile::populate
+ * @param frame
+ * @param wr
+ * @param framenumber
+ * @return wr[][]
+ * Populates the array made in the previous function with the RGB values of the frames at their locations.
+ * Called once for each frame, places the next frame's RGB values in the next 10 rows of the array.
+ * @author Alex Wezensky
+ */
+int** writefile::populate(Frame * frame, int** wr, int framenumber){
     QList<Pixel *> pList = frame->getTowerContents();
-    qDebug() << pList;
-    //QString filename = "out.txt";
-    QString filename = nameoffile;
-    QFile file(filename);
-    //int height = pList.size() / 20;     //40 pixels/frame, 5 vars/pixel -> 200 vars/frame -> 10 lines/frame
-    int wr[Globals::TOWER_SIZE_X*3][Globals::TOWER_SIZE_Y] = {0}; //array length needs to be a constant value so just use the size of the tower in Globals
-    //x=4, y=10
+    //qDebug() << pList;
 
     QList<Pixel *>::iterator i;
     Pixel * tPixel;
@@ -47,54 +49,64 @@ void writefile::write(QString nameoffile, Frame * frame)
     //populate the array with pixel data
     for (i = pList.begin(); i != pList.end(); i++){
         tPixel = qgraphicsitem_cast<Pixel*>(i.operator *());
-        qDebug() << tPixel->towerPos() << tPixel->red() << tPixel->green() << tPixel->blue() << pList.size();
+        //qDebug() << tPixel->towerPos() << tPixel->red() << tPixel->green() << tPixel->blue() << pList.size();
         QPointF p = tPixel->towerPos();
         int x = p.x();
         int y = p.y();
-        qDebug() << x << y;
+        y = framenumber*10 + y;
+        //qDebug() << x << y;
         wr[x*3][y] = tPixel->red();
+        //qDebug() << wr[x*3][y] << tPixel->red();
         wr[(x*3)+1][y] = tPixel->green();
         wr[(x*3)+2][y] = tPixel->blue();
         //QString myString = QString::QPointF(tPixel->towerPos());
         //QStringList myStringList = myString.split(')').first().split(',');
         //qDebug() << myStringList.first() << myStringList.last();
     }
-
-    //qDebug() << pList.indexOf(0);//->red();
-
-    /*int pLcount = 0;
-    for(int j = 0; j < Globals::TOWER_SIZE_Y; j++){
-        for(int i = 0; i < Globals::TOWER_SIZE_X*3; i=i+3){
-            //qDebug() << "i:" << i << " j:" << j;
-            wr[i][j] = pList[0]->red();
-            //qDebug() << "i:" << i << " j:" << j << " red:" << pList[0]->red();
-            wr[i+1][j] = pList[0]->red();
-            //qDebug() << i << " " << j << " " << pList[0]->red();
-            wr[i+2][j] = pList[0]->red();
-            //qDebug() << i << " " << j << " " << pList[0]->red();
-            //pLcount++;
-            //pList.pop_front();
-            //qDebug() << "lul";
-        }
-    }*/
+    //qDebug() << wr;
+    for(int i = 0; i < Globals::TOWER_SIZE_X*3; i++)
+        for(int j = 0; j < Globals::TOWER_SIZE_Y*2; j++)
+    //        qDebug() << wr[i][j] << " i " << i << " j " << j;
+    return wr;
+}
+/**
+ * @brief writefile::write
+ * @param nameoffile
+ * @param write
+ * @param noframes
+ * Writes the contents of the array filled in the last function to the file with the name given by the user.
+ * @author Alex Wezensky
+ */
+void writefile::write(QString nameoffile, int** write, int noframes)
+{
+    //QList<Pixel *> pList = frame->getTowerContents();
+    //qDebug() << pList;
+    QString filename = nameoffile;
+    QFile file(filename);
+    //int wr[Globals::TOWER_SIZE_X*3][Globals::TOWER_SIZE_Y] = {0}; //x=4, y=10
+    int** wr = write;
+    for(int i = 0; i < Globals::TOWER_SIZE_X*3; i++)
+        for(int j = 0; j < Globals::TOWER_SIZE_Y*2; j++)
+    //        qDebug() << wr[i][j];
 
     if(file.open(QIODevice::WriteOnly | QIODevice::Text))
     {
         // We're going to stream text to the file
         QTextStream stream( &file );
-        for(int j = 0; j < Globals::TOWER_SIZE_Y; j++){
+        for(int j = 0; j < Globals::TOWER_SIZE_Y*noframes; j++){
             for(int i = 0; i < Globals::TOWER_SIZE_X*3; i=i+3){
-                printf("wr[%d][%d] = %d\n", i, j, wr[i][j]);
+                //printf("wr[%d][%d] = %d\n", i, j, wr[i][j]);
                 stream << wr[i][j] << " ";
-                printf("wr[%d][%d] = %d\n", i+1, j, wr[i+1][j]);
+                //printf("wr[%d][%d] = %d\n", i+1, j, wr[i+1][j]);
                 stream << wr[i+1][j] << " ";
-                printf("wr[%d][%d] = %d\n", i+2, j, wr[i+2][j]);
+                //printf("wr[%d][%d] = %d\n", i+2, j, wr[i+2][j]);
                 stream << wr[i+2][j] << " ";
             }
             stream << endl;
-            //if((i+1) % 10 == 0){
-            //    stream << endl;
-            //}
+
+            if((j+1) % 10 == 0)
+                stream << endl;
+
         }
         file.close();
     }

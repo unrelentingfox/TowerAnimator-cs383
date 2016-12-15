@@ -8,7 +8,9 @@ class writefile
 {
     public:
         writefile();
-        void write(QString, Frame *);
+        void write(QString, int**, int);
+        int** populate(Frame *, int**, int);
+        int** make(int);
 };
 
 #endif // WRITE_H

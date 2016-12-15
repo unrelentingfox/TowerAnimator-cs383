@@ -3,7 +3,7 @@
 
 Frame::Frame(int frameNum, double frameDuration)
 {
-    duration = 1;
+    duration = 100;
     duration = frameDuration;
     frameNumber = frameNum;
     tool = Globals::DRAW_TOOL;
