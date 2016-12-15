@@ -4,6 +4,10 @@
 #include <QDebug>
 #include <pixel.h>
 
+/**
+ * @brief The Object class is a custom QGraphicsItemGroup that is used to group pixels together and allow them to be moved as one item
+ * @author Dustin Fox
+ */
 class Object : public QGraphicsItemGroup
 {
 public:

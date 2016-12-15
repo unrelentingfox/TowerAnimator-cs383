@@ -2,6 +2,10 @@
 #define GLOBAL_H
 #include <QPointF>
 
+/**
+ * @brief The Globals class Holds all of the crucual settings for the tower animator, including tower size which can be changed to accomidate larger or smaller towers or screens.
+ * @author Dustin Fox
+ */
 class Globals
 {
 public:

@@ -11,7 +11,8 @@
 #include "algorithms.h"
 #include "frame.h"
 /**
- * @brief The Pixel class
+ * @brief The Pixel class is a custom QGraphicsRectItem with added functionality to keep track of pixel information to be saved in a .tan file
+ * @author Dustin Fox, Lydia Engerbretson, Hannah Pearson
  */
 class Pixel : public QGraphicsRectItem
 {

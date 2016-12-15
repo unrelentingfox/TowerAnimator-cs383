@@ -16,11 +16,9 @@
 #include "frame.h"
 #include "timelineview.h"
 
-
-//http://stackoverflow.com/questions/7830054/how-to-draw-a-point-on-mouseclick-on-a-qgraphicsscene
 /**
- * @brief The AnimationView class
- * Each instance is a frame in the timeline.
+ * @brief The AnimationView class which is a custom QGraphicsView
+ * @author Dustin Fox
  */
 class AnimationView : public QGraphicsView
 {

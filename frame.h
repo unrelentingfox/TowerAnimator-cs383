@@ -11,7 +11,7 @@
 #include <QDebug>
 
 /**
- * @brief the Frame class holds a frame and operations for adding pixels
+ * @brief the Frame class is a custom QGraphicsScene that holds frame information and operations for adding pixels
  * to and removing pixels from the frame. It also contains important
  * functions that track and change values corresponding to the state of the
  * mouse and the currently selected tool, which can be draw, erase, or move.
