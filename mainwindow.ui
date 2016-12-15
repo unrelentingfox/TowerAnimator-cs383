@@ -208,6 +208,12 @@
      <layout class="QHBoxLayout" name="horizontalLayout_4">
       <item>
        <widget class="QPushButton" name="delteFrame">
+        <property name="toolTip">
+         <string>Deletes the selected frame.</string>
+        </property>
+        <property name="toolTipDuration">
+         <number>3</number>
+        </property>
         <property name="text">
          <string>Delete Frame</string>
         </property>
@@ -215,6 +221,12 @@
       </item>
       <item>
        <widget class="QPushButton" name="gotoCurrentFrame">
+        <property name="toolTip">
+         <string>Moves the Timeline View to the current frame.</string>
+        </property>
+        <property name="toolTipDuration">
+         <number>3</number>
+        </property>
         <property name="text">
          <string>Current Frame</string>
         </property>
@@ -222,6 +234,12 @@
       </item>
       <item>
        <widget class="QPushButton" name="AddFrame">
+        <property name="toolTip">
+         <string>Creates a new frame after the selected frame.</string>
+        </property>
+        <property name="toolTipDuration">
+         <number>3</number>
+        </property>
         <property name="text">
          <string>New Frame</string>
         </property>
