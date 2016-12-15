@@ -6,6 +6,11 @@
 #include "frame.h"
 #include "pixel.h"
 
+
+/**
+ * @brief The readfile class used to read a tan file
+ * @author Colton H
+ */
 class readfile : public QObject
 {
     Q_OBJECT
