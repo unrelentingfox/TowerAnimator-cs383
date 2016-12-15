@@ -36,11 +36,17 @@ QWidget* TimelineGraphics::timelineWidget()
  * @brief TimelineGraphics::addTimelineFrame
  * Overloaded function. generates an empty frame and
  * passes it to the same function that accepts a frame
- * to be added.
+ * to be added. This frame will duplicate the duration of the
+ * currently selected frame.
  */
 void TimelineGraphics::addTimelineFrame()
 {
-    addTimelineFrame(new Frame(0,1));
+    if(!selectedView){
+        addTimelineFrame(new Frame(0,100));
+    }
+    else {
+        addTimelineFrame(new Frame(0,selectedView->frame->duration));
+    }
 }
 
 /**
@@ -88,6 +94,7 @@ void TimelineGraphics::currentFrame(TimelineView* view)
     this->selectedView = view;
     selectedView->setBackgroundBrush(Qt::gray);
     emit scrollToSelected(selectedView);
+    emit displayDuration(selectedView->frame->duration);
 }
 
 /**
@@ -193,4 +200,14 @@ void TimelineGraphics::stopPlayback()
 void TimelineGraphics::gotoCurrentFrame()
 {
     emit selectedView->iWasSelected(selectedView);
+}
+
+/**
+ * @brief TimelineGraphics::DurationChanged
+ * This slot recieves the signal valuChanged from the editor
+ * @param newDuration
+ */
+void TimelineGraphics::DurationChanged(int newDuration)
+{
+    selectedView->frame->duration = newDuration;
 }

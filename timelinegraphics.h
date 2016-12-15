@@ -17,6 +17,7 @@ class TimelineGraphics : public QObject
 signals:
     void connectNewFrame(TimelineView*);
     void scrollToSelected(TimelineView*);
+    void displayDuration(int);
 public:
     TimelineGraphics();
     QWidget* timelineWidget();
@@ -39,6 +40,7 @@ public slots:
     void restartPlayback();
     void stopPlayback();
     void gotoCurrentFrame();
+    void DurationChanged(int newDuration);
 };
 
 #endif // TIMELINEGRAPHICS_H

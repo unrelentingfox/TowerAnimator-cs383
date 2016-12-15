@@ -240,6 +240,23 @@
         </property>
        </spacer>
       </item>
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Frame Duration (ms)</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="FrameDuration">
+        <property name="buttonSymbols">
+         <enum>QAbstractSpinBox::PlusMinus</enum>
+        </property>
+        <property name="maximum">
+         <number>999999999</number>
+        </property>
+       </widget>
+      </item>
      </layout>
     </item>
     <item>
@@ -324,7 +341,7 @@
      <x>0</x>
      <y>0</y>
      <width>1207</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

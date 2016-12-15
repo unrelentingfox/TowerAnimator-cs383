@@ -4,9 +4,9 @@
 /**
  * @brief Frame::Frame is the Frame class constructor
  * @param int frameNum is the frame number
- * @param double frameDuration is the duration of the frame
+ * @param int frameDuration is the duration of the frame
  */
-Frame::Frame(int frameNum, double frameDuration)
+Frame::Frame(int frameNum, int frameDuration)
 {
     duration = 1;
     duration = frameDuration;
