@@ -3,6 +3,12 @@
 #include "global.h"
 #include <QPointF>
 
+/**
+ * @brief the Algorithms class contains functions for
+ * converting a point representing the location of the mouse
+ * into a limited range of values corresponding to
+ * the specified grid
+ */
 class Algorithms
 {
 public:
