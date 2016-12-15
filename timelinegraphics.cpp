@@ -6,68 +6,64 @@
 #include <QGraphicsGridLayout>
 #include <iostream>
 
+/**
+ * @brief TimelineGraphics::TimelineGraphics
+ * Initialize the timeline widget
+ */
 TimelineGraphics::TimelineGraphics()
 {
     timeline = new QWidget;
     layout = new QHBoxLayout;
     timelinelist = new storageTimeline;
     layout->setAlignment(Qt::AlignLeft);
-    loadTimeline();
-}
-
-QWidget* TimelineGraphics::timelineWidget()
-{
-    return timeline;
-}
-
-void TimelineGraphics::loadTimeline()
-{
     timeline->setLayout(this->layout);
     timeline->setMaximumHeight(Globals::TOWER_HEIGHT + Globals::PIXEL_SIZE*2);
     selectedView = NULL;
     isPlaying = false;
 }
 
-void TimelineGraphics::addFramePixel(QGraphicsScene* scene, int x, int y)
+/**
+ * @brief TimelineGraphics::timelineWidget
+ * Fetch the timeline widget
+ * @return
+ */
+QWidget* TimelineGraphics::timelineWidget()
 {
-   QGraphicsRectItem* item1 = new QGraphicsRectItem(x*15,y*15+20,10,10);
-   item1->setBrush(QBrush(Qt::red));
-   scene->addItem(item1);
+    return timeline;
 }
 
+/**
+ * @brief TimelineGraphics::addTimelineFrame
+ * Overloaded function. generates an empty frame and
+ * passes it to the same function that accepts a frame
+ * to be added.
+ */
 void TimelineGraphics::addTimelineFrame()
 {
     addTimelineFrame(new Frame(0,1));
 }
 
+/**
+ * @brief TimelineGraphics::addTimelineFrame
+ * Takes a frame initialized a TimelineView. Adds this to the
+ * layout of the timeline widget after the currently selected frame.
+ * @param scene
+ */
 void TimelineGraphics::addTimelineFrame(Frame* scene)
 {
-    TimelineView* view = new TimelineView;
-    //Frame* scene = new Frame(timelinelist->getNumOfFrames());
-
-    //initialize the view
-    view->frame = scene;
-    view->setHorizontalScrollBarPolicy ( Qt::ScrollBarAlwaysOff );
-    view->setVerticalScrollBarPolicy ( Qt::ScrollBarAlwaysOff );
-    view->setScene(scene);
-    //view->setMaximumWidth(80);
-    view->setFixedSize(Globals::TOWER_WIDTH, Globals::TOWER_HEIGHT);
-    // view->setMaximumHeight(200);
-    //view->scale(0.5, 0.5);
+    //create a view containing the frame as its scene
+    TimelineView* view = new TimelineView(scene);
 
     //make connections
     emit connectNewFrame(view); //connects frame to animationview
     connect(view, SIGNAL (iWasSelected(TimelineView*)), this, SLOT (currentFrame(TimelineView*)));
-
-    //make the new frame the selected frame
-
 
     //add to layout inserting after currently selected frame
     int index = 0;
     if (selectedView) {
         index = layout->indexOf(this->selectedView);
     }
-    qDebug() << index;
+    //qDebug() << index;
     layout->insertWidget(index+1, view);
 
 
@@ -78,6 +74,12 @@ void TimelineGraphics::addTimelineFrame(Frame* scene)
     emit view->iWasSelected(view);
 }
 
+/**
+ * @brief TimelineGraphics::currentFrame
+ * Selects the new frame. unhighlights the old frame.
+ * Highlights the new one.
+ * @param view
+ */
 void TimelineGraphics::currentFrame(TimelineView* view)
 {
     if(selectedView) {
@@ -88,33 +90,38 @@ void TimelineGraphics::currentFrame(TimelineView* view)
     emit scrollToSelected(selectedView);
 }
 
+/**
+ * @brief TimelineGraphics::deleteView
+ * deletes a view from the storage class and removes it from the widget layout.
+ * @param view
+ */
 void TimelineGraphics::deleteView(TimelineView* view)
 {
     //remove the layout
     layout->removeWidget(view);
     timelinelist->removeFrame(layout->indexOf(view));
-    //timelinelist->removeFrame(view->frame->frameNumber);
+    //clean up
     delete view->frame;
     delete view;
     selectedView = NULL;
 }
 
+/**
+ * @brief TimelineGraphics::deleteCurrentView
+ * Determines the current selected view and deletes it.
+ * selects a new frame for and displays it in the animation view.
+ * @return
+ */
 int TimelineGraphics::deleteCurrentView()
 {
     // get index of view to be deleted
-    if(!selectedView)
-        return 0;
-    TimelineView* view = this->selectedView;
-    if(!view)
-        return 0;
-    int index = layout->indexOf(view);
-    qDebug() << index;
+    int index = layout->indexOf(selectedView);
+    //qDebug() << index;
 
     //delete the view
     deleteView(this->selectedView);
 
     //select a new frame based on index of last frame
-
     QLayoutItem* item = layout->itemAt(index);
     if(item)
     {
@@ -133,12 +140,14 @@ int TimelineGraphics::deleteCurrentView()
     return 0;
 }
 
+/**
+ * @brief TimelineGraphics::playback
+ * Begins playback at index start.
+ * @param start
+ * @return
+ */
 int TimelineGraphics::playback(int start)
 {
-//    if(isPlaying) {
-//        isPlaying = false;
-//        return 0;
-//    }
     isPlaying = true;
     QLayoutItem* item;
     TimelineView* view;
@@ -152,21 +161,35 @@ int TimelineGraphics::playback(int start)
     return 0;
 }
 
+/**
+ * @brief TimelineGraphics::restartPlayback
+ * Calls playback at index 0.
+ */
 void TimelineGraphics::restartPlayback()
 {
     playback(0);
 }
 
+/**
+ * @brief TimelineGraphics::resumePlayback
+ * Calls playback at index of selected frame.
+ */
 void TimelineGraphics::resumePlayback()
 {
     playback(layout->indexOf(selectedView));
 }
 
+/**
+ * @brief TimelineGraphics::stopPlayback
+ */
 void TimelineGraphics::stopPlayback()
 {
     isPlaying = false;
 }
 
+/**
+ * @brief TimelineGraphics::gotoCurrentFrame
+ */
 void TimelineGraphics::gotoCurrentFrame()
 {
     emit selectedView->iWasSelected(selectedView);
