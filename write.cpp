@@ -43,7 +43,7 @@ void writefile::write(QString nameoffile, Frame * frame)
 
     QList<Pixel *>::iterator i;
     Pixel * tPixel;
-    int j = 0;
+    // compiler said this was unused. removed. int j = 0;
     //populate the array with pixel data
     for (i = pList.begin(); i != pList.end(); i++){
         tPixel = qgraphicsitem_cast<Pixel*>(i.operator *());
