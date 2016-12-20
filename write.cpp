@@ -1,11 +1,4 @@
 #include "write.h"
-#include "timelineview.h"
-#include "storagetimeline.h"
-#include "frame.h"
-#include <QString>
-#include <QFile>
-#include <QTextStream>
-#include <QList>
 
 writefile::writefile()
 {
@@ -29,6 +22,7 @@ int** writefile::make(int noframes){
     }
     return wr;
 }
+
 /**
  * @brief writefile::make2
  * @param noframes
@@ -101,6 +95,7 @@ double *writefile::populate2(double duration, double * fdur, int framenumber){
     qDebug() << framenumber;
     return fdur;
 }
+
 /**
  * @brief writefile::write
  * @param nameoffile
@@ -110,58 +105,82 @@ double *writefile::populate2(double duration, double * fdur, int framenumber){
  * Also inserts the time stamps in their proper places after converting them to the proper format.
  * @author Alex Wezensky
  */
-void writefile::write(QString nameoffile, int** write, int noframes, double* fdurfilled){
-    //QList<Pixel *> pList = frame->getTowerContents();
-    //qDebug() << pList;
-    QString filename = nameoffile;
+void writefile::write(QString filename, QHBoxLayout * frames){
     QFile file(filename);
-    //int wr[Globals::TOWER_SIZE_X*3][Globals::TOWER_SIZE_Y] = {0}; //x=4, y=10
-    int** wr = write;
-    /*for(int i = 0; i < Globals::TOWER_SIZE_X*3; i++)
-        for(int j = 0; j < Globals::TOWER_SIZE_Y*2; j++)
-            qDebug() << wr[i][j];*/
-    int milli = -1;
+    Frame * frame;
+    QTime duration;
+    duration.setHMS(0,0,0,0);
+
+    int numberOfFrames = countFrames(frames);
+
     if(file.open(QIODevice::WriteOnly | QIODevice::Text))
     {
-        // We're going to stream text to the file
         QTextStream stream( &file );
+
+        //Add the default header info for .tan file
         stream << "0.3\n"
                << "255 191 0 0 0 0 0 0 255\n"
                << "0 0 0 128 128 128 255 0 0 255 95 0 255 191 0 223 255 0 127 255 0 31 255 0 0 255 63 0 255 159 0 255 255 0 159 255 0 63 255 31 0 255 127 0 255 223 0 255 255 0 191 255 0 95\n"
                << "255 255 255 211 211 211 127 0 0 127 47 0 127 95 0 111 127 0 63 127 0 15 127 0 0 127 31 0 127 79 0 127 127 0 79 127 0 31 127 15 0 127 63 0 127 111 0 127 127 0 95 127 0 47\n"
-               << noframes << " " << Globals::TOWER_SIZE_Y << " " << Globals::TOWER_SIZE_X << endl;
-               //<< "00:00.000\n";
-        for(int j = 0; j < Globals::TOWER_SIZE_Y*noframes; j++){
-            if(j % 10 == 0){
-                milli += fdurfilled[j/10];
-                int minute = milli / 60000;
-                int mremain = milli % 60000;
-                int second = mremain / 1000;
-                int ms = mremain % 1000;
-                if(second < 10 && ms == 0){
-                    stream << "0" << minute << ":0" << second << "." << "000" << "\n";
-                }else if(second < 10){
-                    stream << "0" << minute << ":0" << second << "." << ms << "\n";
-                }else if(ms == 0){
-                    stream << "0" << minute << ":" << second << "." << "000" << "\n";
+               << numberOfFrames << " " << Globals::TOWER_SIZE_Y << " " << Globals::TOWER_SIZE_X << endl
+               << duration.toString("mm:ss.zzz") << endl;
+
+            for(int i = 0; i < numberOfFrames; i++){
+                //get current frame
+                frame = dynamic_cast<TimelineView *>(frames->itemAt(i)->widget())->frame;
+                if(frame){
+                    //print frame
+                    streamFrame(frame, &stream);
+
+                    //Print the timestamp after all frames except the last one (to follow .tan format)
+                    if((i+1) < numberOfFrames){
+                        //add the frameDuration to the duration variable
+                        duration = duration.addMSecs(frame->getDuration());
+                        stream << duration.toString("mm:ss.zzz") << endl;
                 }
-
+                }
             }
-
-            for(int i = 0; i < Globals::TOWER_SIZE_X*3; i=i+3){
-                //printf("wr[%d][%d] = %d\n", i, j, wr[i][j]);
-                stream << wr[i][j] << " ";
-                //printf("wr[%d][%d] = %d\n", i+1, j, wr[i+1][j]);
-                stream << wr[i+1][j] << " ";
-                //printf("wr[%d][%d] = %d\n", i+2, j, wr[i+2][j]);
-                stream << wr[i+2][j] << " ";
-            }
-            stream << endl;
-
-            if((j+1) % 10 == 0)
-                stream << endl;
-
         }
         file.close();
+}
+
+
+void writefile::streamFrame(Frame *frame, QTextStream *stream)
+{
+    //Create an array to represent the frame
+    int tower[Globals::TOWER_SIZE_X][Globals::TOWER_SIZE_Y][3] = {0,0,0};
+    //initialize all the iterators for the above array
+    int x = 0;
+    int y = 0;
+    int rgb = 0; // 0 = red, 1 = green, 2 = blue
+    const int RGB_MAX = 3;
+
+    //Populate the array with the pixels
+    QList<Pixel *> pixels = frame->getTowerContents();
+    for(int i = 0; i < pixels.length(); i++){
+        x = pixels[i]->towerPos().x();
+        y = pixels[i]->towerPos().y();
+        tower[x][y][0] = pixels[i]->red();
+        tower[x][y][1] = pixels[i]->green();
+        tower[x][y][2] = pixels[i]->blue();
     }
+
+    //Print the array
+    for(y = 0; y < Globals::TOWER_SIZE_Y; y++){
+        for(x = 0; x < Globals::TOWER_SIZE_X; x++){
+            for(rgb = 0; rgb < RGB_MAX; rgb++){
+                *stream << tower[x][y][rgb]<< " ";
+            }
+        }
+        *stream << "\n";
+    }
+}
+
+int writefile::countFrames(QHBoxLayout *frames)
+{
+    int frameCount = 0;
+    for(int i = 0; frames->itemAt(i) != 0; i++)
+        frameCount++;
+
+    return frameCount;
 }
