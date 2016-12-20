@@ -20,6 +20,11 @@ Frame::Frame(int frameNum, int frameDuration)
     this->addItem(tower);
 }
 
+double Frame::getDuration()
+{
+    return duration;
+}
+
 /**
  * @brief Frame::setTool changes which tool has been selected.
  * Possible values for tool are set in global.h file and include:

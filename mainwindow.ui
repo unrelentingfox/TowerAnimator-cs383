@@ -352,7 +352,6 @@
     <addaction name="actionSave_As"/>
     <addaction name="actionSave"/>
     <addaction name="actionImport"/>
-    <addaction name="actionExport"/>
    </widget>
    <addaction name="menuFile"/>
   </widget>

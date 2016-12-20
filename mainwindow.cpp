@@ -148,13 +148,51 @@ void MainWindow::on_actionSave_triggered()
    }
 }
 
+/**
+ * @brief MainWindow::on_actionSave_As_triggered
+ *        Asks user for .tan file name, and calls write, which saves the data in a .tan format
+ * @author Alex Wezensky
+ */
 void MainWindow::on_actionSave_As_triggered()
 {
-    // get the file name and location of where it will be saved
-    fileName = QFileDialog::getOpenFileName(this,
-    tr("Open File"), "/home/", tr("Tan Files (*.tan *.tan2)"));
-    // all changes have been saved
-    editedSinceLastSave = false;
+    //save and name the new exported tan file
+    fileName = QFileDialog::getSaveFileName(this, tr("Export File"), "/home/", tr("Tan Files (*.tan *.tan2)"));
+    writefile w;
+    /*if(ui->AnimationWidget->getCurrentFrame() != 0){
+        w.write(fileName, ui->AnimationWidget->getCurrentFrame());
+    }*/
+    int noframes = 0;
+    int** wr;
+    int** filled;
+    double * fdur;
+    double * fdurfilled;
+    //if(timeline->layout->itemAt(i) != 0){
+    for(int i = 0; timeline->layout->itemAt(i) != 0; i++)
+        noframes++;
+    wr = w.make(noframes);
+
+    TimelineView * var; // = new TimelineView;
+
+    fdur = w.make2(noframes);
+    //qDebug() << duration;
+
+    /*for(int i = 0; i < Globals::TOWER_SIZE_X*3; i++)
+        for(int j = 0; j < Globals::TOWER_SIZE_Y*noframes; j++)
+            qDebug() << wr[i][j];*/
+    for(int i = 0; timeline->layout->itemAt(i) != 0; i++){
+        QLayoutItem* item = timeline->layout->itemAt(i);
+        var = dynamic_cast<TimelineView *> (item->widget());
+        //qDebug() << "Hi" << item << var;
+        emit var->iWasSelected(var);
+        if(ui->AnimationWidget->getCurrentFrame() != 0){
+            //w.write(fileName, ui->AnimationWidget->getCurrentFrame());
+            double duration = var->frame->duration;
+            filled = w.populate(ui->AnimationWidget->getCurrentFrame(), wr, i);
+            fdurfilled = w.populate2(duration, fdur, i);
+        }
+    }
+
+    w.write(fileName, filled, noframes, fdurfilled);
 }
 
 void MainWindow::on_actionImport_triggered()
@@ -164,20 +202,4 @@ void MainWindow::on_actionImport_triggered()
     tr("Open File"), "/home/", tr("Tan Files (*.tan *.tan2)"));
     //readfile f;
     rf->read(fileName);
-}
-
-/**
- * @brief MainWindow::on_actionExport_triggered
- *        Asks user for .tan file name, and calls write, which saves the data in a .tan format
- * @author Alex Wezensky
- */
-void MainWindow::on_actionExport_triggered()
-{
-    //save and name the new exported tan file
-    fileName = QFileDialog::getSaveFileName(this, tr("Export File"), "/home/", tr("Tan Files (*.tan *.tan2)"));
-    writefile w;
-    if(ui->AnimationWidget->getCurrentFrame() != 0){
-        w.write(fileName, ui->AnimationWidget->getCurrentFrame());
-    }
-
 }

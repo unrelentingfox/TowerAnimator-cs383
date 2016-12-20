@@ -8,6 +8,7 @@
 
 #include "global.h"
 #include "read.h"
+#include "frame.h"
 #include "timelineview.h"
 #include "timelinegraphics.h"
 
@@ -36,8 +37,6 @@ private slots:
     void on_actionSave_As_triggered();
 
     void on_actionImport_triggered();
-
-    void on_actionExport_triggered();
 
 private:
     Ui::MainWindow *ui;
