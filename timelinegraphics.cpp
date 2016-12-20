@@ -123,7 +123,7 @@ int TimelineGraphics::deleteCurrentView()
 {
     // get index of view to be deleted
     int index = layout->indexOf(selectedView);
-    //qDebug() << index;
+    qDebug() << index;
 
     //delete the view
     deleteView(this->selectedView);

@@ -1,3 +1,5 @@
+#ifndef STORAGETIMELINE_H
+#define STORAGETIMELINE_H
 #include "frame.h"
 
 /**
@@ -30,3 +32,4 @@ public:
     void addFrame(Frame *frame);
     int getNumOfFrames();
 };
+#endif

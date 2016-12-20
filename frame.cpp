@@ -20,7 +20,7 @@ Frame::Frame(int frameNum, int frameDuration)
     this->addItem(tower);
 }
 
-double Frame::getDuration()
+int Frame::getDuration()
 {
     return duration;
 }

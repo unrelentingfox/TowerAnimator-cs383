@@ -144,41 +144,47 @@ void MainWindow::on_actionSave_As_triggered()
     //save and name the new exported tan file
     fileName = QFileDialog::getSaveFileName(this, tr("Export File"), "/home/", tr("Tan Files (*.tan *.tan2)"));
     writefile w;
-    /*if(ui->AnimationWidget->getCurrentFrame() != 0){
-        w.write(fileName, ui->AnimationWidget->getCurrentFrame());
-    }*/
-    int noframes = 0;
-    int** wr;
-    int** filled;
-    double * fdur;
-    double * fdurfilled;
-    //if(timeline->layout->itemAt(i) != 0){
-    for(int i = 0; timeline->layout->itemAt(i) != 0; i++)
-        noframes++;
-    wr = w.make(noframes);
+    int noframes = 1;
+    w.write(fileName,timeline->layout);
 
-    TimelineView * var; // = new TimelineView;
 
-    fdur = w.make2(noframes);
-    //qDebug() << duration;
+// The code below did not work.//
 
-    /*for(int i = 0; i < Globals::TOWER_SIZE_X*3; i++)
-        for(int j = 0; j < Globals::TOWER_SIZE_Y*noframes; j++)
-            qDebug() << wr[i][j];*/
-    for(int i = 0; timeline->layout->itemAt(i) != 0; i++){
-        QLayoutItem* item = timeline->layout->itemAt(i);
-        var = dynamic_cast<TimelineView *> (item->widget());
-        //qDebug() << "Hi" << item << var;
-        emit var->iWasSelected(var);
-        if(ui->AnimationWidget->getCurrentFrame() != 0){
-            //w.write(fileName, ui->AnimationWidget->getCurrentFrame());
-            double duration = var->frame->duration;
-            filled = w.populate(ui->AnimationWidget->getCurrentFrame(), wr, i);
-            fdurfilled = w.populate2(duration, fdur, i);
-        }
-    }
+//    /*if(ui->AnimationWidget->getCurrentFrame() != 0){
+//        w.write(fileName, ui->AnimationWidget->getCurrentFrame());
+//    }*/
+//    int noframes = 0;
+//    int** wr;
+//    int** filled;
+//    double * fdur;
+//    double * fdurfilled;
+//    //if(timeline->layout->itemAt(i) != 0){
+//    for(int i = 0; timeline->layout->itemAt(i) != 0; i++)
+//        noframes++;
+//    wr = w.make(noframes);
 
-    w.write(fileName, filled, noframes, fdurfilled);
+//    TimelineView * var;
+
+//    fdur = w.make2(noframes);
+//    //qDebug() << duration;
+
+//    /*for(int i = 0; i < Globals::TOWER_SIZE_X*3; i++)
+//        for(int j = 0; j < Globals::TOWER_SIZE_Y*noframes; j++)
+//            qDebug() << wr[i][j];*/
+//    for(int i = 0; timeline->layout->itemAt(i) != 0; i++){
+//        QLayoutItem* item = timeline->layout->itemAt(i);
+//        var = dynamic_cast<TimelineView *> (item->widget());
+//        //qDebug() << "Hi" << item << var;
+//        emit var->iWasSelected(var);
+//        if(ui->AnimationWidget->getCurrentFrame() != 0){
+//            //w.write(fileName, ui->AnimationWidget->getCurrentFrame());
+//            double duration = var->frame->duration;
+//            filled = w.populate(ui->AnimationWidget->getCurrentFrame(), wr, i);
+//            fdurfilled = w.populate2(duration, fdur, i);
+//        }
+//    }
+
+//    w.write(fileName, filled, noframes, fdurfilled);
 }
 
 void MainWindow::on_actionImport_triggered()
