@@ -142,7 +142,7 @@ void MainWindow::on_actionSave_triggered()
 void MainWindow::on_actionSave_As_triggered()
 {
     //save and name the new exported tan file
-    fileName = QFileDialog::getSaveFileName(this, tr("Export File"), "/home/", tr("Tan Files (*.tan *.tan2)"));
+    fileName = QFileDialog::getSaveFileName(this, tr("Export File"), "/home/", tr("Tan Files (*.tan)"));
     writefile w;
     int noframes = 1;
     w.write(fileName,timeline->layout);

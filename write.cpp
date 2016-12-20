@@ -109,8 +109,9 @@ void writefile::write(QString filename, QHBoxLayout * frames){
     QFile file(filename);
     Frame * frame;
     QTime duration;
+    duration.setHMS(0,0,0,0);
 
-    int numberOfFrames = this->countFrames(frames);
+    int numberOfFrames = countFrames(frames);
 
     if(file.open(QIODevice::WriteOnly | QIODevice::Text))
     {
@@ -122,23 +123,23 @@ void writefile::write(QString filename, QHBoxLayout * frames){
                << "0 0 0 128 128 128 255 0 0 255 95 0 255 191 0 223 255 0 127 255 0 31 255 0 0 255 63 0 255 159 0 255 255 0 159 255 0 63 255 31 0 255 127 0 255 223 0 255 255 0 191 255 0 95\n"
                << "255 255 255 211 211 211 127 0 0 127 47 0 127 95 0 111 127 0 63 127 0 15 127 0 0 127 31 0 127 79 0 127 127 0 79 127 0 31 127 15 0 127 63 0 127 111 0 127 127 0 95 127 0 47\n"
                << numberOfFrames << " " << Globals::TOWER_SIZE_Y << " " << Globals::TOWER_SIZE_X << endl
-               << "00:00.000\n";
+               << duration.toString("mm:ss.zzz") << endl;
 
             for(int i = 0; i < numberOfFrames; i++){
                 //get current frame
                 frame = dynamic_cast<TimelineView *>(frames->itemAt(i)->widget())->frame;
+                if(frame){
+                    //print frame
+                    streamFrame(frame, &stream);
 
-                //print frame
-                streamFrame(frame, &stream);
-
-                //Print the timestamp after all frames except the last one (to follow .tan format)
-                if((i+1) < numberOfFrames){
-                    duration = duration.addMSecs(frame->getDuration());
-                    stream << "test" << endl;
+                    //Print the timestamp after all frames except the last one (to follow .tan format)
+                    if((i+1) < numberOfFrames){
+                        //add the frameDuration to the duration variable
+                        duration = duration.addMSecs(frame->getDuration());
+                        stream << duration.toString("mm:ss.zzz") << endl;
+                }
                 }
             }
-            stream << endl;
-
         }
         file.close();
 }
@@ -155,7 +156,7 @@ void writefile::streamFrame(Frame *frame, QTextStream *stream)
     const int RGB_MAX = 3;
 
     //Populate the array with the pixels
-    QList<Pixel *> pixels = frame->getPixels();
+    QList<Pixel *> pixels = frame->getTowerContents();
     for(int i = 0; i < pixels.length(); i++){
         x = pixels[i]->towerPos().x();
         y = pixels[i]->towerPos().y();
@@ -181,5 +182,5 @@ int writefile::countFrames(QHBoxLayout *frames)
     for(int i = 0; frames->itemAt(i) != 0; i++)
         frameCount++;
 
-    return (frameCount + 1);
+    return frameCount;
 }
